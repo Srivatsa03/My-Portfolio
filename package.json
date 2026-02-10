@@ -1,0 +1,70 @@
+{
+  "name": "srivatsa-kamballa-portfolio",
+  "version": "2.0.0",
+  "description": "Personal portfolio website of Srivatsa Kamballa - CS Graduate Student at UIC",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000 || python -m SimpleHTTPServer 8000",
+    "serve": "npx http-server -p 8000 -o",
+    "lint:html": "npx htmlhint *.html",
+    "lint:css": "npx stylelint '**/*.css' --fix",
+    "lint:js": "npx eslint *.js --fix",
+    "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
+    "format:css": "npx prettier --write '**/*.css'",
+    "format:js": "npx prettier --write '**/*.js'",
+    "format:html": "npx prettier --write '**/*.html'",
+    "format": "npm run format:html && npm run format:css && npm run format:js",
+    "minify:css": "npx clean-css-cli -o style.min.css style.css",
+    "minify:js": "npx terser main.js -o main.min.js --compress --mangle",
+    "minify": "npm run minify:css && npm run minify:js",
+    "optimize:images": "echo 'Image optimization: Use imagemin or similar tools'",
+    "validate": "npm run lint && echo 'Validation complete!'",
+    "build": "npm run validate && npm run minify",
+    "test": "npm run validate",
+    "deploy": "git add . && git commit -m 'deploy: update portfolio' && git push origin main",
+    "lighthouse": "npx lighthouse https://www.srivatsakamballa.site --output html --output-path ./lighthouse-report.html --view"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeWithVatsa/portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "personal-website",
+    "web-development",
+    "front-end",
+    "html",
+    "css",
+    "javascript",
+    "responsive-design"
+  ],
+  "author": {
+    "name": "Srivatsa Kamballa",
+    "email": "srivatsakamballa.sk@gmail.com",
+    "url": "https://www.srivatsakamballa.site"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodeWithVatsa/portfolio/issues"
+  },
+  "homepage": "https://www.srivatsakamballa.site",
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "htmlhint": "^1.1.4",
+    "stylelint": "^16.1.0",
+    "prettier": "^3.1.1",
+    "clean-css-cli": "^5.6.3",
+    "terser": "^5.26.0",
+    "http-server": "^14.1.1",
+    "lighthouse": "^11.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead"
+  ]
+}
