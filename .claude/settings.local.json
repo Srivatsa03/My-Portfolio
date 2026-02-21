@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(curl:*)",
+      "Bash(for f in sonarqube.svg tableau.svg nodejs.svg bash.svg azuredevops.svg kiali.svg)",
+      "Bash(do)",
+      "Bash(done)"
+    ]
+  }
+}

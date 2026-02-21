@@ -1,0 +1,38 @@
+
+🔴 Critical — Fix These First
+1. Your bio says "Web Developer" — you're applying for DevOps
+The very first thing an Apple recruiter sees when they click your portfolio link is:
+
+"Web Developer with experience of Digital Concept Arts, Frontend Web Designs."
+
+That's a mismatch. If a recruiter Googles you after reading your resume and lands on this, it creates doubt. Change it to something like:
+
+"DevOps & Infrastructure Engineer. CS Master's student at UIC building cloud-native systems, CI/CD pipelines, and AI-powered platforms."
+
+2. The About Me section needs a full rewrite
+Right now it talks about digital concept art and enjoying web UI. None of that is relevant to Apple IS&T. Rewrite it to reflect who you actually are today — a DevOps/infrastructure engineer who also builds things for the web. Keep it short, 3–4 lines max.
+3. Skills section is missing all your DevOps stack
+Your tech stack icons only show: HTML, CSS, JS, Bootstrap, React, GitHub, Git, C, Python, Java, C++, Photoshop, Figma, Adobe Illustrator, Canva. There is no Docker, Kubernetes, AWS, GCP, Terraform, Jenkins, Prometheus, Grafana, or Linux anywhere. An Apple recruiter visiting this page would have no idea you know any of that. Add a second skills category called something like "Cloud & DevOps" with those tools.
+4. The copyright says "twentytwentyfour" — it's 2026
+Small thing but Apple is obsessive about attention to detail. Update it to 2026.
+
+🟡 Important — Fix These Soon
+5. Experience section has no descriptions
+Your four experience entries just show titles and dates — nothing else. Every recruiter who clicks through from your resume will see blank entries. Add 1–2 line descriptions for each role, same way you have them on your resume.
+6. Project images are wrong
+Your Movie Recommendation project shows an image named UniBank.webp — that's clearly a banking app screenshot, not your recommendation system. The MTProto project shows BYOB.webp. These look like placeholder images that were never replaced. Swap them for actual screenshots of your projects, or at minimum use relevant placeholder images that match the project topic.
+7. The Fraud Detection project links to someone else's GitHub
+github.com/MokshitSurana/AI-agent-Digital-Fraud — this links to another person's repo, not yours. If it was a team project, either fork it to your own GitHub or add a note like "Team project — contributed X, Y, Z." Linking away from your profile entirely looks like you're claiming someone else's work.
+8. WuzzyFuzz (Scala DSL) project is irrelevant for this role
+It's an interesting academic project but a Scala fuzzy logic DSL has zero relevance to Apple DevOps. Either replace it with the MetARAG / fuzzing pipeline project from your GRA work, or add those as new projects and push WuzzyFuzz to the bottom.
+
+🟢 Nice to Have
+9. Add the MetARAG and FuzzBench projects
+These are your two strongest pieces of work for this role and they don't appear on your portfolio at all. The fuzzing pipeline work especially — Docker, Linux, LLVM, CI automation — is exactly what Apple IS&T does. Add them.
+10. Add GitHub repo links + live demo where possible
+Apple engineers will click through to GitHub. Make sure your pinned repos match what's on your portfolio and that READMEs are clean and descriptive, not empty.
+11. Update the resume download link
+Make sure the "Resume" button on your About section downloads the new Apple-tailored version, not an old one.
+
+
+and i am seeking for apple devops entry level role 
