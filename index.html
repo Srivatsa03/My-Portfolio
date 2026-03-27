@@ -111,8 +111,8 @@
           <div><p class="jello">U</p><p class="jello">I</p><p class="jello">C</p><p class="jello">.</p></div>
         </article>
         <p id="info-para" data-aos="fade-up" data-aos-delay="600">
-          Software Engineer & Researcher specializing in AI/ML Systems, Cloud Infrastructure, Full-Stack Development, and DevOps Engineering. Passionate about building scalable, production-ready solutions that solve real-world problems.<br /><br />
-          From research labs to production systems — bridging cutting-edge technology with practical implementation across the entire stack.
+          I'm a Software Engineer and CS grad student at UIC who genuinely enjoys building things — whether that's cloud systems, AI tools, full-stack apps, or research pipelines.<br /><br />
+          I like figuring out how things work, making them better, and shipping stuff that actually holds up in the real world.
         </p>
         <div class="contact-btn-div" data-aos="fade-up" data-aos-delay="800">
           <a href="mailto:srivatsakamballa02@gmail.com" tabindex="-1">
@@ -141,11 +141,11 @@
         </div>
         <div class="info-dp-section">
           <div class="about-info">
-            <p>DevOps & Infrastructure Engineer and CS Master's student at UIC, building cloud-native systems, CI/CD pipelines, and AI-powered platforms.</p>
+            <p>I'm Srivatsa — a Software Engineer currently doing my Master's in CS at UIC. I've worked on a pretty wide range of things: cloud infrastructure, AI systems, full-stack development, and software research.</p>
             <br />
-            <p>I work across the full infrastructure stack — containerization (Docker, Kubernetes, Helm), IaC (Terraform, Ansible), CI/CD (Jenkins, ArgoCD, Azure Pipelines), and observability (Prometheus, Grafana, CloudWatch) across AWS, Azure, and GCP.</p>
+            <p>I'm comfortable across the stack. On the infrastructure side I've worked with Docker, Kubernetes, Terraform, Ansible, CI/CD pipelines, and cloud platforms like AWS, Azure, and GCP. On the software side I've built AI pipelines, web apps, and everything in between.</p>
             <br />
-            <p>Currently conducting research in software security (fuzzing pipelines with Docker & LLVM) and AI document intelligence (MetARAG), applying production-grade engineering to real-world research problems.</p>
+            <p>Right now I'm doing research at UIC — one project on automated software testing pipelines, and another on AI-powered document retrieval. I like that research pushes me to think carefully and build things that actually have to work, not just demo well.</p>
             
             <button class="resume-btn" id="resume-btn" onclick="openURL()">
               <div class="sign">
@@ -188,9 +188,9 @@
                 <p class="experience-location">Remote</p>
                 <div class="experience-description">
                   <ul>
-                    <li>Reconstructed and modernized a greybox fuzzing research pipeline using Google's FuzzBench, Docker, and a custom LLVM build, reducing setup time by ~60% and enabling reproducible experiments across 5+ benchmarks (e.g., Zlib, LibPNG)</li>
-                    <li>Implemented and validated two new Bayesian estimators from the FSE'21 paper, improving statistical stopping accuracy by 30%+ in predicting residual risk and time-to-next discovery during fuzzing campaigns</li>
-                    <li>Optimized infrastructure efficiency by caching LLVM builds and modularizing Docker layers, cutting rebuild time by ~70% and preparing for VM-based large-scale data generation (>100 GB of fuzzing data)</li>
+                    <li>Took a broken research pipeline and rebuilt it from scratch using Google's FuzzBench, Docker, and a custom LLVM build — cut setup time by ~60% and made experiments actually reproducible across 5+ test benchmarks</li>
+                    <li>Implemented two new Bayesian statistical estimators based on a published research paper, which improved stopping accuracy by 30%+ when predicting how much risk is left in a fuzzing run</li>
+                    <li>Optimized the build process by caching LLVM and modularizing Docker layers — rebuild time dropped by ~70%, and the system is now ready to generate 100+ GB of large-scale fuzzing data</li>
                   </ul>
                 </div>
               </div>
@@ -207,9 +207,9 @@
                 <p class="experience-location">Remote</p>
                 <div class="experience-description">
                   <ul>
-                    <li>Led and mentored a team of 5+ researchers and developers in building an AI-driven document intelligence and retrieval chatbot (MetARAG) that processes large-scale PDFs into semantically searchable knowledge graphs using Python, LangChain, OpenAI APIs, and LLM metadata generation</li>
-                    <li>Optimized a multi-stage data pipeline (PDF parsing → semantic chunking → metadata enrichment) to automatically skip redundant runs and leverage GPU acceleration, improving processing efficiency by ~65%</li>
-                    <li>Designed robust LLM evaluation and enrichment workflows to enhance context retrieval and accuracy, achieving 40% faster response generation and higher metadata consistency across 4+ document corpora</li>
+                    <li>Led a team of 5+ people to build MetARAG — an AI chatbot that takes large collections of PDFs and turns them into something you can actually search and ask questions to, using Python, LangChain, and OpenAI APIs</li>
+                    <li>Built and optimized the data pipeline end-to-end (PDF parsing, chunking, metadata enrichment) with GPU acceleration — cut processing time by ~65% by making the pipeline smart enough to skip work it already did</li>
+                    <li>Designed the LLM evaluation layer that checks response quality and consistency — ended up getting 40% faster response times and noticeably better answers across 4+ different document sets</li>
                   </ul>
                 </div>
               </div>
@@ -233,15 +233,15 @@
         </div>
         <div class="project-boxes-div">
 
-          <!-- FuzzBench: Most relevant for Apple IS&T DevOps -->
+          <!-- FuzzBench -->
           <div data-aos="fade-up" class="project-box-wrapper">
             <div class="project-box project-box1" id="project-box1">
               <div class="info-div">
                 <img src="src/png/clogo.png" alt="FuzzBench icon" class="faviconforProject" />
-                <article class="ProjectHeading">FuzzBench — Greybox Fuzzing Research Pipeline</article>
+                <article class="ProjectHeading">FuzzBench — Automated Software Testing Research Pipeline</article>
                 <p class="ProjectDescription">
-                  Reconstructed and modernized a greybox fuzzing research pipeline using Google's FuzzBench, Docker, and a custom LLVM build, reducing setup time by ~60% and enabling reproducible experiments across 5+ benchmarks (Zlib, LibPNG).<br><br>
-                  Optimized infrastructure by caching LLVM builds and modularizing Docker layers, cutting rebuild time by ~70%. Implemented Bayesian estimators improving statistical stopping accuracy by 30%+, preparing for VM-based large-scale data generation (&gt;100 GB).
+                  The existing fuzzing research environment was pretty broken — I rebuilt it from scratch using Google's FuzzBench, Docker, and a custom LLVM compiler build. Setup time dropped by ~60% and experiments became fully reproducible.<br><br>
+                  I also implemented two new statistical models from a research paper to better predict when testing should stop, improving accuracy by 30%+. Optimized the Docker layer caching to cut rebuild time by ~70%.
                 </p>
                 <div class="project-buttons">
                   <a href="https://github.com/Srivatsa03/fuzzbench" target="_blank" class="github-redirect">
@@ -256,15 +256,15 @@
             </div>
           </div>
 
-          <!-- MetARAG: AI Document Intelligence -->
+          <!-- MetARAG -->
           <div data-aos="fade-up" class="project-box-wrapper">
             <div class="project-box project-box2" id="project-box2">
               <div class="info-div">
                 <img src="src/png/python.png" alt="MetARAG icon" class="faviconforProject" />
-                <article class="ProjectHeading">MetARAG — AI Document Intelligence & Retrieval System</article>
+                <article class="ProjectHeading">MetARAG — AI Chatbot for Document Search & Retrieval</article>
                 <p class="ProjectDescription">
-                  Led a team of 5+ in building an AI-driven document intelligence chatbot processing large-scale PDFs into semantically searchable knowledge graphs using Python, LangChain, and OpenAI APIs.<br><br>
-                  Optimized a multi-stage data pipeline (PDF parsing → semantic chunking → metadata enrichment) with GPU acceleration, improving processing efficiency by ~65% and achieving 40% faster response generation across 4+ document corpora.
+                  Led a team of 5+ to build an AI system that lets you actually talk to large collections of PDFs — ask questions, get answers with context, find things instantly. Built with Python, LangChain, and OpenAI APIs.<br><br>
+                  I designed the whole data pipeline and optimized it with GPU acceleration — processing efficiency improved by ~65% and responses came back 40% faster across 4+ different document sets.
                 </p>
                 <div class="project-buttons">
                   <a href="https://github.com/Srivatsa03/UICLaborDocsChatbot" target="_blank" class="github-redirect">
@@ -279,15 +279,15 @@
             </div>
           </div>
 
-          <!-- Movie Recommendation: MLOps, Jenkins, Prometheus, Docker -->
+          <!-- Movie Recommendation -->
           <div data-aos="fade-up" class="project-box-wrapper">
             <div class="project-box project-box3" id="project-box3">
               <div class="info-div">
                 <img src="src/png/python.png" alt="Movie Recommendation icon" class="faviconforProject" />
-                <article class="ProjectHeading">Movie Recommendation System (MLOps, Responsible AI, Fairness-Aware ML)</article>
+                <article class="ProjectHeading">Movie Recommendation System — Full ML Pipeline from Model to Production</article>
                 <p class="ProjectDescription">
-                  Deployed a full-scale movie recommendation service via FastAPI and Docker achieving RMSE 0.58 and 65% faster inference. Built CI/CD, monitoring, and fairness pipelines using Jenkins, Prometheus, Grafana, LaunchDarkly, and Evidently AI.<br><br>
-                  Implemented A/B testing, model drift tracking, exposure/accuracy parity enforcement, and security mechanisms (rate limiting, poisoning detection) ensuring responsible AI deployment across a 6-person team.
+                  Built and deployed a movie recommendation service end-to-end with a 6-person team — model training, REST API (FastAPI + Docker), CI/CD with Jenkins, and live monitoring with Prometheus and Grafana. Hit RMSE 0.58 and 65% faster inference.<br><br>
+                  We also cared about doing it right — built A/B testing, drift detection, fairness checks, and security mechanisms (rate limiting, poisoning detection) into the system from the start.
                 </p>
                 <div class="project-buttons">
                   <a href="https://github.com/Srivatsa03/Movie-Recommendation" target="_blank" class="github-redirect">
@@ -307,10 +307,10 @@
             <div class="project-box project-box4" id="project-box4">
               <div class="info-div">
                 <img src="src/png/reactlogo.png" alt="MTProto icon" class="faviconforProject" />
-                <article class="ProjectHeading">E2E Encrypted Messaging Application using MTProto 2.0 Protocol</article>
+                <article class="ProjectHeading">End-to-End Encrypted Messaging App — MTProto 2.0</article>
                 <p class="ProjectDescription">
-                  Implemented Telegram's MTProto 2.0 transport and encryption layers to establish secure client-server communication using AES-256, SHA-256, and Perfect Forward Secrecy mechanisms for cloud chats.<br><br>
-                  Developed multi-layer transport protocols (TCP, WebSocket, HTTP/HTTPS) with complete message serialization, session management, and time synchronization, enabling robust E2E encrypted data exchange.
+                  Built a secure messaging application by implementing Telegram's MTProto 2.0 protocol from scratch — including AES-256 encryption, SHA-256 hashing, and Perfect Forward Secrecy so no two sessions share keys.<br><br>
+                  Supports multiple transport layers (TCP, WebSocket, HTTP/HTTPS) with full message serialization, session handling, and time sync. Basically rebuilt how Telegram's security layer works at the protocol level.
                 </p>
                 <div class="project-buttons">
                   <a href="https://github.com/Srivatsa03/Telegram-MTproto2.0" target="_blank" class="github-redirect">
@@ -325,15 +325,15 @@
             </div>
           </div>
 
-          <!-- AI Fraud Detection: Team project, fixed link -->
+          <!-- AI Fraud Detection -->
           <div data-aos="fade-up" class="project-box-wrapper">
             <div class="project-box project-box5" id="project-box5">
               <div class="info-div">
                 <img src="src/png/python.png" alt="AI Fraud Detection icon" class="faviconforProject" />
-                <article class="ProjectHeading">AI-Powered Digital Fraud Detection (Team Project)</article>
+                <article class="ProjectHeading">AI-Powered Digital Fraud Detection</article>
                 <p class="ProjectDescription">
-                  Multi-agent AI system for real-time fraud detection using machine learning and intelligent agents. Analyzes transaction patterns, behavioral anomalies, and risk factors to identify fraudulent activities with high accuracy.<br><br>
-                  Team project — contributed AI agent design and fraud analysis pipeline across multiple detection vectors.
+                  Team project where we built a multi-agent AI system that catches fraud in real time — it looks at transaction patterns, user behavior, and risk signals together rather than in isolation.<br><br>
+                  My part was designing the AI agent architecture and the fraud analysis pipeline that connects detection across multiple signals. The goal was catching things rule-based systems typically miss.
                 </p>
                 <div class="project-buttons">
                   <a href="https://github.com/Srivatsa03/Probfuzzz" target="_blank" class="github-redirect">
@@ -348,15 +348,15 @@
             </div>
           </div>
 
-          <!-- WuzzyFuzz: Moved to bottom (least relevant for DevOps role) -->
+          <!-- WuzzyFuzz -->
           <div data-aos="fade-up" class="project-box-wrapper">
             <div class="project-box project-box6" id="project-box6">
               <div class="info-div">
                 <img src="src/png/java.png" alt="WuzzyFuzz icon" class="faviconforProject" />
-                <article class="ProjectHeading">WuzzyFuzz — Domain Specific Language (Scala)</article>
+                <article class="ProjectHeading">WuzzyFuzz — A Programming Language I Built from Scratch</article>
                 <p class="ProjectDescription">
-                  Designed and implemented a domain-specific programming language for fuzzy logic operations in Scala. Built custom parser, interpreter, and optimizer with support for partial evaluation and dynamic binding.<br><br>
-                  Enables intuitive fuzzy set operations and logic gate implementations with advanced features including gate-based operations and systematic optimization.
+                  Designed and built my own domain-specific language in Scala for fuzzy logic — wrote the parser, interpreter, and optimizer myself. It was one of those projects where you really have to understand how languages work to pull it off.<br><br>
+                  Supports fuzzy set operations, logic gates, partial evaluation, and dynamic binding. Probably the most "computer science fundamentals" project I've done, and I genuinely enjoyed it.
                 </p>
                 <div class="project-buttons">
                   <a href="https://github.com/Srivatsa03/WuzzyFuzz-03" target="_blank" class="github-redirect">
@@ -611,7 +611,7 @@
                 <h4 class="education-university">University of Illinois at Chicago</h4>
                 <p class="education-duration">Aug 2024 - May 2026 (Anticipated)</p>
                 <p class="education-location">Chicago, Illinois</p>
-                <p class="education-gpa">GPA: 3.80/4.0</p>
+                <p class="education-gpa">GPA: 3.91/4.00</p>
                 <div class="education-coursework">
                   <p class="coursework-label">Relevant Coursework:</p>
                   <ul class="coursework-list">
