@@ -2032,7 +2032,7 @@ footer{
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    z-index: 1;
+    z-index: 0;
 }
 
 .footer-blob{
@@ -2053,6 +2053,7 @@ footer{
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(10px);
+    z-index: 2;
 }
 
 .footercontainer{
