@@ -1299,6 +1299,150 @@ noscript{
     transform: scale(0.95);
 }
 
+.active-work-section {
+    width: 100%;
+    margin-top: 30px;
+    padding: 0 50px 50px;
+}
+
+.active-work-heading {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.active-work-heading h3 {
+    color: var(--color-white);
+    font-size: 2.8rem;
+    font-weight: 800;
+}
+
+.active-work-heading p {
+    color: var(--color-gray);
+    font-size: 1.5rem;
+    line-height: 22px;
+    text-align: right;
+}
+
+.active-work-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.active-work-card {
+    min-height: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 28px;
+    background: linear-gradient(135deg, var(--tech-stack-box-first-color), var(--tech-stack-box-second-color));
+    border: 1px solid var(--tech-stack-box-border-color);
+    border-radius: 18px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.active-work-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-light-blue);
+    box-shadow: 0 10px 28px rgba(15, 82, 186, 0.22);
+}
+
+.active-work-topline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.active-status,
+.active-domain,
+.active-work-private {
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.active-status {
+    padding: 7px 12px;
+    color: var(--color-white);
+    background: var(--color-purple);
+}
+
+.active-domain {
+    padding: 7px 12px;
+    color: var(--color-light-blue);
+    border: 1px solid rgba(77, 208, 225, 0.35);
+    background: rgba(77, 208, 225, 0.08);
+}
+
+.active-work-card h4 {
+    color: var(--color-white);
+    font-size: 2rem;
+    line-height: 1.35;
+}
+
+.active-work-card p {
+    color: var(--color-ddd-color);
+    font-size: 1.45rem;
+    line-height: 24px;
+}
+
+.active-work-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: auto;
+}
+
+.active-work-tags span {
+    padding: 6px 10px;
+    color: var(--color-light-blue);
+    background: rgba(15, 82, 186, 0.18);
+    border: 1px solid rgba(15, 82, 186, 0.45);
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.active-work-link,
+.active-work-private {
+    margin-top: 4px;
+}
+
+.active-work-link {
+    width: fit-content;
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+    transition: all 0.3s ease;
+}
+
+.active-work-link:hover {
+    background: rgba(77, 208, 225, 0.12);
+    border-color: var(--color-light-blue);
+}
+
+.active-work-private {
+    padding: 10px 14px;
+    color: var(--color-gray);
+    border: 1px solid rgba(196, 196, 196, 0.25);
+    background: rgba(255, 255, 255, 0.04);
+}
+
 /* Skills Section */
 .skills-section-container{
     padding-top: 150px;
@@ -2419,6 +2563,23 @@ footer{
         height: auto;
     }
 
+    .active-work-section {
+        padding: 0 0 45px;
+    }
+
+    .active-work-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .active-work-heading p {
+        text-align: left;
+    }
+
+    .active-work-grid {
+        grid-template-columns: 1fr;
+    }
+
     .info-div{
         width: 100%;
         height: auto;
@@ -2544,6 +2705,11 @@ footer{
     
     .project-boxes-div{
         padding: 40px 0;
+    }
+
+    .active-work-card {
+        min-height: auto;
+        padding: 24px;
     }
 
     .education-degree {
