@@ -1,7 +1,7 @@
 {
   "name": "srivatsa-kamballa-portfolio",
   "version": "2.0.0",
-  "description": "Personal portfolio website of Srivatsa Kamballa - CS Graduate Student at UIC",
+  "description": "Personal portfolio website of Srivatsa Kamballa - Software Engineer focused on AI infrastructure, backend systems, cloud platforms, and automation",
   "main": "index.html",
   "scripts": {
     "start": "python -m http.server 8000 || python -m SimpleHTTPServer 8000",
