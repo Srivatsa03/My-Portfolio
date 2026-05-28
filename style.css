@@ -593,11 +593,37 @@ noscript{
     align-items: flex-start;
     color: var(--color-white);
     flex-wrap: wrap;
+    min-height: 1.2em;
+    max-width: 100%;
 }
 
 #work div{
     display: flex;
 	margin: 0px 12px 0px 0px;
+}
+
+.typing-role {
+    display: inline-block;
+    line-height: 1.1;
+}
+
+.typing-cursor {
+    display: inline-block;
+    width: 0.08em;
+    height: 0.9em;
+    margin-left: 10px;
+    margin-top: 0.12em;
+    background: var(--color-light-blue);
+    animation: typing-cursor-blink 0.9s steps(1) infinite;
+}
+
+@keyframes typing-cursor-blink {
+    0%, 48% {
+        opacity: 1;
+    }
+    49%, 100% {
+        opacity: 0;
+    }
 }
 
 .jello:hover{
