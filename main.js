@@ -106,9 +106,14 @@ if (typingRoleElement) {
     const width = canvas.clientWidth || canvas.parentElement.clientWidth;
     const height = canvas.clientHeight || canvas.parentElement.clientHeight;
     const isMobile = width < 800;
-    const centerX = width * (isMobile ? 0.7 : 0.72);
-    const centerY = height * (isMobile ? 0.68 : 0.5);
-    const base = Math.min(width, height) * (isMobile ? 0.15 : 0.25);
+    const scrollProgress = document.documentElement.scrollHeight > window.innerHeight
+      ? window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)
+      : 0;
+    const driftX = Math.sin(time * 0.00016 + scrollProgress * Math.PI * 2) * width * (isMobile ? 0.08 : 0.11);
+    const driftY = Math.cos(time * 0.00012 + scrollProgress * Math.PI * 2) * height * (isMobile ? 0.05 : 0.08);
+    const centerX = width * (isMobile ? 0.72 : 0.76) + driftX;
+    const centerY = height * (isMobile ? 0.64 : 0.5) + driftY;
+    const base = Math.min(width, height) * (isMobile ? 0.18 : 0.24);
 
     context.clearRect(0, 0, width, height);
 
@@ -122,9 +127,9 @@ if (typingRoleElement) {
     context.fill();
 
     const rings = [
-      { rx: base * 0.78, ry: base * 0.28, rotation: -0.34, opacity: 0.18 },
-      { rx: base * 1.08, ry: base * 0.39, rotation: 0.18, opacity: 0.14 },
-      { rx: base * 1.38, ry: base * 0.5, rotation: -0.1, opacity: 0.1 }
+      { rx: base * 0.78, ry: base * 0.28, rotation: -0.34, opacity: isMobile ? 0.1 : 0.16 },
+      { rx: base * 1.08, ry: base * 0.39, rotation: 0.18, opacity: isMobile ? 0.08 : 0.12 },
+      { rx: base * 1.38, ry: base * 0.5, rotation: -0.1, opacity: isMobile ? 0.06 : 0.09 }
     ];
 
     rings.forEach((ring) => drawEllipse(centerX, centerY, ring.rx, ring.ry, ring.rotation, ring.opacity));
