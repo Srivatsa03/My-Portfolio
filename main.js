@@ -50,194 +50,114 @@ if (typingRoleElement) {
     return;
   }
 
-  const startFallbackMap = () => {
-    const context = canvas.getContext("2d");
-    if (!context) {
-      return;
-    }
+  const context = canvas.getContext("2d");
+  if (!context) {
+    return;
+  }
 
-    const fallbackNodes = [
-      [0, 0],
-      [1, -0.8],
-      [1.8, 0.1],
-      [1.1, 0.95],
-      [0, 1.05],
-      [-1.1, 0.95],
-      [-1.8, 0.1],
-      [-1, -0.8]
+  const orbitNodes = [
+    { label: "AI", ring: 0, angle: -0.2, speed: 0.00023, color: "rgba(214, 230, 243, 0.9)" },
+    { label: "Cloud", ring: 0, angle: 2.2, speed: 0.00023, color: "rgba(77, 208, 225, 0.85)" },
+    { label: "Backend", ring: 1, angle: 0.8, speed: -0.00018, color: "rgba(214, 230, 243, 0.72)" },
+    { label: "Data", ring: 1, angle: 3.7, speed: -0.00018, color: "rgba(77, 208, 225, 0.72)" },
+    { label: "SRE", ring: 2, angle: 1.7, speed: 0.00013, color: "rgba(214, 230, 243, 0.62)" },
+    { label: "RAG", ring: 2, angle: 4.8, speed: 0.00013, color: "rgba(77, 208, 225, 0.62)" }
+  ];
+
+  const resizeCanvas = () => {
+    const width = canvas.clientWidth || canvas.parentElement.clientWidth;
+    const height = canvas.clientHeight || canvas.parentElement.clientHeight;
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = width * ratio;
+    canvas.height = height * ratio;
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+  };
+
+  const drawEllipse = (centerX, centerY, radiusX, radiusY, rotation, opacity) => {
+    context.save();
+    context.translate(centerX, centerY);
+    context.rotate(rotation);
+    context.beginPath();
+    context.ellipse(0, 0, radiusX, radiusY, 0, 0, Math.PI * 2);
+    context.strokeStyle = `rgba(77, 208, 225, ${opacity})`;
+    context.lineWidth = 1;
+    context.stroke();
+    context.restore();
+  };
+
+  const drawNode = (x, y, size, color, glow) => {
+    const gradient = context.createRadialGradient(x, y, 0, x, y, size * 4);
+    gradient.addColorStop(0, color);
+    gradient.addColorStop(0.28, color);
+    gradient.addColorStop(1, "rgba(77, 208, 225, 0)");
+
+    context.fillStyle = gradient;
+    context.beginPath();
+    context.arc(x, y, size * 4, 0, Math.PI * 2);
+    context.fill();
+
+    context.fillStyle = glow ? "rgba(245, 247, 250, 0.92)" : color;
+    context.beginPath();
+    context.arc(x, y, size, 0, Math.PI * 2);
+    context.fill();
+  };
+
+  const drawHeroMap = (time) => {
+    const width = canvas.clientWidth || canvas.parentElement.clientWidth;
+    const height = canvas.clientHeight || canvas.parentElement.clientHeight;
+    const isMobile = width < 800;
+    const centerX = width * (isMobile ? 0.7 : 0.72);
+    const centerY = height * (isMobile ? 0.68 : 0.5);
+    const base = Math.min(width, height) * (isMobile ? 0.15 : 0.25);
+
+    context.clearRect(0, 0, width, height);
+
+    const aura = context.createRadialGradient(centerX, centerY, 0, centerX, centerY, base * 2.2);
+    aura.addColorStop(0, "rgba(77, 208, 225, 0.1)");
+    aura.addColorStop(0.55, "rgba(15, 82, 186, 0.06)");
+    aura.addColorStop(1, "rgba(15, 82, 186, 0)");
+    context.fillStyle = aura;
+    context.beginPath();
+    context.arc(centerX, centerY, base * 2.2, 0, Math.PI * 2);
+    context.fill();
+
+    const rings = [
+      { rx: base * 0.78, ry: base * 0.28, rotation: -0.34, opacity: 0.18 },
+      { rx: base * 1.08, ry: base * 0.39, rotation: 0.18, opacity: 0.14 },
+      { rx: base * 1.38, ry: base * 0.5, rotation: -0.1, opacity: 0.1 }
     ];
 
-    const resizeFallback = () => {
-      const width = canvas.clientWidth || canvas.parentElement.clientWidth;
-      const height = canvas.clientHeight || canvas.parentElement.clientHeight;
-      const ratio = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = width * ratio;
-      canvas.height = height * ratio;
-      context.setTransform(ratio, 0, 0, ratio, 0, 0);
-    };
+    rings.forEach((ring) => drawEllipse(centerX, centerY, ring.rx, ring.ry, ring.rotation, ring.opacity));
 
-    const drawFallback = (time) => {
-      const width = canvas.clientWidth || canvas.parentElement.clientWidth;
-      const height = canvas.clientHeight || canvas.parentElement.clientHeight;
-      const centerX = width * (width < 800 ? 0.56 : 0.68);
-      const centerY = height * (width < 800 ? 0.62 : 0.48);
-      const scale = Math.min(width, height) * (width < 800 ? 0.18 : 0.23);
+    drawNode(centerX, centerY, isMobile ? 4 : 6, "rgba(245, 247, 250, 0.9)", true);
 
-      context.clearRect(0, 0, width, height);
-      context.strokeStyle = "rgba(77, 208, 225, 0.22)";
-      context.fillStyle = "rgba(214, 230, 243, 0.85)";
-      context.lineWidth = 1;
+    orbitNodes.forEach((node, index) => {
+      const ring = rings[node.ring];
+      const angle = node.angle + time * node.speed;
+      const pulse = 1 + Math.sin(time * 0.002 + index) * 0.12;
+      const cos = Math.cos(angle);
+      const sin = Math.sin(angle);
+      const rotatedX = cos * ring.rx;
+      const rotatedY = sin * ring.ry;
+      const x = centerX + rotatedX * Math.cos(ring.rotation) - rotatedY * Math.sin(ring.rotation);
+      const y = centerY + rotatedX * Math.sin(ring.rotation) + rotatedY * Math.cos(ring.rotation);
 
-      const points = fallbackNodes.map(([x, y], index) => {
-        const wave = Math.sin(time * 0.0015 + index) * 12;
-        return [centerX + x * scale, centerY + y * scale + wave];
-      });
+      drawNode(x, y, (isMobile ? 2.8 : 3.8) * pulse, node.color, false);
 
-      points.forEach(([x, y]) => {
+      if (!isMobile && node.ring === 0) {
         context.beginPath();
         context.moveTo(centerX, centerY);
         context.lineTo(x, y);
+        context.strokeStyle = "rgba(77, 208, 225, 0.08)";
+        context.lineWidth = 1;
         context.stroke();
-      });
-
-      points.forEach(([x, y], index) => {
-        const [nextX, nextY] = points[(index + 1) % points.length];
-        context.beginPath();
-        context.moveTo(x, y);
-        context.lineTo(nextX, nextY);
-        context.stroke();
-      });
-
-      context.beginPath();
-      context.arc(centerX, centerY, 6, 0, Math.PI * 2);
-      context.fill();
-
-      points.forEach(([x, y], index) => {
-        context.beginPath();
-        context.arc(x, y, index % 3 === 0 ? 4.5 : 3.5, 0, Math.PI * 2);
-        context.fill();
-      });
-
-      window.requestAnimationFrame(drawFallback);
-    };
-
-    window.addEventListener("resize", resizeFallback);
-    resizeFallback();
-    window.requestAnimationFrame(drawFallback);
-  };
-
-  if (!window.THREE) {
-    startFallbackMap();
-    return;
-  }
-
-  const webglProbe = document.createElement("canvas");
-  const hasWebGL = Boolean(webglProbe.getContext("webgl") || webglProbe.getContext("experimental-webgl"));
-  if (!hasWebGL) {
-    startFallbackMap();
-    return;
-  }
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-  camera.position.z = 8.5;
-
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    alpha: true,
-    antialias: true
-  });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  const nodeLabels = [
-    "AI Infrastructure",
-    "Backend",
-    "Cloud",
-    "DevOps/SRE",
-    "Data",
-    "RAG",
-    "Security",
-    "Automation"
-  ];
-  const nodePositions = [];
-  const radius = 2.8;
-
-  nodeLabels.forEach((label, index) => {
-    const angle = (index / nodeLabels.length) * Math.PI * 2;
-    const zOffset = index % 2 === 0 ? 0.75 : -0.75;
-    const position = new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * 1.55, zOffset);
-    nodePositions.push(position);
-
-    const nodeGeometry = new THREE.SphereGeometry(index === 0 ? 0.09 : 0.065, 18, 18);
-    const nodeMaterial = new THREE.MeshBasicMaterial({
-      color: index % 3 === 0 ? 0x4dd0e1 : 0xd6e6f3,
-      transparent: true,
-      opacity: 0.88
-    });
-    const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
-    node.position.copy(position);
-    node.userData.phase = index * 0.6;
-    group.add(node);
-  });
-
-  const centerGeometry = new THREE.SphereGeometry(0.14, 24, 24);
-  const centerMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.95 });
-  const centerNode = new THREE.Mesh(centerGeometry, centerMaterial);
-  group.add(centerNode);
-
-  const linePoints = [];
-  nodePositions.forEach((position, index) => {
-    linePoints.push(0, 0, 0, position.x, position.y, position.z);
-    const nextPosition = nodePositions[(index + 1) % nodePositions.length];
-    linePoints.push(position.x, position.y, position.z, nextPosition.x, nextPosition.y, nextPosition.z);
-  });
-
-  const lineGeometry = new THREE.BufferGeometry();
-  lineGeometry.setAttribute("position", new THREE.Float32BufferAttribute(linePoints, 3));
-  const lineMaterial = new THREE.LineBasicMaterial({
-    color: 0x4dd0e1,
-    transparent: true,
-    opacity: 0.22
-  });
-  group.add(new THREE.LineSegments(lineGeometry, lineMaterial));
-
-  const resizeHeroMap = () => {
-    const width = canvas.clientWidth || canvas.parentElement.clientWidth;
-    const height = canvas.clientHeight || canvas.parentElement.clientHeight;
-    renderer.setSize(width, height, false);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    group.position.x = width < 800 ? 0.3 : 1.7;
-    group.scale.setScalar(width < 800 ? 0.86 : 1);
-  };
-
-  let mouseX = 0;
-  let mouseY = 0;
-  window.addEventListener("mousemove", (event) => {
-    mouseX = (event.clientX / window.innerWidth - 0.5) * 0.18;
-    mouseY = (event.clientY / window.innerHeight - 0.5) * 0.12;
-  });
-  window.addEventListener("resize", resizeHeroMap);
-  resizeHeroMap();
-
-  const clock = new THREE.Clock();
-  const animateHeroMap = () => {
-    const elapsed = clock.getElapsedTime();
-    group.rotation.y = elapsed * 0.12 + mouseX;
-    group.rotation.x = Math.sin(elapsed * 0.3) * 0.08 + mouseY;
-
-    group.children.forEach((child) => {
-      if (child.isMesh && child.userData.phase !== undefined) {
-        const pulse = 1 + Math.sin(elapsed * 1.8 + child.userData.phase) * 0.18;
-        child.scale.setScalar(pulse);
       }
     });
 
-    renderer.render(scene, camera);
+    window.requestAnimationFrame(drawHeroMap);
   };
 
-  renderer.setAnimationLoop(animateHeroMap);
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+  window.requestAnimationFrame(drawHeroMap);
 })();

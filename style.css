@@ -492,7 +492,7 @@ noscript{
     width: 100%;
     height: 100%;
     z-index: 0;
-    opacity: 0.72;
+    opacity: 0.58;
     pointer-events: none;
 }
 
@@ -2705,7 +2705,7 @@ footer{
     }
 
     .hero-system-map {
-        opacity: 0.38;
+        opacity: 0.28;
     }
     
     .cursor-inner,
@@ -3140,7 +3140,7 @@ footer{
     }
 
     .hero-system-map {
-        opacity: 0.2;
+        display: none;
     }
     
     .text-content{
