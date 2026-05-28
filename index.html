@@ -108,6 +108,7 @@
     </div>
 
     <section class="landing-page-container" id="home">
+      <canvas id="hero-system-map" class="hero-system-map" aria-hidden="true"></canvas>
       <div class="blob"></div>
       <div class="text-content">
         <article id="hello-friend" data-aos="fade-up" data-aos-delay="0">
@@ -143,6 +144,42 @@
       </div>
     </section>
 
+    <section class="impact-section-container" id="impact">
+      <div class="impact-section">
+        <div class="section-heading" data-aos="fade-up">
+          <h2 class="section-heading-article">&#60;/SelectedImpact&#62;</h2>
+          <p class="sectionHeadingP"></p>
+        </div>
+        <div class="impact-grid">
+          <article class="impact-card" data-aos="fade-up">
+            <span class="impact-kicker">UIC x CCC Intelligent Solutions</span>
+            <h3>MetARAG</h3>
+            <p>RAG-based document intelligence for querying large policy and agreement collections with source-grounded answers.</p>
+          </article>
+          <article class="impact-card" data-aos="fade-up" data-aos-delay="100">
+            <span class="impact-kicker">UIC x TransUnion</span>
+            <h3>ECI Pipeline</h3>
+            <p>AI-powered ecosystem change intelligence for Android security, CVE, fraud, and risk-analysis workflows.</p>
+          </article>
+          <article class="impact-card" data-aos="fade-up" data-aos-delay="200">
+            <span class="impact-kicker">Research Infrastructure</span>
+            <h3>FuzzBench + LLVM</h3>
+            <p>Reproducible automated software testing infrastructure on AWS with Docker, Bayesian estimators, and benchmark pipelines.</p>
+          </article>
+          <article class="impact-card" data-aos="fade-up" data-aos-delay="300">
+            <span class="impact-kicker">Cloud Platform Engineering</span>
+            <h3>AWS EKS DevSecOps</h3>
+            <p>Three-tier Kubernetes platform with Terraform, Jenkins, ArgoCD, security gates, Prometheus, and Grafana.</p>
+          </article>
+          <article class="impact-card" data-aos="fade-up" data-aos-delay="400">
+            <span class="impact-kicker">Patent Granted</span>
+            <h3>AI + RFID Access Control</h3>
+            <p>Co-invented a patented AI-enabled library automation system using cameras, RFID, and access-control workflows.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="about-section-container" id="about" data-aos="fade-up">
       <div class="about-section">
         <div class="section-heading">
@@ -161,6 +198,72 @@
           <div class="dp" data-aos="fade-up">
             <img src="src/webp/srivatsa.webp" alt="Srivatsa Kamballa" />
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-study-section-container" id="case-studies">
+      <div class="case-study-section">
+        <div class="section-heading" data-aos="fade-up">
+          <h2 class="section-heading-article">&#60;/CaseStudies&#62;</h2>
+          <p class="sectionHeadingP"></p>
+        </div>
+        <div class="case-study-grid">
+          <article class="case-study-card" data-aos="fade-up">
+            <div class="case-study-topline">
+              <span>UIC x CCC Intelligent Solutions</span>
+              <span>AI Infrastructure</span>
+            </div>
+            <h3>MetARAG - Document Intelligence Platform</h3>
+            <div class="case-study-details">
+              <p><strong>Problem:</strong> Make large policy and agreement PDFs searchable through natural-language Q&amp;A with source context.</p>
+              <p><strong>Built:</strong> Parsing, chunking, metadata enrichment, embeddings, retrieval tuning, and evidence-backed answer workflows.</p>
+              <p><strong>Stack:</strong> Python, LangChain, OpenAI APIs, Docker, Kubernetes, PostgreSQL, pgvector.</p>
+            </div>
+            <a href="https://github.com/Srivatsa03/UICLaborDocsChatbot" target="_blank" class="case-study-link">View GitHub</a>
+          </article>
+
+          <article class="case-study-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="case-study-topline">
+              <span>UIC x TransUnion</span>
+              <span>AI + Risk Systems</span>
+            </div>
+            <h3>ECI Pipeline - Ecosystem Change Intelligence</h3>
+            <div class="case-study-details">
+              <p><strong>Problem:</strong> Track Android ecosystem changes across security, CVE, policy, and developer sources for risk workflows.</p>
+              <p><strong>Built:</strong> DeltaRAG and Graph-RAG pipeline that turns cross-source evidence into structured risk insights and action tickets.</p>
+              <p><strong>Stack:</strong> Python, FastAPI, PostgreSQL, pgvector, NetworkX, Groq LLM, AWS Lambda, Next.js, Vercel.</p>
+            </div>
+            <a href="https://github.com/Srivatsa03/ECI-Pipeline" target="_blank" class="case-study-link">View GitHub</a>
+          </article>
+
+          <article class="case-study-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="case-study-topline">
+              <span>UIC Research</span>
+              <span>Testing Infrastructure</span>
+            </div>
+            <h3>FuzzBench Research Pipeline</h3>
+            <div class="case-study-details">
+              <p><strong>Problem:</strong> Rebuild a fragile fuzzing research environment into a reproducible benchmark pipeline.</p>
+              <p><strong>Built:</strong> Dockerized FuzzBench workflow with a custom LLVM toolchain, standardized experiment scripts, and Bayesian estimators.</p>
+              <p><strong>Stack:</strong> Google FuzzBench, Docker, LLVM, AWS, Python, Bash.</p>
+            </div>
+            <a href="https://github.com/Srivatsa03/fuzzbench" target="_blank" class="case-study-link">View GitHub</a>
+          </article>
+
+          <article class="case-study-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="case-study-topline">
+              <span>Cloud Platform</span>
+              <span>DevSecOps</span>
+            </div>
+            <h3>End-to-End Kubernetes Platform</h3>
+            <div class="case-study-details">
+              <p><strong>Problem:</strong> Understand production-style cloud deployments across infrastructure, CI/CD, GitOps, security, and observability.</p>
+              <p><strong>Built:</strong> AWS EKS platform with infrastructure-as-code, automated releases, security scanning, rollback workflows, and monitoring.</p>
+              <p><strong>Stack:</strong> AWS EKS, Terraform, Jenkins, ArgoCD, Trivy, SonarQube, Prometheus, Grafana.</p>
+            </div>
+            <a href="https://github.com/Srivatsa03/End-to-End-Kubernetes-Three-Tier-DevSecOps-Project" target="_blank" class="case-study-link">View GitHub</a>
+          </article>
         </div>
       </div>
     </section>
@@ -538,6 +641,58 @@
       </div>
     </section>
 
+    <section class="architecture-section-container" id="architecture">
+      <div class="architecture-section">
+        <div class="section-heading" data-aos="fade-up">
+          <h2 class="section-heading-article">&#60;/SystemFlows&#62;</h2>
+          <p class="sectionHeadingP"></p>
+        </div>
+        <div class="architecture-grid">
+          <article class="architecture-card" data-aos="fade-up">
+            <div class="architecture-topline">RAG Document Intelligence</div>
+            <h3>MetARAG Flow</h3>
+            <div class="flow-row">
+              <span>PDFs</span>
+              <span>Parse</span>
+              <span>Chunk</span>
+              <span>Embed</span>
+              <span>Retrieve</span>
+              <span>Answer</span>
+            </div>
+            <p>Designed around source-grounded retrieval, metadata enrichment, and response evaluation so answers stay tied to evidence.</p>
+          </article>
+
+          <article class="architecture-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="architecture-topline">Ecosystem Change Intelligence</div>
+            <h3>ECI Pipeline Flow</h3>
+            <div class="flow-row">
+              <span>Sources</span>
+              <span>Deltas</span>
+              <span>Graph</span>
+              <span>RAG</span>
+              <span>Risk</span>
+              <span>Tickets</span>
+            </div>
+            <p>Combines graph context, vector retrieval, and LLM agents to convert fragmented security signals into usable risk summaries.</p>
+          </article>
+
+          <article class="architecture-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="architecture-topline">Cloud Platform Engineering</div>
+            <h3>DevSecOps Flow</h3>
+            <div class="flow-row">
+              <span>Code</span>
+              <span>Build</span>
+              <span>Scan</span>
+              <span>GitOps</span>
+              <span>EKS</span>
+              <span>Observe</span>
+            </div>
+            <p>Uses infrastructure-as-code, CI/CD, security gates, deployment automation, and monitoring to model production release workflows.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="skills-section-container" id="skills">
       <div class="skills-section">
         <div class="section-heading" data-aos="fade-up">
@@ -910,6 +1065,28 @@
       </div>
     </section>
 
+    <section class="availability-section-container" id="availability">
+      <div class="availability-section" data-aos="fade-up">
+        <p class="availability-kicker">Currently open to full-time roles starting June 2026</p>
+        <h2>Software Engineering, AI Infrastructure, Platform, Cloud, DevOps/SRE, and Data Infrastructure.</h2>
+        <p>Based in Chicago and open to relocating across the United States.</p>
+        <a href="mailto:srivatsakamballa02@gmail.com" class="availability-link">Start a conversation</a>
+      </div>
+    </section>
+
+    <section class="recommendations-section-container" id="recommendations">
+      <div class="recommendations-section">
+        <div class="section-heading" data-aos="fade-up">
+          <h2 class="section-heading-article">&#60;/Recommendations&#62;</h2>
+          <p class="sectionHeadingP"></p>
+        </div>
+        <div class="recommendations-card" data-aos="fade-up">
+          <span>Coming soon</span>
+          <p>Recommendations from UIC faculty, CCC Intelligent Solutions collaborators, and TransUnion project stakeholders will be added here after they are published on LinkedIn.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact-section-container" id="contact">
       <div class="contact-section">
@@ -1036,6 +1213,7 @@
     </div>
   </footer>
 
+  <script src="https://unpkg.com/three@0.160.1/build/three.min.js"></script>
   <script src="main.js"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>AOS.init();</script>

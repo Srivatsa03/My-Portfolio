@@ -482,6 +482,18 @@ noscript{
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-system-map {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.72;
+    pointer-events: none;
 }
 
 .text-content{
@@ -491,6 +503,8 @@ noscript{
     height: 100%;
     align-items: flex-start;
     justify-content: center;
+    position: relative;
+    z-index: 2;
 }
 
 #hello-friend{
@@ -935,6 +949,277 @@ noscript{
     z-index: -2;
     box-shadow: 2px 2px 0px inset transparent, -2px -2px 0px inset #0F52BA;
     transition-duration: .5s;
+}
+
+/* Selected Impact */
+.impact-section-container,
+.case-study-section-container,
+.architecture-section-container,
+.availability-section-container,
+.recommendations-section-container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.impact-section-container {
+    padding: 120px 0 0;
+}
+
+.impact-section,
+.case-study-section,
+.architecture-section,
+.recommendations-section {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.impact-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 34px;
+}
+
+.impact-card {
+    min-height: 220px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(0, 21, 66, 0.92), rgba(0, 9, 38, 0.42));
+    border: 1px solid rgba(77, 208, 225, 0.28);
+    border-radius: 8px;
+}
+
+.impact-kicker,
+.architecture-topline,
+.availability-kicker {
+    color: #4DD0E1;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.impact-card h3 {
+    color: var(--color-white);
+    font-size: 1.9rem;
+    line-height: 1.25;
+}
+
+.impact-card p {
+    color: var(--color-ddd-color);
+    font-size: 1.35rem;
+    line-height: 22px;
+}
+
+/* Case Studies */
+.case-study-section-container {
+    padding: 140px 0 0;
+}
+
+.case-study-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    margin-top: 34px;
+}
+
+.case-study-card {
+    min-height: 430px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: linear-gradient(135deg, var(--tech-stack-box-first-color), var(--tech-stack-box-second-color));
+    border: 1px solid var(--tech-stack-box-border-color);
+    border-radius: 8px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.case-study-card:hover,
+.architecture-card:hover,
+.impact-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-light-blue);
+    box-shadow: 0 12px 30px rgba(15, 82, 186, 0.2);
+}
+
+.case-study-topline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.case-study-topline span {
+    padding: 7px 11px;
+    color: var(--color-light-blue);
+    background: rgba(77, 208, 225, 0.08);
+    border: 1px solid rgba(77, 208, 225, 0.28);
+    border-radius: 999px;
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.case-study-card h3,
+.architecture-card h3 {
+    color: var(--color-white);
+    font-size: 2.35rem;
+    line-height: 1.3;
+}
+
+.case-study-details {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.case-study-details p,
+.architecture-card p,
+.recommendations-card p,
+.availability-section p {
+    color: var(--color-ddd-color);
+    font-size: 1.55rem;
+    line-height: 25px;
+}
+
+.case-study-details strong {
+    color: var(--color-white);
+}
+
+.case-study-link,
+.availability-link {
+    width: fit-content;
+    margin-top: auto;
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 800;
+    padding: 11px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.06);
+    transition: all 0.3s ease;
+}
+
+.case-study-link:hover,
+.availability-link:hover {
+    background: rgba(77, 208, 225, 0.12);
+    border-color: var(--color-light-blue);
+    transform: translateY(-2px);
+}
+
+/* Architecture */
+.architecture-section-container {
+    padding: 40px 0 120px;
+}
+
+.architecture-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin-top: 34px;
+}
+
+.architecture-card {
+    min-height: 390px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: linear-gradient(135deg, var(--tech-stack-box-first-color), rgba(0, 9, 38, 0.2));
+    border: 1px solid var(--tech-stack-box-border-color);
+    border-radius: 8px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flow-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.flow-row span {
+    position: relative;
+    padding: 10px 12px;
+    color: var(--color-white);
+    border: 1px solid rgba(77, 208, 225, 0.28);
+    border-radius: 8px;
+    background: rgba(77, 208, 225, 0.08);
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.flow-row span:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -9px;
+    top: 50%;
+    width: 8px;
+    height: 1px;
+    background: rgba(77, 208, 225, 0.6);
+}
+
+/* Availability + Recommendations */
+.availability-section-container {
+    padding: 80px 0 0;
+}
+
+.availability-section {
+    width: 60%;
+    padding: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    background: linear-gradient(135deg, rgba(0, 21, 66, 0.95), rgba(0, 9, 38, 0.2));
+    border: 1px solid rgba(77, 208, 225, 0.32);
+    border-radius: 8px;
+}
+
+.availability-section h2 {
+    color: var(--color-white);
+    font-size: 3.2rem;
+    line-height: 1.25;
+}
+
+.recommendations-section-container {
+    padding: 100px 0 0;
+}
+
+.recommendations-card {
+    width: 100%;
+    margin-top: 34px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--tech-stack-box-first-color), var(--tech-stack-box-second-color));
+    border: 1px solid var(--tech-stack-box-border-color);
+    border-radius: 8px;
+}
+
+.recommendations-card span {
+    width: fit-content;
+    padding: 8px 12px;
+    color: var(--color-light-blue);
+    border: 1px solid rgba(77, 208, 225, 0.28);
+    border-radius: 999px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .dp:hover::after{
@@ -2384,6 +2669,18 @@ footer{
         width: 80%;
     }
 
+    .impact-section,
+    .case-study-section,
+    .architecture-section,
+    .recommendations-section,
+    .availability-section {
+        width: 80%;
+    }
+
+    .impact-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .logo:hover{
         transform: translateY(200px);
         transition-duration: 1s;
@@ -2405,6 +2702,10 @@ footer{
     
     .blob{
         display: none;
+    }
+
+    .hero-system-map {
+        opacity: 0.38;
     }
     
     .cursor-inner,
@@ -2583,6 +2884,18 @@ footer{
     .projects-section-div{
         width: 80%;
     }
+
+    .impact-grid,
+    .case-study-grid,
+    .architecture-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .impact-card,
+    .case-study-card,
+    .architecture-card {
+        min-height: auto;
+    }
     
     .project-box{
         flex-direction: column;
@@ -2728,6 +3041,23 @@ footer{
     .projects-section-div{
         width: 80%;
     }
+
+    .impact-section-container,
+    .case-study-section-container {
+        padding-top: 100px;
+    }
+
+    .architecture-section-container {
+        padding-bottom: 90px;
+    }
+
+    .availability-section {
+        padding: 32px;
+    }
+
+    .availability-section h2 {
+        font-size: 2.7rem;
+    }
     
     .project-boxes-div{
         padding: 40px 0;
@@ -2808,9 +3138,25 @@ footer{
     .landing-page-container{
         height: 85vh;
     }
+
+    .hero-system-map {
+        opacity: 0.2;
+    }
     
     .text-content{
         justify-content: flex-start;
+    }
+
+    .impact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .impact-card,
+    .case-study-card,
+    .architecture-card,
+    .recommendations-card,
+    .availability-section {
+        padding: 24px;
     }
     
     .project-box{
