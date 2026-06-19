@@ -502,16 +502,27 @@ noscript{
     pointer-events: none;
 }
 
-/* Vanta NET hero background (scoped to the hero, sits behind the text) */
-.vanta-bg {
+/* Hero ambient particle canvas + soft depth glow (sits behind the text) */
+.landing-page-container::after {
+    content: "";
     position: absolute;
     inset: 0;
     z-index: 0;
-    overflow: hidden;
+    pointer-events: none;
+    background:
+        radial-gradient(60% 55% at 78% 42%, rgba(15, 82, 186, 0.30), rgba(0, 9, 38, 0) 70%),
+        radial-gradient(50% 60% at 12% 80%, rgba(77, 208, 225, 0.10), rgba(0, 9, 38, 0) 70%);
 }
-.vanta-bg canvas {
-    opacity: 0.9;
+.hero-fx {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
+.landing-page-container .blob { z-index: 0; }
+.landing-page-container .text-content { z-index: 2; }
 
 .text-content{
     display: flex;
