@@ -20,7 +20,7 @@
   <title>Srivatsa Kamballa | Portfolio</title>
   <link rel="icon" type="image/x-icon" href="src/png/main-favicon.png" />
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <link rel="stylesheet" href="style.css?v=20260619-hero-fx" />
+  <link rel="stylesheet" href="style.css?v=20260619-bg3d" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Passions+Conflict&amp;family=Orbitron&amp;family=Fira+Code&amp;family=Six+Caps" />
 </head>
 
@@ -30,6 +30,9 @@
   </audio>
   <div id="preloader"></div>
   <noscript>Allow Javascript</noscript>
+
+  <canvas id="bg-3d" aria-hidden="true"></canvas>
+  <div id="bg-veil" aria-hidden="true"></div>
 
   <header>
     <div class="cursor-inner" id="cursor-inner"></div>
@@ -108,7 +111,6 @@
     </div>
 
     <section class="landing-page-container" id="home">
-      <canvas id="hero-fx" class="hero-fx" aria-hidden="true"></canvas>
       <div class="blob"></div>
       <div class="text-content">
         <article id="hello-friend" data-aos="fade-up" data-aos-delay="0">
@@ -961,63 +963,97 @@
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>AOS.init();</script>
 
-  <!-- Hero ambient particles: lightweight 2D canvas, no library. Reduced-motion safe. -->
+  <!-- Site-wide 3D point structure (three.js). Scroll + mouse reactive. Mobile + reduced-motion gated. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script>
-    (function heroFX() {
-      var canvas = document.getElementById("hero-fx");
-      if (!canvas || !canvas.getContext) return;
-      var ctx = canvas.getContext("2d");
+    (function bg3D() {
+      var canvas = document.getElementById("bg-3d");
+      if (!canvas || typeof THREE === "undefined") return;
       var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      var w = 0, h = 0, dots = [], raf = null;
+      var mobile = window.innerWidth <= 768;
 
-      function size() {
-        var r = canvas.getBoundingClientRect();
-        w = r.width; h = r.height;
-        canvas.width = Math.max(1, w * dpr);
-        canvas.height = Math.max(1, h * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-      function seed() {
-        var count = Math.max(14, Math.min(42, Math.floor(w / 30)));
-        dots = [];
-        for (var i = 0; i < count; i++) {
-          dots.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 1.5 + 0.5,
-            vy: -(Math.random() * 0.16 + 0.04),
-            vx: (Math.random() - 0.5) * 0.1,
-            a: Math.random() * 0.35 + 0.12
-          });
-        }
-      }
-      function render(move) {
-        ctx.clearRect(0, 0, w, h);
-        for (var i = 0; i < dots.length; i++) {
-          var p = dots[i];
-          if (move) {
-            p.x += p.vx; p.y += p.vy;
-            if (p.y < -8) { p.y = h + 8; p.x = Math.random() * w; }
-            if (p.x < -8) p.x = w + 8; else if (p.x > w + 8) p.x = -8;
-          }
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(120, 200, 235, " + p.a + ")";
-          ctx.fill();
-        }
-      }
-      function loop() { render(true); raf = window.requestAnimationFrame(loop); }
+      var renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: "low-power" });
+      } catch (e) { return; }
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+      renderer.setSize(window.innerWidth, window.innerHeight);
 
-      size(); seed();
-      if (reduce) { render(false); }
-      else { loop(); }
+      var scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x000926, 0.055);
 
-      var t;
-      window.addEventListener("resize", function () {
-        window.clearTimeout(t);
-        t = window.setTimeout(function () { size(); seed(); if (reduce) render(false); }, 200);
+      var camera = new THREE.PerspectiveCamera(62, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 0, 18);
+
+      // soft round sprite for glowing points
+      function makeDot() {
+        var c = document.createElement("canvas"); c.width = c.height = 64;
+        var g = c.getContext("2d");
+        var grd = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+        grd.addColorStop(0, "rgba(255,255,255,1)");
+        grd.addColorStop(0.25, "rgba(180,230,245,0.9)");
+        grd.addColorStop(1, "rgba(180,230,245,0)");
+        g.fillStyle = grd; g.fillRect(0, 0, 64, 64);
+        var t = new THREE.Texture(c); t.needsUpdate = true; return t;
+      }
+      var sprite = makeDot();
+
+      var COUNT = mobile ? 800 : 2000;
+      var positions = new Float32Array(COUNT * 3);
+      var colors = new Float32Array(COUNT * 3);
+      var cA = new THREE.Color(0x4dd0e1); // cyan
+      var cB = new THREE.Color(0x2f6fd6); // sapphire
+      var R = 16;
+      for (var i = 0; i < COUNT; i++) {
+        // distribute in a slightly flattened shell + interior for depth
+        var u = Math.random(), v = Math.random();
+        var theta = u * Math.PI * 2, phi = Math.acos(2 * v - 1);
+        var rad = R * (0.35 + Math.random() * 0.65);
+        var x = rad * Math.sin(phi) * Math.cos(theta);
+        var y = rad * Math.sin(phi) * Math.sin(theta) * 0.7;
+        var z = rad * Math.cos(phi);
+        positions[i * 3] = x; positions[i * 3 + 1] = y; positions[i * 3 + 2] = z;
+        var col = cA.clone().lerp(cB, Math.random());
+        colors[i * 3] = col.r; colors[i * 3 + 1] = col.g; colors[i * 3 + 2] = col.b;
+      }
+      var geo = new THREE.BufferGeometry();
+      geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+      var mat = new THREE.PointsMaterial({
+        size: 0.42, map: sprite, vertexColors: true, transparent: true,
+        opacity: 0.74, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true
       });
+      var cloud = new THREE.Points(geo, mat);
+      scene.add(cloud);
+
+      var mx = 0, my = 0, tmx = 0, tmy = 0, scrollT = 0;
+      window.addEventListener("mousemove", function (e) {
+        tmx = (e.clientX / window.innerWidth - 0.5);
+        tmy = (e.clientY / window.innerHeight - 0.5);
+      });
+      window.addEventListener("scroll", function () {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        scrollT = max > 0 ? window.scrollY / max : 0;
+      }, { passive: true });
+      window.addEventListener("resize", function () {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      function frame() {
+        mx += (tmx - mx) * 0.04; my += (tmy - my) * 0.04;
+        cloud.rotation.y += 0.0009;
+        cloud.rotation.x = my * 0.5 + scrollT * 0.6;
+        cloud.rotation.z = scrollT * 0.25;
+        camera.position.x = mx * 4;
+        camera.position.z = 18 - scrollT * 5;
+        camera.lookAt(0, 0, 0);
+        renderer.render(scene, camera);
+      }
+
+      if (reduce) { frame(); }
+      else { (function loop() { frame(); window.requestAnimationFrame(loop); })(); }
     })();
   </script>
   <script>
