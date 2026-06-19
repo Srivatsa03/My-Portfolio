@@ -502,6 +502,17 @@ noscript{
     pointer-events: none;
 }
 
+/* Vanta NET hero background (scoped to the hero, sits behind the text) */
+.vanta-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+.vanta-bg canvas {
+    opacity: 0.9;
+}
+
 .text-content{
     display: flex;
     flex-direction: column;

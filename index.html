@@ -20,7 +20,7 @@
   <title>Srivatsa Kamballa | Portfolio</title>
   <link rel="icon" type="image/x-icon" href="src/png/main-favicon.png" />
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <link rel="stylesheet" href="style.css?v=20260502-footer-avatar-full" />
+  <link rel="stylesheet" href="style.css?v=20260619-editorial-redesign" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Passions+Conflict&amp;family=Orbitron&amp;family=Fira+Code&amp;family=Six+Caps" />
 </head>
 
@@ -30,7 +30,6 @@
   </audio>
   <div id="preloader"></div>
   <noscript>Allow Javascript</noscript>
-  <canvas id="hero-system-map" class="hero-system-map" aria-hidden="true"></canvas>
 
   <header>
     <div class="cursor-inner" id="cursor-inner"></div>
@@ -109,6 +108,7 @@
     </div>
 
     <section class="landing-page-container" id="home">
+      <div id="vanta-bg" class="vanta-bg" aria-hidden="true"></div>
       <div class="blob"></div>
       <div class="text-content">
         <article id="hello-friend" data-aos="fade-up" data-aos-delay="0">
@@ -960,6 +960,48 @@
   <script src="main.js"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>AOS.init();</script>
+
+  <!-- Vanta NET hero background (three.js). Mobile + reduced-motion gated. -->
+  <script>
+    (function loadVanta() {
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce || window.innerWidth <= 768) return; // skip heavy 3D on phones / reduced motion
+
+      var loadScript = function (src) {
+        return new Promise(function (resolve, reject) {
+          var s = document.createElement("script");
+          s.src = src;
+          s.onload = resolve;
+          s.onerror = reject;
+          document.body.appendChild(s);
+        });
+      };
+
+      loadScript("https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js")
+        .then(function () {
+          return loadScript("https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js");
+        })
+        .then(function () {
+          if (!window.VANTA || !window.VANTA.NET) return;
+          window.__vantaHero = window.VANTA.NET({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: false,
+            gyroControls: false,
+            minHeight: 200.0,
+            minWidth: 200.0,
+            scale: 1.0,
+            color: 0x4dd0e1,
+            backgroundColor: 0x000926,
+            points: 10.0,
+            maxDistance: 22.0,
+            spacing: 16.0,
+            showDots: true
+          });
+        })
+        .catch(function () { /* CDN unavailable: hero falls back to plain navy */ });
+    })();
+  </script>
   <script>
     const contactForm = document.getElementById("contact-form");
     const contactFormStatus = document.getElementById("contact-form-status");
