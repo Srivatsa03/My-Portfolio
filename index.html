@@ -20,7 +20,7 @@
   <title>Srivatsa Kamballa | Portfolio</title>
   <link rel="icon" type="image/x-icon" href="src/png/main-favicon.png" />
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <link rel="stylesheet" href="style.css?v=20260619-bg3d" />
+  <link rel="stylesheet" href="style.css?v=20260619-motto" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Passions+Conflict&amp;family=Orbitron&amp;family=Fira+Code&amp;family=Six+Caps" />
 </head>
 
@@ -939,7 +939,7 @@
     <div class="footer-foreground">
       <div class="footercontainer">
         <div class="two-words">
-          <article>"Learning, Living, and Leveling Up."</article>
+          <article id="rotating-motto">"Learning, Living, and Leveling Up."</article>
         </div>
         <div class="footer-avatar-container">
           <img src="src/png/footer1.png" alt="animation-head" class="footer-avatar-img" id="footer-wala-avatar"/>
@@ -1056,6 +1056,44 @@
       else { (function loop() { frame(); window.requestAnimationFrame(loop); })(); }
     })();
   </script>
+
+  <!-- Footer motto: auto-rotates every 3s with a fade -->
+  <script>
+    (function rotateMotto() {
+      var el = document.getElementById("rotating-motto");
+      if (!el) return;
+      var mottos = [
+        "Learning, Living, and Leveling Up.",
+        "I build the boring parts that keep the exciting parts running.",
+        "If it does not roll back at 2am, it is not done.",
+        "Make it work, make it honest, make it observable.",
+        "Retrieval that cites its sources. Deploys that survive Monday.",
+        "Production is the only benchmark that counts.",
+        "Every number on this page is one I can defend.",
+        "Turning 2am incidents into one-page runbooks.",
+        "Less magic, more logs.",
+        "Building, Breaking, and Bettering.",
+        "Designing, Deploying, and Debugging.",
+        "Curious, Caffeinated, and Compiling.",
+        "Built to hold up next month, not just the demo.",
+        "Curiosity, compounded."
+      ];
+      var i = 0;
+      var show = function () { el.textContent = '"' + mottos[i] + '"'; };
+      show();
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce || mottos.length < 2) return;
+      window.setInterval(function () {
+        el.style.opacity = "0";
+        window.setTimeout(function () {
+          i = (i + 1) % mottos.length;
+          show();
+          el.style.opacity = "1";
+        }, 450);
+      }, 3000);
+    })();
+  </script>
+
   <script>
     const contactForm = document.getElementById("contact-form");
     const contactFormStatus = document.getElementById("contact-form-status");

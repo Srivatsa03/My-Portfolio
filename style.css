@@ -2564,9 +2564,13 @@ footer{
 }
 
 .two-words article{
-   font-size: 3.4rem;
+   font-size: 2.7rem;
    font-family: fira code;
    text-align: center;
+   max-width: 760px;
+   line-height: 1.4;
+   padding: 0 18px;
+   transition: opacity 0.45s ease;
 }
 
 .footer-avatar-container{
