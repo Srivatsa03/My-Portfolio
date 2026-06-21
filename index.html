@@ -20,7 +20,7 @@
   <title>Srivatsa Kamballa | Portfolio</title>
   <link rel="icon" type="image/x-icon" href="src/png/main-favicon.png" />
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <link rel="stylesheet" href="style.css?v=20260619-motto" />
+  <link rel="stylesheet" href="style.css?v=20260621-photos" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Passions+Conflict&amp;family=Orbitron&amp;family=Fira+Code&amp;family=Six+Caps" />
 </head>
 
@@ -161,7 +161,7 @@
             <p>What I care about is boring in the best way: does it hold up next month, can someone else read it, and does it tell you when it breaks.</p>
           </div>
           <div class="dp" data-aos="fade-up">
-            <img src="src/webp/srivatsa.webp" alt="Srivatsa Kamballa" />
+            <img id="rotating-photo" src="src/photos/photo-1.jpg" alt="Srivatsa Kamballa" />
           </div>
         </div>
       </div>
@@ -1090,6 +1090,33 @@
           show();
           el.style.opacity = "1";
         }, 450);
+      }, 3000);
+    })();
+  </script>
+
+  <!-- About photo: cross-fades through the gallery every 3s (preloaded to avoid flicker) -->
+  <script>
+    (function rotatePhoto() {
+      var img = document.getElementById("rotating-photo");
+      if (!img) return;
+      var photos = [
+        "src/photos/photo-1.jpg",
+        "src/photos/photo-2.jpg",
+        "src/photos/photo-3.jpg",
+        "src/photos/photo-4.jpg",
+        "src/photos/photo-5.jpg"
+      ];
+      photos.forEach(function (src) { var p = new Image(); p.src = src; }); // preload
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce || photos.length < 2) return;
+      var i = 0;
+      window.setInterval(function () {
+        img.style.opacity = "0";
+        window.setTimeout(function () {
+          i = (i + 1) % photos.length;
+          img.src = photos[i];
+          img.style.opacity = "1";
+        }, 500);
       }, 3000);
     })();
   </script>
