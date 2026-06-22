@@ -413,8 +413,30 @@
           <span class="section-eyebrow">fixes that left my machine</span>
           <h2 class="section-title">Open source</h2>
         </div>
-        <p class="work-intro" data-aos="fade-up">Small, careful patches to tools other people depend on. I care less about the line count and more about catching the second broken file nobody noticed.</p>
+        <p class="work-intro" data-aos="fade-up">Four bugs I found and fixed in tools a lot of people build on, across Haystack, LiteLLM, and LlamaIndex. Three are merged, one is in review. I care less about the line count and more about catching the second broken file nobody noticed.</p>
         <ul class="oss-list">
+          <li class="oss-item" data-aos="fade-up">
+            <div class="oss-meta">
+              <a href="https://github.com/BerriAI/litellm/pull/30764" target="_blank" class="oss-repo">BerriAI/litellm</a>
+              <span class="oss-sub">48k+ stars</span>
+              <span class="oss-status merged">PR #30764 &middot; merged</span>
+            </div>
+            <div class="oss-body">
+              <h3>Stopped short secrets leaking into logs</h3>
+              <p>While reading the code I noticed SensitiveDataMasker returned any secret of eight characters or fewer verbatim, an off-by-one threshold plus a zero-length boundary mask, so short redis passwords, API keys, and tokens were landing in logs and the admin UI. I made short values mask by default, kept two legitimate non-secret callers working through dependency injection, added regression tests, and untangled the CI failures that cascaded through shared callers. Reviewed and merged.</p>
+            </div>
+          </li>
+          <li class="oss-item" data-aos="fade-up">
+            <div class="oss-meta">
+              <a href="https://github.com/BerriAI/litellm/pull/29693" target="_blank" class="oss-repo">BerriAI/litellm</a>
+              <span class="oss-sub">48k+ stars</span>
+              <span class="oss-status merged">PR #29693 &middot; merged</span>
+            </div>
+            <div class="oss-body">
+              <h3>Fixed a 10x cost-tracking error</h3>
+              <p>amazon.titan-embed-text-v2 was priced ten times too high in the cost maps, quietly inflating everyone's budget reports. I checked the number against AWS Bedrock pricing, fixed the primary and backup maps in sync so they would not drift apart again, and added a regression test with isolated monkeypatching. Merged after review.</p>
+            </div>
+          </li>
           <li class="oss-item" data-aos="fade-up">
             <div class="oss-meta">
               <a href="https://github.com/deepset-ai/haystack/pull/11670" target="_blank" class="oss-repo">deepset-ai/haystack</a>
@@ -423,29 +445,18 @@
             </div>
             <div class="oss-body">
               <h3>Silenced noisy logs on empty inputs</h3>
-              <p>HTMLToDocument was dumping ERROR and WARNING lines whenever it got an empty ByteStream, because trafilatura and lxml log their parse failures internally instead of raising, so the existing try/except never caught them. I skipped empty streams before extraction, added a test and a release note, and cleared full CI. A maintainer reviewed and merged it.</p>
+              <p>HTMLToDocument was dumping ERROR and WARNING lines whenever it got an empty ByteStream, because trafilatura and lxml log their parse failures internally instead of raising, so the existing try/except never caught them. I skipped empty streams before extraction, added a test and a release note, and cleared full CI. Reviewed and merged.</p>
             </div>
           </li>
           <li class="oss-item" data-aos="fade-up">
             <div class="oss-meta">
-              <a href="https://github.com/BerriAI/litellm/pull/30764" target="_blank" class="oss-repo">BerriAI/litellm</a>
-              <span class="oss-sub">48k+ stars</span>
-              <span class="oss-status open">PR #30764 &middot; open, CI green</span>
+              <a href="https://github.com/run-llama/llama_index/pull/22046" target="_blank" class="oss-repo">run-llama/llama_index</a>
+              <span class="oss-sub">40k+ stars</span>
+              <span class="oss-status open">PR #22046 &middot; open, under review</span>
             </div>
             <div class="oss-body">
-              <h3>Stopped short secrets leaking into logs</h3>
-              <p>While reading the code I noticed SensitiveDataMasker returned any secret of eight characters or fewer verbatim, an off-by-one threshold plus a zero-length boundary mask, so short redis passwords, API keys, and tokens were landing in logs and the admin UI. I made short values mask by default, kept two legitimate non-secret callers working through dependency injection, added regression tests, and untangled the CI failures that cascaded through shared callers.</p>
-            </div>
-          </li>
-          <li class="oss-item" data-aos="fade-up">
-            <div class="oss-meta">
-              <a href="https://github.com/BerriAI/litellm/pull/29693" target="_blank" class="oss-repo">BerriAI/litellm</a>
-              <span class="oss-sub">48k+ stars</span>
-              <span class="oss-status open">PR #29693 &middot; open, review 5/5</span>
-            </div>
-            <div class="oss-body">
-              <h3>Fixed a 10x cost-tracking error</h3>
-              <p>amazon.titan-embed-text-v2 was priced ten times too high in the cost maps, quietly inflating everyone's budget reports. I checked the number against AWS Bedrock pricing, fixed the primary and backup maps in sync so they would not drift apart again, and added a regression test with isolated monkeypatching.</p>
+              <h3>Caught silent data loss in the ingestion core</h3>
+              <p>In LlamaIndex's core IngestionPipeline, the upsert path keyed nodes by document id in a dict, so every chunk of a document except the last was silently dropped, never embedded or stored. I fixed both the sync and async paths to keep all nodes, added regression tests for each, and reproduced the bug end to end through the public API. The PR is open and under review.</p>
             </div>
           </li>
         </ul>
