@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://srivatsa03.github.io/My-Portfolio/sitemap.xml
