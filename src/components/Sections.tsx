@@ -36,7 +36,7 @@ export function About() {
           <div className="text-sm text-muted-foreground space-y-4">
             <div><div className="text-foreground font-semibold">Based in</div>{profile.location}, open to relocating across the US</div>
             <div><div className="text-foreground font-semibold">Focus</div>AI infrastructure · platform · backend · cloud / DevOps</div>
-            <div><div className="text-foreground font-semibold">Now</div>Available for full-time roles</div>
+            <div><div className="text-foreground font-semibold">Now</div>Selectively exploring 2026 roles</div>
           </div>
         </div>
       </div>
