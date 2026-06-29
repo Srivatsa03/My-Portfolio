@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Github, ArrowUpRight, Mail, Linkedin, MapPin } from "lucide-react";
 import {
   about, experience, featuredProjects, moreProjects, openSource,
@@ -229,59 +228,29 @@ export function Education() {
 }
 
 export function Contact() {
-  const [sent, setSent] = useState(false);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const f = new FormData(e.currentTarget);
-    const subject = encodeURIComponent(`Portfolio message from ${f.get("name")}`);
-    const body = encodeURIComponent(`${f.get("message")}\n\nFrom: ${f.get("name")} (${f.get("email")})`);
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-    setSent(true);
-  };
-
   return (
     <Shell id="contact">
       <Heading eyebrow="say hello" title="Get in touch" />
-      <div className="grid lg:grid-cols-2 gap-10">
-        <div className="reveal">
-          <p className="text-accent font-mono text-xs tracking-widest uppercase">Open to work</p>
-          <h3 className="text-2xl font-bold text-foreground mt-2 mb-3">Have a role, project, or research idea?</h3>
-          <p className="text-muted-foreground leading-relaxed mb-6">
-            Available now for full-time software engineering, AI infrastructure, platform, cloud, DevOps/SRE, and data infrastructure roles.
-          </p>
-          <div className="space-y-3">
-            <a href={`mailto:${profile.email}`} className="glass rounded-xl px-4 py-3 flex items-center gap-3 hover:text-foreground transition">
-              <Mail className="w-5 h-5 text-accent" /><span><strong className="block text-foreground text-sm">Email</strong><span className="text-sm text-muted-foreground">{profile.email}</span></span>
-            </a>
-            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="glass rounded-xl px-4 py-3 flex items-center gap-3 hover:text-foreground transition">
-              <Linkedin className="w-5 h-5 text-accent" /><span><strong className="block text-foreground text-sm">LinkedIn</strong><span className="text-sm text-muted-foreground">linkedin.com/in/srivatsa-kamballa</span></span>
-            </a>
-            <a href={profile.github} target="_blank" rel="noreferrer" className="glass rounded-xl px-4 py-3 flex items-center gap-3 hover:text-foreground transition">
-              <Github className="w-5 h-5 text-accent" /><span><strong className="block text-foreground text-sm">GitHub</strong><span className="text-sm text-muted-foreground">github.com/Srivatsa03</span></span>
-            </a>
-            <div className="glass rounded-xl px-4 py-3 flex items-center gap-3">
-              <MapPin className="w-5 h-5 text-accent" /><span><strong className="block text-foreground text-sm">Location</strong><span className="text-sm text-muted-foreground">{profile.location}</span></span>
-            </div>
+      <div className="max-w-3xl reveal">
+        <p className="text-accent font-mono text-xs tracking-widest uppercase">Open to work</p>
+        <h3 className="text-2xl font-bold text-foreground mt-2 mb-3">Have a role, project, or research idea?</h3>
+        <p className="text-muted-foreground leading-relaxed mb-8">
+          Open to full-time software engineering, AI infrastructure, platform, cloud, DevOps/SRE, and data infrastructure roles. The fastest way to reach me is email or LinkedIn.
+        </p>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <a href={`mailto:${profile.email}`} className="glass rounded-xl px-4 py-3 flex items-center gap-3 hover:text-foreground transition">
+            <Mail className="w-5 h-5 text-accent shrink-0" /><span><strong className="block text-foreground text-sm">Email</strong><span className="text-sm text-muted-foreground break-all">{profile.email}</span></span>
+          </a>
+          <a href={profile.linkedin} target="_blank" rel="noreferrer" className="glass rounded-xl px-4 py-3 flex items-center gap-3 hover:text-foreground transition">
+            <Linkedin className="w-5 h-5 text-accent shrink-0" /><span><strong className="block text-foreground text-sm">LinkedIn</strong><span className="text-sm text-muted-foreground">linkedin.com/in/srivatsa-kamballa</span></span>
+          </a>
+          <a href={profile.github} target="_blank" rel="noreferrer" className="glass rounded-xl px-4 py-3 flex items-center gap-3 hover:text-foreground transition">
+            <Github className="w-5 h-5 text-accent shrink-0" /><span><strong className="block text-foreground text-sm">GitHub</strong><span className="text-sm text-muted-foreground">github.com/Srivatsa03</span></span>
+          </a>
+          <div className="glass rounded-xl px-4 py-3 flex items-center gap-3">
+            <MapPin className="w-5 h-5 text-accent shrink-0" /><span><strong className="block text-foreground text-sm">Location</strong><span className="text-sm text-muted-foreground">{profile.location}</span></span>
           </div>
         </div>
-
-        <form onSubmit={onSubmit} className="glass rounded-3xl p-7 space-y-4 reveal">
-          <div>
-            <label className="text-sm text-muted-foreground" htmlFor="name">Name</label>
-            <input id="name" name="name" required placeholder="Your name" className="w-full mt-1 rounded-lg bg-black/30 border border-white/10 px-3 py-2.5 text-foreground outline-none focus:border-accent" />
-          </div>
-          <div>
-            <label className="text-sm text-muted-foreground" htmlFor="email">Email</label>
-            <input id="email" name="email" type="email" required placeholder="you@example.com" className="w-full mt-1 rounded-lg bg-black/30 border border-white/10 px-3 py-2.5 text-foreground outline-none focus:border-accent" />
-          </div>
-          <div>
-            <label className="text-sm text-muted-foreground" htmlFor="message">Message</label>
-            <textarea id="message" name="message" required rows={5} placeholder="Tell me what you want to discuss" className="w-full mt-1 rounded-lg bg-black/30 border border-white/10 px-3 py-2.5 text-foreground outline-none focus:border-accent resize-none" />
-          </div>
-          <button type="submit" className="w-full rounded-lg bg-foreground text-background font-semibold py-3 hover:opacity-90 transition">
-            {sent ? "Opening your mail app..." : "Send message"}
-          </button>
-        </form>
       </div>
     </Shell>
   );
