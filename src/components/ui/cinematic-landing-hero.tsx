@@ -156,16 +156,18 @@ export function CinematicHero({
     const ctx = gsap.context(() => {
       gsap.set(".text-track", { autoAlpha: 0, y: 60, scale: 0.85, filter: "blur(20px)", rotationX: -20 });
       gsap.set(".text-days", { autoAlpha: 1, clipPath: "inset(0 100% 0 0)" });
+      gsap.set(".hero-proof", { autoAlpha: 0, y: 20 });
       gsap.set(".main-card", { y: window.innerHeight + 200, autoAlpha: 1 });
       gsap.set([".card-left-text", ".card-right-text", ".mockup-scroll-wrapper", ".floating-badge", ".phone-widget"], { autoAlpha: 0 });
       gsap.set(".cta-wrapper", { autoAlpha: 0, scale: 0.8, filter: "blur(30px)" });
 
       gsap.timeline({ delay: 0.3 })
         .to(".text-track", { duration: 1.8, autoAlpha: 1, y: 0, scale: 1, filter: "blur(0px)", rotationX: 0, ease: "expo.out" })
-        .to(".text-days", { duration: 1.4, clipPath: "inset(0 0% 0 0)", ease: "power4.inOut" }, "-=1.0");
+        .to(".text-days", { duration: 1.4, clipPath: "inset(0 0% 0 0)", ease: "power4.inOut" }, "-=1.0")
+        .to(".hero-proof", { duration: 1.0, autoAlpha: 1, y: 0, ease: "power2.out" }, "-=0.5");
 
       gsap.timeline({
-        scrollTrigger: { trigger: containerRef.current, start: "top top", end: "+=3200", pin: true, scrub: 1, anticipatePin: 1 },
+        scrollTrigger: { trigger: containerRef.current, start: "top top", end: "+=2200", pin: true, scrub: 1, anticipatePin: 1 },
       })
         .to([".hero-text-wrapper", ".cine-grid-layer"], { scale: 1.15, filter: "blur(20px)", opacity: 0.2, ease: "power2.inOut", duration: 2 }, 0)
         .to(".main-card", { y: 0, ease: "power3.inOut", duration: 2 }, 0)
@@ -175,7 +177,7 @@ export function CinematicHero({
         .fromTo(".floating-badge", { y: 100, autoAlpha: 0, scale: 0.7, rotationZ: -10 }, { y: 0, autoAlpha: 1, scale: 1, rotationZ: 0, ease: "back.out(1.5)", duration: 1.5, stagger: 0.2 }, "-=2.0")
         .fromTo(".card-left-text", { x: -50, autoAlpha: 0 }, { x: 0, autoAlpha: 1, ease: "power4.out", duration: 1.5 }, "-=1.5")
         .fromTo(".card-right-text", { x: 50, autoAlpha: 0, scale: 0.8 }, { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.5 }, "<")
-        .to({}, { duration: 2.5 })
+        .to({}, { duration: 1.4 })
         .set(".hero-text-wrapper", { autoAlpha: 0 })
         .set(".cta-wrapper", { autoAlpha: 1 })
         .to({}, { duration: 1.5 })
@@ -191,12 +193,17 @@ export function CinematicHero({
   if (isMobile) {
     return (
       <section id="home" className="relative min-h-screen flex flex-col justify-center px-6 py-24 bg-background">
-        <p className="text-accent font-mono text-xs tracking-widest mb-3">Available now</p>
+        <p className="text-accent font-mono text-xs tracking-widest mb-3">Platform + AI engineer</p>
         <h1 className="text-silver text-4xl font-black tracking-tight leading-tight">{tagline1}</h1>
         <h1 className="text-silver text-4xl font-black tracking-tight leading-tight mb-5">{tagline2}</h1>
         <h2 className="text-2xl font-extrabold uppercase tracking-tighter text-foreground mb-2">{brandName}</h2>
         <p className="text-foreground/80 font-semibold mb-2">{cardHeading}</p>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-7">{cardDescription}</p>
+        <p className="text-muted-foreground text-sm leading-relaxed mb-5">{cardDescription}</p>
+        <div className="flex flex-wrap gap-2 mb-7">
+          {["Patent granted", "AWS Certified", "LiteLLM (48k★)", "GPA 3.88"].map((b) => (
+            <span key={b} className="glass rounded-full px-3 py-1.5 text-xs font-medium text-muted-foreground whitespace-nowrap">{b}</span>
+          ))}
+        </div>
         <div className="flex flex-col gap-3">
           <a href={githubUrl} target="_blank" rel="noreferrer" className="rounded-xl px-5 py-3 font-semibold bg-foreground text-background text-center">GitHub</a>
           <a href={linkedinUrl} target="_blank" rel="noreferrer" className="rounded-xl px-5 py-3 font-semibold glass text-center">LinkedIn</a>
@@ -224,6 +231,11 @@ export function CinematicHero({
       <div className="hero-text-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 will-change-transform transform-style-3d">
         <h1 className="text-track gsap-reveal text-3d-matte text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">{tagline1}</h1>
         <h1 className="text-days gsap-reveal text-silver-matte text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter">{tagline2}</h1>
+        <div className="hero-proof gsap-reveal mt-8 flex flex-wrap items-center justify-center gap-2.5 md:gap-3">
+          {["Patent granted", "AWS Certified", "Merged in LiteLLM (48k★)", "GPA 3.88"].map((b) => (
+            <span key={b} className="floating-ui-badge rounded-full px-4 py-2 text-xs md:text-sm font-medium tracking-tight text-blue-50/90 whitespace-nowrap">{b}</span>
+          ))}
+        </div>
       </div>
 
       <div className="cta-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 gsap-reveal pointer-events-auto will-change-transform">
