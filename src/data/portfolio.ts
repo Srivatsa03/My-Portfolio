@@ -73,6 +73,20 @@ export const experience = [
 
 export const featuredProjects = [
   {
+    context: "Open source · LLM security",
+    title: "rag-redteam",
+    lede: "Red-team your RAG pipeline for the attacks eval frameworks never check.",
+    story:
+      "RAG eval tools measure answer quality and model scanners probe the model, but nobody was testing the pipeline that turns an untrusted document into trusted context. So I built rag-redteam. It plants poisoned documents and exfiltration probes against your retrieval pipeline, flags prompt injection, source-document leakage, and cross-document smuggling with a deterministic canary, and fails your CI when the pipeline gets more exploitable than its accepted baseline. I benchmarked it across LangChain, LlamaIndex, and Haystack and found a frontier model does not fix injection: it is an architecture problem, not a model problem.",
+    metrics: [
+      { value: "6", label: "attack probes" },
+      { value: "75%", label: "injection on default RAG" },
+      { value: "1-line", label: "GitHub Action CI gate" },
+    ],
+    stack: "Python · pytest · GitHub Actions · LangChain · LlamaIndex · Haystack · OpenAI",
+    link: "https://github.com/Srivatsa03/rag-redteam",
+  },
+  {
     context: "UIC x CCC Intelligent Solutions",
     title: "MetARAG",
     lede: "Document intelligence for teams drowning in policy and agreement PDFs.",
@@ -151,14 +165,6 @@ export const moreProjects = [
       "Telegram's encrypted messaging protocol rebuilt from scratch, with AES-256, SHA-256, and perfect forward secrecy so no two sessions ever share keys.",
     stack: "Python · AES-256 · SHA-256 · TCP/WS",
     link: "https://github.com/Srivatsa03/Telegram-MTproto2.0",
-  },
-  {
-    name: "rag-redteam",
-    context: "LLM security",
-    blurb:
-      "Red-teams a RAG pipeline for the attacks eval frameworks miss: prompt injection, source-document leakage, and instruction smuggling. Runs as a CLI or GitHub Action.",
-    stack: "Python · GitHub Actions · LLM security",
-    link: "https://github.com/Srivatsa03/rag-redteam",
   },
   {
     name: "WuzzyFuzz",
