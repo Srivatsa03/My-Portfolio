@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { Github, Linkedin } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -39,7 +39,46 @@ const INJECTED_STYLES = `
   .btn-modern-light:hover { transform: translateY(-3px); }
   .btn-modern-dark { background: linear-gradient(180deg, #27272A 0%, #18181B 100%); color: #FFFFFF; box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.6), 0 12px 24px -4px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -3px 6px rgba(0,0,0,0.8); }
   .btn-modern-dark:hover { transform: translateY(-3px); background: linear-gradient(180deg, #3F3F46 0%, #27272A 100%); }
+  .tw-cursor { display: inline-block; width: 0.055em; height: 0.95em; background: var(--color-foreground); margin-left: 6px; vertical-align: -0.06em; border-radius: 1px; animation: tw-blink 1.05s steps(1) infinite; }
+  @keyframes tw-blink { 50% { opacity: 0; } }
 `;
+
+// Rotating captions for the headline. All read correctly after "I build systems".
+const CAPTIONS = [
+  "that survive production.",
+  "that cite their sources.",
+  "you can roll back at 2am.",
+  "that never leak a secret.",
+  "that pass their own red-team.",
+  "that tell you when they break.",
+];
+
+// Typewriter: type a word, hold ~3s, erase, type the next. Respects reduced-motion.
+function useTypewriter(words: string[], typeMs = 55, deleteMs = 28, holdMs = 3000) {
+  const reduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const [text, setText] = useState(reduced ? words[0] : "");
+  const [i, setI] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+  useEffect(() => {
+    if (reduced) return;
+    const word = words[i % words.length];
+    let t: number;
+    if (!deleting) {
+      if (text.length < word.length) {
+        t = window.setTimeout(() => setText(word.slice(0, text.length + 1)), typeMs);
+      } else {
+        t = window.setTimeout(() => setDeleting(true), holdMs);
+      }
+    } else if (text.length > 0) {
+      t = window.setTimeout(() => setText(word.slice(0, text.length - 1)), deleteMs);
+    } else {
+      setDeleting(false);
+      setI((v) => (v + 1) % words.length);
+    }
+    return () => window.clearTimeout(t);
+  }, [text, deleting, i, reduced, words, typeMs, deleteMs, holdMs]);
+  return text;
+}
 
 export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement> {
   brandName?: string;
@@ -57,7 +96,6 @@ export function CinematicHero({
   brandName = "Srivatsa Kamballa",
   role = "Platform + AI Engineer",
   tagline1 = "I build systems",
-  tagline2 = "that survive production.",
   description = (
     <>
       Cloud infrastructure, AI retrieval systems, and the security tooling that keeps them honest.{" "}
@@ -72,6 +110,7 @@ export function CinematicHero({
   const rootRef = useRef<HTMLElement>(null);
   const termRef = useRef<HTMLDivElement>(null);
   const reqRef = useRef<number>(0);
+  const typed = useTypewriter(CAPTIONS);
 
   // Subtle, non-blocking intro. Uses from() so content is visible even if JS never runs.
   useEffect(() => {
@@ -138,7 +177,9 @@ export function CinematicHero({
             <span className="text-muted-foreground"> · {role}</span>
           </p>
           <h1 className="hero-anim text-silver-matte text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05]">{tagline1}</h1>
-          <h1 className="hero-anim text-silver-matte text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-6">{tagline2}</h1>
+          <h1 className="hero-anim text-silver-matte text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-6 min-h-[1.15em]" aria-label="that survive production">
+            {typed}<span className="tw-cursor" aria-hidden="true" />
+          </h1>
           <p className="hero-anim text-muted-foreground text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-7">{description}</p>
 
           <div className="hero-anim flex flex-wrap gap-2.5 justify-center lg:justify-start mb-9">
