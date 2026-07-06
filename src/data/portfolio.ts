@@ -205,6 +205,15 @@ export const openSource = [
     link: "https://github.com/deepset-ai/haystack/pull/11670",
   },
   {
+    repo: "pydantic/pydantic",
+    stars: "28k+ stars",
+    status: "PR #13374 · merged",
+    merged: true,
+    title: "Stopped a JSON schema config being silently dropped",
+    body: "When an Annotated field combined a dict json_schema_extra with a callable one, Pydantic warned that the callable would be ignored, but if the dict came first the code did the exact opposite: it let the callable overwrite the dict, silently losing the config and even crashing schema generation when the callable mutated keys that were no longer there. I made the dict win as the warning promises, matching the already-correct reverse ordering, and added a regression test. Reviewed and merged.",
+    link: "https://github.com/pydantic/pydantic/pull/13374",
+  },
+  {
     repo: "run-llama/llama_index",
     stars: "40k+ stars",
     status: "PR #22046 · open, under review",

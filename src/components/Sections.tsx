@@ -127,8 +127,8 @@ export function OpenSource() {
     <Shell id="open-source">
       <Heading eyebrow="fixes that left my machine" title="Open source" />
       <p className="text-muted-foreground max-w-2xl mb-10 reveal">
-        Four bugs I found and fixed in tools a lot of people build on, across Haystack, LiteLLM, and LlamaIndex.
-        Three merged, one in review. I care less about line count and more about catching the second broken file nobody noticed.
+        Five bugs I found and fixed in tools a lot of people build on, across Haystack, LiteLLM, Pydantic, and LlamaIndex.
+        Four merged, one in review. I care less about line count and more about catching the second broken file nobody noticed.
       </p>
       <div className="grid md:grid-cols-2 gap-5">
         {openSource.map((o, i) => (
