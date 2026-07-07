@@ -179,7 +179,7 @@ export const moreProjects = [
 export const openSource = [
   {
     repo: "BerriAI/litellm",
-    stars: "48k+ stars",
+    stars: "53k+ stars",
     status: "PR #30764 · merged",
     merged: true,
     title: "Stopped short secrets leaking into logs",
@@ -188,7 +188,7 @@ export const openSource = [
   },
   {
     repo: "BerriAI/litellm",
-    stars: "48k+ stars",
+    stars: "53k+ stars",
     status: "PR #29693 · merged",
     merged: true,
     title: "Fixed a 10x cost-tracking error",
@@ -197,7 +197,7 @@ export const openSource = [
   },
   {
     repo: "deepset-ai/haystack",
-    stars: "20k+ stars",
+    stars: "26k+ stars",
     status: "PR #11670 · merged",
     merged: true,
     title: "Silenced noisy logs on empty inputs",
@@ -215,12 +215,21 @@ export const openSource = [
   },
   {
     repo: "run-llama/llama_index",
-    stars: "40k+ stars",
-    status: "PR #22046 · open, under review",
+    stars: "51k+ stars",
+    status: "PR #22133 · open, under review",
     merged: false,
     title: "Caught silent data loss in the ingestion core",
     body: "In LlamaIndex's core IngestionPipeline, the upsert path keyed nodes by document id in a dict, so every chunk of a document except the last was silently dropped, never embedded or stored. I fixed both the sync and async paths to keep all nodes, added regression tests for each, and reproduced the bug end to end through the public API. The PR is open and under review.",
-    link: "https://github.com/run-llama/llama_index/pull/22046",
+    link: "https://github.com/run-llama/llama_index/pull/22133",
+  },
+  {
+    repo: "stanfordnlp/dspy",
+    stars: "35k+ stars",
+    status: "PR #9942 · open, under review",
+    merged: false,
+    title: "Fixed silent value corruption in the chat parser",
+    body: "In DSPy's ChatAdapter.parse, the field-header regex matched the stripped line but sliced the unstripped one, so any indented header leaked stray marker characters into the parsed value, quietly corrupting structured outputs. I aligned the match and the slice, added regression tests for the indented cases, and cleared CI. The PR is open and under review.",
+    link: "https://github.com/stanfordnlp/dspy/pull/9942",
   },
 ];
 
