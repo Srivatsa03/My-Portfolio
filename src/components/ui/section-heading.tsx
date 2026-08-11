@@ -2,22 +2,17 @@ import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
 interface SectionHeadingProps {
-  eyebrow: string;
   title: string;
   icon?: ReactNode;
   className?: string;
 }
 
-export function SectionHeading({ eyebrow, title, icon, className }: SectionHeadingProps) {
+/** Centered icon + title, matching the reference. */
+export function SectionHeading({ title, icon, className }: SectionHeadingProps) {
   return (
-    <div className={cn("mb-8", className)}>
-      <div className="flex items-center gap-2">
-        <span className="text-brand">{icon}</span>
-        <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-          {eyebrow}
-        </span>
-      </div>
-      <h2 className="mt-2 text-2xl font-bold tracking-tight text-gradient sm:text-3xl">
+    <div className={cn("mb-10 flex items-center justify-center gap-2", className)}>
+      <span className="text-secondary-foreground">{icon}</span>
+      <h2 className="text-xl font-bold tracking-tight text-secondary-foreground sm:text-2xl">
         {title}
       </h2>
     </div>

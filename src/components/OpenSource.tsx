@@ -8,12 +8,8 @@ export function OpenSource() {
   return (
     <section id="open-source" className="mx-auto max-w-5xl px-4 py-10 sm:py-16">
       <BlurFade>
-        <SectionHeading
-          eyebrow="fixes that left my machine"
-          title="Open source"
-          icon={<GitPullRequest className="h-4 w-4" />}
-        />
-        <p className="-mt-4 mb-8 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        <SectionHeading title="Open Source" icon={<GitPullRequest className="h-5 w-5 sm:h-6 sm:w-6" />} />
+        <p className="mx-auto -mt-4 mb-10 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
           Seven pull requests merged across LiteLLM, LlamaIndex, Pydantic, and Haystack,
           plus two open, all solo. The pattern is silent-correctness bugs: the ones that
           throw no error while quietly corrupting data, leaking secrets, or mispricing usage.

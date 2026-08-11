@@ -24,9 +24,9 @@
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
 
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Fira Code", Menlo,
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", "JetBrains Mono", Menlo,
     monospace;
 
   --radius-sm: 0.4rem;
@@ -71,8 +71,8 @@
   --border: oklch(0.915 0.006 264);
   --input: oklch(0.915 0.006 264);
   --ring: oklch(0.7 0.02 261);
-  --brand: oklch(0.58 0.16 258);
-  --brand-foreground: oklch(0.97 0.02 258);
+  --brand: oklch(0.56 0.2 295);
+  --brand-foreground: oklch(0.97 0.02 295);
 }
 
 /* Dark theme */
@@ -94,8 +94,8 @@
   --border: oklch(1 0 0 / 9%);
   --input: oklch(1 0 0 / 12%);
   --ring: oklch(0.55 0.02 264);
-  --brand: oklch(0.7 0.15 256);
-  --brand-foreground: oklch(0.18 0.02 264);
+  --brand: oklch(0.74 0.15 296);
+  --brand-foreground: oklch(0.18 0.02 296);
 }
 
 @layer base {
@@ -125,27 +125,35 @@
   to { opacity: 1; transform: none; }
 }
 
-/* Script accent used on the name flourish (self-contained, no web font). */
+/* Script accent (matches the reference: Pacifico). */
 .font-script {
-  font-family: "Snell Roundhand", "Segoe Script", "Brush Script MT", cursive;
-  font-style: italic;
+  font-family: "Pacifico", "Snell Roundhand", "Segoe Script", cursive;
+  font-style: normal;
 }
 
-/* Grid + glow ambience behind the page. */
-.bg-grid-ambient {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background-size: 56px 56px;
-  background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--foreground) 4%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 4%, transparent) 1px, transparent 1px);
-  mask-image: radial-gradient(ellipse 75% 55% at 50% -2%, black 0%, transparent 70%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 55% at 50% -2%, black 0%, transparent 70%);
-}
+/* Soft constellation glow at the top of the page, like the reference hero. */
 .bg-glow-ambient {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background:
-    radial-gradient(38rem 26rem at 12% -4%, color-mix(in srgb, var(--brand) 20%, transparent), transparent 60%),
-    radial-gradient(36rem 26rem at 92% 4%, color-mix(in srgb, var(--brand) 12%, transparent), transparent 60%);
+    radial-gradient(46rem 26rem at 50% -8%, color-mix(in srgb, var(--brand) 26%, transparent), transparent 62%),
+    radial-gradient(30rem 22rem at 82% 2%, color-mix(in srgb, var(--brand) 12%, transparent), transparent 60%);
+}
+/* Faint starfield masked to the upper page. */
+.bg-grid-ambient {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, color-mix(in srgb, var(--foreground) 55%, transparent), transparent),
+    radial-gradient(1px 1px at 60% 20%, color-mix(in srgb, var(--foreground) 45%, transparent), transparent),
+    radial-gradient(1px 1px at 75% 42%, color-mix(in srgb, var(--foreground) 40%, transparent), transparent),
+    radial-gradient(1px 1px at 40% 55%, color-mix(in srgb, var(--foreground) 35%, transparent), transparent),
+    radial-gradient(1px 1px at 88% 28%, color-mix(in srgb, var(--foreground) 45%, transparent), transparent),
+    radial-gradient(1px 1px at 10% 48%, color-mix(in srgb, var(--foreground) 35%, transparent), transparent),
+    radial-gradient(1px 1px at 32% 12%, color-mix(in srgb, var(--foreground) 45%, transparent), transparent),
+    radial-gradient(1px 1px at 52% 38%, color-mix(in srgb, var(--foreground) 30%, transparent), transparent);
+  background-size: 100% 100%;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 85% 60% at 50% -4%, black 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 60% at 50% -4%, black 0%, transparent 72%);
 }
 
 /* Marquee edge fades. */

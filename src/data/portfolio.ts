@@ -71,6 +71,7 @@ export const highlight = {
 export interface ExperienceItem {
   role: string;
   org: string;
+  short: string;
   date: string;
   location?: string;
   summary?: string;
@@ -83,6 +84,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Software Developer, Software Testing",
     org: "University of Illinois Chicago",
+    short: "UIC",
     date: "Aug 2026 - Present",
     location: "Chicago, IL",
     summary:
@@ -98,6 +100,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Software Developer",
     org: "University of Illinois Chicago",
+    short: "UIC",
     date: "Aug 2024 - Jul 2026",
     location: "Chicago, IL",
     summary: "Research infrastructure and DevOps for the fuzzing platform the PSBayes work runs on.",
@@ -112,6 +115,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Software Developer, AI Engineer",
     org: "UIC College of Business Administration",
+    short: "UIC",
     date: "Aug 2025 - May 2026",
     location: "Chicago, IL",
     summary: "AI engineering in the Liautaud business school's industry program, building systems for external clients and the university.",
@@ -124,34 +128,43 @@ export const experience: ExperienceItem[] = [
     href: profile.github,
   },
   {
+    role: "Trainee Software Engineer",
+    org: "Mu Sigma",
+    short: "μσ",
+    date: "May 2023 - Jun 2024",
+    location: "Bangalore, India",
+    summary: "Analytics and data engineering for enterprise decision-support clients.",
+    bullets: [
+      "Automated ETL workflows for extraction, cleaning, validation, and transformation in Python and SQL, cutting recurring data-prep effort about 40% and lifting analytics-pipeline reliability about 30%.",
+    ],
+    skills: ["Python", "SQL", "ETL", "Pandas", "Tableau"],
+  },
+];
+
+export interface TeachingItem {
+  role: string;
+  org: string;
+  course: string;
+  date: string;
+  detail: string;
+}
+
+export const teaching: TeachingItem[] = [
+  {
     role: "Teaching Assistant, Computer Science",
     org: "University of Illinois Chicago",
+    course: "CS 516 · Responsible Data Science",
     date: "Aug 2025 - Jan 2026",
-    location: "Chicago, IL",
-    bullets: [
-      "Supported 30+ graduate students through CS 516 Responsible Data Science as subject-matter expert, holding office hours on fairness, provenance, and model evaluation.",
-    ],
-    skills: ["Responsible AI", "Teaching", "Model Evaluation"],
+    detail:
+      "Subject-matter expert for 30+ graduate students, holding office hours on fairness, provenance, and model evaluation.",
   },
   {
     role: "Teaching Assistant, Business Analytics",
     org: "UIC College of Business Administration",
+    course: "IDS 532 + MS Business Analytics capstone",
     date: "Jan 2026 - May 2026",
-    location: "Chicago, IL",
-    bullets: [
-      "Taught IDS 532 Operations Management and ran the MS Business Analytics capstone for 20+ students across 5 to 6 teams, coordinating scope, milestones, and client-sponsor communication.",
-    ],
-    skills: ["Teaching", "Stakeholder Management", "Analytics"],
-  },
-  {
-    role: "Trainee Software Engineer",
-    org: "Mu Sigma",
-    date: "May 2023 - Jun 2024",
-    location: "Bangalore, India",
-    bullets: [
-      "Automated ETL workflows for extraction, cleaning, validation, and transformation in Python and SQL, cutting recurring data-prep effort about 40% and lifting pipeline reliability about 30%.",
-    ],
-    skills: ["Python", "SQL", "ETL", "Pandas", "Tableau"],
+    detail:
+      "Ran the analytics capstone for 20+ students across 5 to 6 teams, coordinating scope, milestones, and client-sponsor communication.",
   },
 ];
 
