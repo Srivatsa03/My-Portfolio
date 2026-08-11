@@ -1,33 +1,61 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#06070d" />
-    <meta name="description" content="Srivatsa Kamballa | Software Engineer focused on AI infrastructure, backend systems, cloud platforms, DevOps, and data workflows." />
-    <meta name="keywords" content="Srivatsa Kamballa,Software Engineer,AI Infrastructure Engineer,Platform Engineer,Cloud Engineer,DevOps Engineer,Backend Engineer,UIC,CCC Intelligent Solutions,TransUnion,RAG,Kubernetes,AWS,Terraform" />
+    <meta name="theme-color" content="#0c0e16" />
+    <meta
+      name="description"
+      content="Srivatsa Kamballa — Software, AI Platform, and DevOps/SRE engineer working on the security and reliability of AI pipelines. Fuzzing research, 7 merged open-source PRs, a granted patent, AWS certified."
+    />
+    <meta
+      name="keywords"
+      content="Srivatsa Kamballa,Software Engineer,AI Platform Engineer,DevOps Engineer,SRE,LLM Security,RAG Security,Kubernetes,AWS,Terraform,UIC"
+    />
     <meta name="author" content="Srivatsa Kamballa" />
     <meta name="google-site-verification" content="n5jHT5ZlMxDs9rS9uO2XTx99o00wJ6--FlQgfQuSBHM" />
 
-    <!-- Open Graph / link previews -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Srivatsa Kamballa | Portfolio" />
-    <meta property="og:description" content="Software Engineer focused on AI infrastructure, backend systems, cloud platforms, and DevOps." />
+    <meta
+      property="og:description"
+      content="I build AI infrastructure, then I break it before an attacker can. Software, AI platform, and DevOps/SRE engineer."
+    />
     <meta property="og:url" content="https://srivatsa03.github.io/My-Portfolio/" />
     <meta name="twitter:card" content="summary" />
 
     <title>Srivatsa Kamballa | Portfolio</title>
-    <link rel="icon" type="image/png" href="%BASE_URL%main-favicon.png" />
+    <link rel="icon" type="image/png" href="./main-favicon.png" />
+
+    <!-- Set theme before first paint to avoid a flash. -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "light") {
+            document.documentElement.classList.remove("dark");
+            document.documentElement.style.colorScheme = "light";
+          } else {
+            document.documentElement.classList.add("dark");
+            document.documentElement.style.colorScheme = "dark";
+          }
+        } catch (e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HZDCVBBQXY"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-HZDCVBBQXY');
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-HZDCVBBQXY");
     </script>
   </head>
   <body>

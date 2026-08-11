@@ -1,64 +1,89 @@
 import { useEffect, useState } from "react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { navLinks, profile } from "@/data/portfolio";
+import { getInitialTheme, setTheme, type Theme } from "@/lib/theme";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [theme, setThemeState] = useState<Theme>("dark");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    setThemeState(getInitialTheme());
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const toggle = () => {
+    const next: Theme = theme === "dark" ? "light" : "dark";
+    setThemeState(next);
+    setTheme(next);
+  };
+
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? "backdrop-blur-md bg-background/70 border-b border-white/5" : ""
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
+        scrolled ? "border-border bg-background/70 backdrop-blur-md" : "border-transparent"
       }`}
     >
-      <nav className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
-        <a href="#home" className="font-black tracking-tight text-lg text-silver">SK</a>
-
-        <ul className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
-          {navLinks.map((l) => (
-            <li key={l.id}>
-              <a href={`#${l.id}`} className="hover:text-foreground transition-colors">{l.label}</a>
-            </li>
-          ))}
-        </ul>
-
-        <a
-          href={`mailto:${profile.email}`}
-          className="hidden md:inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold bg-foreground text-background hover:opacity-90 transition"
-        >
-          Let's talk
+      <nav className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
+        <a href="#hero" className="inline-flex items-center gap-2">
+          <span className="grid h-8 w-8 place-items-center rounded-lg border bg-card text-sm font-bold">
+            {profile.initials}
+          </span>
+          <span className="hidden text-sm font-semibold sm:inline">{profile.name}</span>
         </a>
 
-        <button
-          className="md:hidden text-foreground"
-          aria-label="Menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <div className="space-y-1.5">
-            <span className="block w-6 h-0.5 bg-foreground" />
-            <span className="block w-6 h-0.5 bg-foreground" />
-            <span className="block w-4 h-0.5 bg-foreground" />
-          </div>
-        </button>
+        <div className="flex items-center gap-1">
+          <ul className="mr-1 hidden items-center gap-0.5 md:flex">
+            {navLinks.map((l) => (
+              <li key={l.id}>
+                <a
+                  href={`#${l.id}`}
+                  className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <button
+            onClick={toggle}
+            aria-label="Toggle theme"
+            className="grid h-9 w-9 place-items-center rounded-lg border bg-card text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+
+          <button
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Menu"
+            className="grid h-9 w-9 place-items-center rounded-lg border bg-card text-muted-foreground md:hidden"
+          >
+            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
+        </div>
       </nav>
 
       {open && (
-        <ul className="md:hidden bg-background/95 backdrop-blur-md border-t border-white/5 px-5 py-4 space-y-3 text-muted-foreground">
-          {navLinks.map((l) => (
-            <li key={l.id}>
-              <a href={`#${l.id}`} onClick={() => setOpen(false)} className="block hover:text-foreground">
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="border-t border-border bg-background/95 backdrop-blur-md md:hidden">
+          <ul className="mx-auto flex max-w-5xl flex-col px-4 py-2">
+            {navLinks.map((l) => (
+              <li key={l.id}>
+                <a
+                  href={`#${l.id}`}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-md px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </header>
   );

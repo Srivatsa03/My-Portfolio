@@ -1,190 +1,298 @@
-// All portfolio content in one place. Carried over verbatim from the existing site.
+// Single source of truth for portfolio content.
+// Sourced from the Aug 2026 profile (linkedin-rewrite, master-resume). All
+// metrics user-confirmed. OSS statuses verified against the GitHub API.
 
 export const profile = {
   name: "Srivatsa Kamballa",
-  greeting: "Namaste(); I'm",
-  roles: ["Software Engineer", "AI Infrastructure Engineer", "Platform Engineer", "Cloud / DevOps Engineer"],
-  summary:
-    "I build the unglamorous parts that keep AI and infrastructure honest: retrieval that cites its sources, pipelines that do not silently break, and deployments you can roll back at 2am.",
-  summary2:
-    "Most recently with CCC Intelligent Solutions and TransUnion through UIC, plus a granted patent and a few merged fixes in open source I am quietly proud of.",
+  initials: "SK",
+  // Rotating title tokens shown after the name.
+  roles: ["Software Engineer", "AI Platform Engineer", "DevOps / SRE Engineer"],
+  thesis: "I build AI infrastructure, then I break it before an attacker can.",
+  blurb:
+    "MS Computer Science at UIC working on the security and reliability of AI pipelines. First-author fuzzing research, seven merged PRs across LiteLLM, LlamaIndex, Pydantic, and Haystack, a granted patent, and AWS certified.",
+  location: "Chicago, IL",
+  available: true,
+  availableNote: "Open to 2026 roles",
   email: "srivatsakamballa02@gmail.com",
-  github: "https://github.com/Srivatsa03",
   linkedin: "https://www.linkedin.com/in/srivatsa-kamballa",
-  location: "Chicago, Illinois",
-  motto: "Learning, Living, and Leveling Up.",
+  github: "https://github.com/Srivatsa03",
+  githubUser: "Srivatsa03",
+  resume: "https://github.com/Srivatsa03",
 };
 
-export const about = [
-  "I'm an MS Computer Science grad from UIC. I like problems that sit between a model and production: a RAG system that has to actually cite the right paragraph, a pipeline that has to survive a bad upstream feed, an EKS cluster that has to roll back cleanly when a deploy goes wrong.",
-  "Lately that has meant document intelligence with CCC Intelligent Solutions, Android risk intelligence with TransUnion, and rebuilding a fuzzing research stack from a state nobody wanted to touch. Before grad school I shipped data automation at Mu Sigma and earned a patent along the way.",
-  "What I care about is boring in the best way: does it hold up next month, can someone else read it, and does it tell you when it breaks.",
+export const socials = [
+  { label: "Email", href: `mailto:${profile.email}`, icon: "mail" },
+  { label: "LinkedIn", href: profile.linkedin, icon: "linkedin" },
+  { label: "GitHub", href: profile.github, icon: "github" },
 ];
 
-export const experience = [
+export const navLinks = [
+  { id: "hero", label: "Home" },
+  { id: "dashboard", label: "About" },
+  { id: "projects", label: "Work" },
+  { id: "open-source", label: "Open Source" },
+  { id: "experience", label: "Experience" },
+  { id: "contact", label: "Contact" },
+];
+
+export const stats = [
+  { value: 7, suffix: "", label: "PRs merged", sub: "LiteLLM · LlamaIndex · Pydantic · Haystack" },
+  { value: 158, suffix: "K", label: "Combined stars", sub: "in repos I have merged into" },
+  { value: 3.88, decimals: 2, label: "MS GPA", sub: "Computer Science, UIC" },
+  { value: 1, suffix: "", label: "Granted patent", sub: "IP India, 2023" },
+];
+
+// Real stack, shown as a scrolling pill marquee.
+export const stack = [
+  "Python", "AWS", "Kubernetes", "Terraform", "Docker", "Ansible",
+  "ArgoCD", "GitOps", "Jenkins", "GitHub Actions", "Prometheus", "Grafana",
+  "LangChain", "LlamaIndex", "RAG", "FastAPI", "PostgreSQL", "pgvector",
+  "Bash", "Linux", "LLVM", "Rust", "PyTorch", "TypeScript", "React", "SQL",
+];
+
+export const highlight = {
+  title: "Currently building",
+  items: [
+    {
+      name: "rag-redteam",
+      href: "https://github.com/Srivatsa03/rag-redteam",
+      note: "Red-teams RAG pipelines for prompt injection and data leakage, and fails CI the moment your pipeline gets more exploitable. On PyPI and the GitHub Marketplace.",
+      meta: "PyPI · GitHub Action · MIT",
+    },
+    {
+      name: "kubemend",
+      href: "https://github.com/Srivatsa03/kubemend",
+      note: "A Kubernetes remediation agent that diagnoses freely and acts narrowly: six typed, reversible actions whose only write surface is a git commit.",
+      meta: "Kubernetes · SRE · GitOps",
+    },
+  ],
+};
+
+export interface ExperienceItem {
+  role: string;
+  org: string;
+  date: string;
+  location?: string;
+  summary?: string;
+  bullets: string[];
+  skills: string[];
+  href?: string;
+}
+
+export const experience: ExperienceItem[] = [
   {
-    role: "Research Infrastructure Engineer",
-    company: "University of Illinois Chicago",
-    duration: "Mar 2025 - May 2026",
-    location: "Chicago, Illinois",
-    points: [
-      "Rebuilt the FuzzBench automated software testing environment from scratch on AWS using Docker and a custom LLVM toolchain, cutting setup time by ~60% and making experiments reproducible across 5+ benchmark configurations.",
-      "Reduced Docker and LLVM rebuild time from over 40 minutes to under 15 minutes by optimizing layer caching and modularizing the dependency build.",
-      "Provisioned research infrastructure on AWS and Azure with Terraform and Ansible across 10+ Linux nodes, automating VPC setup, networking, and package management.",
-      "Implemented two Bayesian statistical estimators for residual fuzzing risk, improving stopping-condition accuracy by 30%+ across all benchmark configurations.",
+    role: "Software Developer, Software Testing",
+    org: "University of Illinois Chicago",
+    date: "Aug 2026 - Present",
+    location: "Chicago, IL",
+    summary:
+      "Fuzzing and probabilistic-modeling research with UIC and Penn State collaborators, on a question most testing tools dodge: when is it actually safe to stop fuzzing?",
+    bullets: [
+      "Built PSBayes, a per-seed Beta-posterior estimator of the residual risk left in a fuzzing campaign, in an accuracy-tuned and a safety-tuned variant, evaluated across 8 FuzzBench benchmarks and 18,861 discovery rounds.",
+      "First author on the resulting paper, A Bayesian Approach to Estimating Residual Risk of Fuzzing, currently under submission.",
+      "Extending the framework to LLM-generated C to Rust translation with cross-language differential fuzzing, so the stopping rule bounds the risk of an undetected translation bug.",
     ],
+    skills: ["Python", "Docker", "LLVM", "FuzzBench", "Rust", "AWS", "Bash"],
+    href: profile.github,
   },
   {
-    role: "AI Platform Engineer",
-    company: "University of Illinois Chicago",
-    duration: "Sep 2024 - Mar 2025",
-    location: "Chicago, Illinois",
-    points: [
-      "Led a team of 5+ engineers to build MetARAG, a RAG-based document intelligence platform, with UIC x CCC Intelligent Solutions for source-grounded search across 4+ document corpora.",
-      "Built a GPU-accelerated processing pipeline covering PDF parsing, chunking, metadata enrichment, embeddings, and retrieval tuning, improving processing efficiency by ~65% and response speed by ~40%.",
-      "Achieved ~93% retrieval precision through context-selection and evidence-backed answer workflows using Python, LangChain, OpenAI APIs, Docker, Kubernetes, PostgreSQL, and pgvector.",
-      "Owned ArgoCD GitOps deployment end-to-end, cutting deployment time by 55% with automated rollback and reducing MTTR by 45% using Prometheus, Grafana, and Loki.",
+    role: "Software Developer",
+    org: "University of Illinois Chicago",
+    date: "Aug 2024 - Jul 2026",
+    location: "Chicago, IL",
+    summary: "Research infrastructure and DevOps for the fuzzing platform the PSBayes work runs on.",
+    bullets: [
+      "Rebuilt the FuzzBench research environment on AWS from scratch with Docker and a custom LLVM build, cutting setup time roughly 60% and making every experiment reproducible.",
+      "Cut Docker rebuild time from over 40 minutes to under 15, and provisioned 10+ Linux nodes on AWS and Azure with Terraform and Ansible, taking per-node setup from 4 hours to 45 minutes.",
+      "Built Jenkins and GitHub Actions pipelines with tfsec scanning, drove failed deployments from 10 per month to under 2, and cut MTTR from 3 hours to under 1 with Prometheus and Grafana.",
     ],
+    skills: ["AWS", "Azure", "Terraform", "Ansible", "Docker", "Kubernetes", "Jenkins", "Prometheus", "Grafana"],
+    href: profile.github,
+  },
+  {
+    role: "Software Developer, AI Engineer",
+    org: "UIC College of Business Administration",
+    date: "Aug 2025 - May 2026",
+    location: "Chicago, IL",
+    summary: "AI engineering in the Liautaud business school's industry program, building systems for external clients and the university.",
+    bullets: [
+      "Led 5+ engineers on MetARAG, a document-intelligence platform for CCC Intelligent Solutions covering parsing, chunking, embeddings, and retrieval tuning, reaching about 93% retrieval precision across 4+ corpora.",
+      "Built the GPU-accelerated pipeline underneath it carrying 100+ GB, improving processing efficiency about 65% and cutting response latency about 40%.",
+      "Shipped ECI Pipeline for TransUnion, a DeltaRAG and Graph-RAG system turning 10 live Android security feeds into evidence-backed risk tickets on FastAPI, pgvector, NetworkX, and a Next.js dashboard.",
+    ],
+    skills: ["Python", "LangChain", "FastAPI", "pgvector", "NetworkX", "ArgoCD", "AWS", "Next.js"],
+    href: profile.github,
+  },
+  {
+    role: "Teaching Assistant, Computer Science",
+    org: "University of Illinois Chicago",
+    date: "Aug 2025 - Jan 2026",
+    location: "Chicago, IL",
+    bullets: [
+      "Supported 30+ graduate students through CS 516 Responsible Data Science as subject-matter expert, holding office hours on fairness, provenance, and model evaluation.",
+    ],
+    skills: ["Responsible AI", "Teaching", "Model Evaluation"],
+  },
+  {
+    role: "Teaching Assistant, Business Analytics",
+    org: "UIC College of Business Administration",
+    date: "Jan 2026 - May 2026",
+    location: "Chicago, IL",
+    bullets: [
+      "Taught IDS 532 Operations Management and ran the MS Business Analytics capstone for 20+ students across 5 to 6 teams, coordinating scope, milestones, and client-sponsor communication.",
+    ],
+    skills: ["Teaching", "Stakeholder Management", "Analytics"],
   },
   {
     role: "Trainee Software Engineer",
-    company: "Mu Sigma",
-    duration: "May 2023 - Jun 2024",
+    org: "Mu Sigma",
+    date: "May 2023 - Jun 2024",
     location: "Bangalore, India",
-    points: [
-      "Automated ETL workflows for extraction, cleaning, validation, and transformation in Python and SQL, cutting recurring data-preparation effort from 6 hours to under 2 hours weekly.",
-      "Accelerated reporting turnaround from 3 days to same-day delivery by transforming raw business data into structured, analysis-ready datasets for decision-support use cases.",
-      "Improved analytics pipeline reliability by ~30% by debugging data-quality issues and standardizing validation checks across 10+ upstream sources.",
-      "Eliminated 2,000+ scheduled jobs through batching and deduplication, reducing compute overhead and manual reporting effort for downstream teams.",
+    bullets: [
+      "Automated ETL workflows for extraction, cleaning, validation, and transformation in Python and SQL, cutting recurring data-prep effort about 40% and lifting pipeline reliability about 30%.",
     ],
-  },
-  {
-    role: "Cloud and DevOps Intern",
-    company: "Broadridge",
-    duration: "Aug 2022 - May 2023",
-    location: "India",
-    points: [
-      "Built early hands-on experience with cloud infrastructure, deployment workflows, and environment setup in an enterprise technology environment.",
-      "Supported release and deployment processes through version control, environment configuration, and repeatable deployment practices.",
-      "Strengthened foundations in infrastructure reliability, access control, and operational consistency across enterprise systems.",
-    ],
+    skills: ["Python", "SQL", "ETL", "Pandas", "Tableau"],
   },
 ];
 
-export const featuredProjects = [
+export const education = [
   {
-    context: "Open source · LLM security",
+    degree: "Master of Science, Computer Science",
+    org: "University of Illinois Chicago",
+    date: "Aug 2024 - May 2026",
+    location: "Chicago, IL",
+    detail: "GPA 3.88 / 4.00",
+  },
+  {
+    degree: "Bachelor of Technology, Computer Science (AI)",
+    org: "Jain University",
+    date: "2020 - 2024",
+    location: "Bangalore, India",
+    detail: "GPA 3.91 / 4.00",
+  },
+];
+
+export const patent = {
+  title: "Book Issue Management System for Libraries",
+  number: "Patent No. 202341071153",
+  authority: "Intellectual Property India",
+  date: "Nov 2023",
+  detail:
+    "Co-invented an AI-enabled camera and RFID system for automated library book issuance, return, and access control.",
+};
+
+export const certification = {
+  name: "AWS Certified Solutions Architect - Associate",
+  authority: "Amazon Web Services",
+  date: "2026",
+};
+
+export interface Project {
+  title: string;
+  tagline: string;
+  description: string;
+  href: string;
+  tags: string[];
+  meta: string;
+  featured?: boolean;
+}
+
+export const projects: Project[] = [
+  {
     title: "rag-redteam",
-    lede: "Red-team your RAG pipeline for the attacks eval frameworks never check.",
-    story:
-      "RAG eval tools measure answer quality and model scanners probe the model, but nobody was testing the pipeline that turns an untrusted document into trusted context. So I built rag-redteam. It plants poisoned documents and exfiltration probes against your retrieval pipeline, flags prompt injection, source-document leakage, and cross-document smuggling with a deterministic canary, and fails your CI when the pipeline gets more exploitable than its accepted baseline. I benchmarked it across LangChain, LlamaIndex, and Haystack and found a frontier model does not fix injection: it is an architecture problem, not a model problem.",
-    metrics: [
-      { value: "6", label: "attack probes" },
-      { value: "75%", label: "injection on default RAG" },
-      { value: "1-line", label: "GitHub Action CI gate" },
-    ],
-    stack: "Python · pytest · GitHub Actions · LangChain · LlamaIndex · Haystack · OpenAI",
-    link: "https://github.com/Srivatsa03/rag-redteam",
+    tagline: "Open-source RAG security red-teaming",
+    description:
+      "Red-teams retrieval pipelines across 7 vulnerability classes, from indirect prompt injection to embedding-inversion exposure, as a CLI and a CI-gating GitHub Action. Detection is deterministic and LLM-judge-free using canary tokens and structural checks. Benchmarked LangChain, LlamaIndex, and Haystack defaults, all exploitable at 50 to 75%, and a frontier-model upgrade did not fix it: injection is a pipeline problem, not a model problem.",
+    href: "https://github.com/Srivatsa03/rag-redteam",
+    tags: ["Python", "LLM Security", "GitHub Action", "PyPI", "RAG"],
+    meta: "PyPI · GitHub Marketplace · MIT",
+    featured: true,
   },
   {
-    context: "UIC x CCC Intelligent Solutions",
+    title: "kubemend",
+    tagline: "Kubernetes SRE agent with a git-only write surface",
+    description:
+      "A remediation agent that diagnoses freely and acts narrowly. Every constraint on it is code with tests, not a prompt. It selects from a closed set of six typed actions that are reversible by construction, whose blast radius is computable before execution, and whose only write surface is a git commit. Ships a recorded cluster snapshot so it runs with nothing attached.",
+    href: "https://github.com/Srivatsa03/kubemend",
+    tags: ["Kubernetes", "Python", "SRE", "GitOps", "Agents"],
+    meta: "Kubernetes · SRE",
+    featured: true,
+  },
+  {
     title: "MetARAG",
-    lede: "Document intelligence for teams drowning in policy and agreement PDFs.",
-    story:
-      "A team kept losing answers inside hundreds of documents. I led five of us to build MetARAG so they could ask in plain English and get a response that points back to the exact paragraph it came from. The hard part was never the model. It was making retrieval trustworthy: parsing, chunking, metadata, and an evaluation loop that flags when an answer is not actually grounded.",
-    metrics: [
-      { value: "93%", label: "retrieval precision" },
-      { value: "65%", label: "more efficient processing" },
-      { value: "40%", label: "faster responses" },
-    ],
-    stack: "Python · LangChain · OpenAI · Docker · Kubernetes · PostgreSQL · pgvector",
-    link: "https://github.com/Srivatsa03/UICLaborDocsChatbot",
+    tagline: "GPU-accelerated document intelligence for CCC Intelligent Solutions",
+    description:
+      "Led 5+ engineers on a RAG platform covering parsing, chunking, embeddings, and retrieval tuning, reaching about 93% retrieval precision across 4+ corpora and 100+ GB, with about 65% better processing efficiency and 40% lower latency.",
+    href: "https://github.com/Srivatsa03/UICLaborDocsChatbot",
+    tags: ["RAG", "LangChain", "GPU", "AWS", "Kubernetes"],
+    meta: "Industry · CCC Intelligent Solutions",
   },
   {
-    context: "UIC x TransUnion",
     title: "ECI Pipeline",
-    story:
-      "TransUnion needed to see Android ecosystem risk before it turned into a problem. I built ECI to watch 10 live security, CVE, and policy sources, diff what changed, and turn the deltas into action tickets a fraud team can act on. A DeltaRAG and Graph-RAG pass ties evidence across sources, so a single CVE never gets read in isolation.",
-    metrics: [
-      { value: "10", label: "live data sources" },
-      { value: "93%", label: "retrieval precision" },
-      { value: "100%", label: "manual triage removed" },
-    ],
-    stack: "Python · FastAPI · PostgreSQL · pgvector · NetworkX · Groq · AWS Lambda · Next.js",
-    link: "https://github.com/Srivatsa03/ECI-Pipeline",
+    tagline: "Ecosystem change intelligence for Android risk, TransUnion",
+    description:
+      "A DeltaRAG and Graph-RAG platform on AWS Lambda ingesting 10 live Android security and CVE feeds, turning them into evidence-backed risk tickets with a Sentinel scoring agent, on FastAPI, pgvector, NetworkX, Groq, and a live Next.js dashboard.",
+    href: "https://github.com/Srivatsa03/ECI-Pipeline",
+    tags: ["FastAPI", "pgvector", "Graph-RAG", "Next.js", "AWS Lambda"],
+    meta: "Industry · TransUnion",
   },
   {
-    context: "UIC Research",
-    title: "FuzzBench + LLVM",
-    story:
-      "I inherited a fuzzing research environment that no longer built. I rebuilt it from scratch on a custom LLVM toolchain so experiments are reproducible, then implemented two Bayesian estimators to put an actual number on how much risk is left at the moment you decide to stop fuzzing.",
-    metrics: [
-      { value: "60%", label: "faster setup" },
-      { value: "40m → 15m", label: "rebuild time" },
-      { value: "30%+", label: "better stop accuracy" },
-    ],
-    stack: "Google FuzzBench · Docker · LLVM · AWS · Python · Bash",
-    link: "https://github.com/Srivatsa03/fuzzbench",
+    title: "Chain-of-Thought on CLEVR",
+    tagline: "When reasoning supervision helps, and when it hurts",
+    description:
+      "Fine-tuned BLIP-2 with LoRA on 50,000 CLEVR samples on an L40S, lifting accuracy from 8.75% zero-shot to 45.95%. A controlled study found chain-of-thought wins on short reasoning chains and loses on long ones, the opposite of the usual assumption.",
+    href: "https://github.com/Srivatsa03/Chain-of-Thought-on-CLEVR",
+    tags: ["PyTorch", "BLIP-2", "LoRA", "Vision-Language"],
+    meta: "Research · CS533",
   },
   {
-    context: "Cloud Platform",
-    title: "EKS DevSecOps Platform",
-    story:
-      "A from-scratch three-tier platform on AWS EKS, built to behave like production rather than a demo. Eight services, infrastructure as code, GitOps deploys, security gates that block a bad image before it ships, and dashboards that tell you something is wrong before your users do.",
-    metrics: [
-      { value: "8", label: "microservices" },
-      { value: "500+ rps", label: "zero-downtime" },
-      { value: "40%", label: "faster incident response" },
-    ],
-    stack: "AWS EKS · Terraform · Jenkins · ArgoCD · Trivy · SonarQube · Prometheus · Grafana",
-    link: "https://github.com/Srivatsa03/End-to-End-Kubernetes-Three-Tier-DevSecOps-Project",
+    title: "DevSecOps EKS Platform",
+    tagline: "Production 3-tier platform at 500+ req/sec",
+    description:
+      "A 3-tier application on AWS EKS with 8 microservices and zero-downtime deploys, automated end to end with Jenkins, ArgoCD, Trivy, and SonarQube gates, provisioned with Terraform and observed with Prometheus and Grafana.",
+    href: "https://github.com/Srivatsa03/End-to-End-Kubernetes-Three-Tier-DevSecOps-Project",
+    tags: ["AWS EKS", "Terraform", "ArgoCD", "Jenkins", "DevSecOps"],
+    meta: "Platform · SRE",
   },
 ];
 
-export const moreProjects = [
-  {
-    name: "CoT vs Answer-Only VQA",
-    context: "UIC CS533",
-    blurb:
-      "Fine-tuned BLIP-2 with LoRA on an NVIDIA L40S and found that chain-of-thought helps short reasoning chains but quietly hurts long ones. A result I did not expect going in.",
-    stack: "PyTorch · BLIP-2 · LoRA · CLEVR",
-    link: "https://github.com/Srivatsa03",
-  },
-  {
-    name: "CineMatch",
-    context: "Recommender + MLOps",
-    blurb:
-      "An end-to-end movie recommender wired with the full production kit: CI/CD, quality gates, drift checks, and monitoring. Lands at RMSE 0.58.",
-    stack: "FastAPI · Docker · Jenkins · scikit-learn",
-    link: "https://github.com/Srivatsa03/Movie-Recommendation",
-  },
-  {
-    name: "MTProto 2.0",
-    context: "Applied cryptography",
-    blurb:
-      "Telegram's encrypted messaging protocol rebuilt from scratch, with AES-256, SHA-256, and perfect forward secrecy so no two sessions ever share keys.",
-    stack: "Python · AES-256 · SHA-256 · TCP/WS",
-    link: "https://github.com/Srivatsa03/Telegram-MTproto2.0",
-  },
-  {
-    name: "WuzzyFuzz",
-    context: "Language design",
-    blurb:
-      "A small domain-specific language for fuzzy logic in Scala, written end to end from the parser through the interpreter down to a little optimizer.",
-    stack: "Scala",
-    link: "https://github.com/Srivatsa03/WuzzyFuzz-03",
-  },
-];
+export interface OpenSourcePR {
+  repo: string;
+  stars: string;
+  status: string;
+  merged: boolean;
+  title: string;
+  body: string;
+  link: string;
+}
 
-export const openSource = [
+export const openSource: OpenSourcePR[] = [
+  {
+    repo: "pydantic/pydantic",
+    stars: "28k+ stars",
+    status: "PR #13374 · merged",
+    merged: true,
+    title: "Stopped a JSON schema config being silently dropped",
+    body: "When an Annotated field combined a dict json_schema_extra with a callable one, Pydantic warned the callable would be ignored, then did the opposite: it dropped the dict and could crash schema generation. I made the dict win as documented and added a regression test. Approved by a core maintainer.",
+    link: "https://github.com/pydantic/pydantic/pull/13374",
+  },
   {
     repo: "BerriAI/litellm",
     stars: "53k+ stars",
     status: "PR #30764 · merged",
     merged: true,
     title: "Stopped short secrets leaking into logs",
-    body: "While reading the code I noticed SensitiveDataMasker returned any secret of eight characters or fewer verbatim, an off-by-one threshold plus a zero-length boundary mask, so short redis passwords, API keys, and tokens were landing in logs and the admin UI. I made short values mask by default, kept two legitimate non-secret callers working through dependency injection, added regression tests, and untangled the CI failures that cascaded through shared callers. Reviewed and merged.",
+    body: "SensitiveDataMasker returned any secret of 8 characters or fewer verbatim, leaking short redis passwords, API keys, and tokens into logs and the admin UI. I made short values mask by default, audited all 16 call sites, and added regression tests.",
     link: "https://github.com/BerriAI/litellm/pull/30764",
+  },
+  {
+    repo: "run-llama/llama_index",
+    stars: "51k+ stars",
+    status: "PR #22133 · merged",
+    merged: true,
+    title: "Fixed silent data loss in the ingestion core",
+    body: "In IngestionPipeline upserts, nodes were keyed by document id in a dict, so every chunk of a document except the last was silently dropped, never embedded or stored. I fixed both the sync and async paths with regression tests for each.",
+    link: "https://github.com/run-llama/llama_index/pull/22133",
   },
   {
     repo: "BerriAI/litellm",
@@ -192,7 +300,7 @@ export const openSource = [
     status: "PR #29693 · merged",
     merged: true,
     title: "Fixed a 10x cost-tracking error",
-    body: "amazon.titan-embed-text-v2 was priced ten times too high in the cost maps, quietly inflating everyone's budget reports. I checked the number against AWS Bedrock pricing, fixed the primary and backup maps in sync so they would not drift apart again, and added a regression test with isolated monkeypatching. Merged after review.",
+    body: "amazon.titan-embed-text-v2 was priced ten times too high in the cost maps, inflating everyone's budget reports. I verified the number against AWS Bedrock pricing and fixed the primary and backup maps in sync so they would not drift apart again.",
     link: "https://github.com/BerriAI/litellm/pull/29693",
   },
   {
@@ -201,104 +309,34 @@ export const openSource = [
     status: "PR #11670 · merged",
     merged: true,
     title: "Silenced noisy logs on empty inputs",
-    body: "HTMLToDocument was dumping ERROR and WARNING lines whenever it got an empty ByteStream, because trafilatura and lxml log their parse failures internally instead of raising, so the existing try/except never caught them. I skipped empty streams before extraction, added a test and a release note, and cleared full CI. Reviewed and merged.",
+    body: "HTMLToDocument dumped ERROR lines on empty ByteStream inputs because lxml logs its parse failures internally rather than raising. I skipped empty streams before extraction, and separately authored the OpenSearch and Elasticsearch SQL retriever docs (#11543, #11494).",
     link: "https://github.com/deepset-ai/haystack/pull/11670",
   },
   {
-    repo: "pydantic/pydantic",
-    stars: "28k+ stars",
-    status: "PR #13374 · merged",
-    merged: true,
-    title: "Stopped a JSON schema config being silently dropped",
-    body: "When an Annotated field combined a dict json_schema_extra with a callable one, Pydantic warned that the callable would be ignored, but if the dict came first the code did the exact opposite: it let the callable overwrite the dict, silently losing the config and even crashing schema generation when the callable mutated keys that were no longer there. I made the dict win as the warning promises, matching the already-correct reverse ordering, and added a regression test. Reviewed and merged.",
-    link: "https://github.com/pydantic/pydantic/pull/13374",
-  },
-  {
-    repo: "run-llama/llama_index",
-    stars: "51k+ stars",
-    status: "PR #22133 · open, under review",
+    repo: "BerriAI/litellm",
+    stars: "53k+ stars",
+    status: "PR #31725 · open",
     merged: false,
-    title: "Caught silent data loss in the ingestion core",
-    body: "In LlamaIndex's core IngestionPipeline, the upsert path keyed nodes by document id in a dict, so every chunk of a document except the last was silently dropped, never embedded or stored. I fixed both the sync and async paths to keep all nodes, added regression tests for each, and reproduced the bug end to end through the public API. The PR is open and under review.",
-    link: "https://github.com/run-llama/llama_index/pull/22133",
+    title: "Time-based off-peak pricing in the cost engine",
+    body: "A feature on a core billing path: models define a UTC window and discounted rate, and the calculator picks the rate by time of day, backward-compatible, with regression tests. Open and under review.",
+    link: "https://github.com/BerriAI/litellm/pull/31725",
   },
   {
     repo: "stanfordnlp/dspy",
-    stars: "35k+ stars",
-    status: "PR #9942 · open, under review",
+    stars: "36k+ stars",
+    status: "PR #9942 · open",
     merged: false,
-    title: "Fixed silent value corruption in the chat parser",
-    body: "In DSPy's ChatAdapter.parse, the field-header regex matched the stripped line but sliced the unstripped one, so any indented header leaked stray marker characters into the parsed value, quietly corrupting structured outputs. I aligned the match and the slice, added regression tests for the indented cases, and cleared CI. The PR is open and under review.",
+    title: "Fixed value corruption in the chat parser",
+    body: "In ChatAdapter.parse, the field-header regex matched the stripped line but sliced the unstripped one, leaking stray marker characters into parsed values on indented headers. I aligned the match and the slice with regression tests. Open and under review.",
     link: "https://github.com/stanfordnlp/dspy/pull/9942",
   },
 ];
 
 export const skills = [
-  { category: "Languages", items: ["Python", "JavaScript", "C++", "Java", "YAML", "Bash", "React", "Node.js", "SQL / PostgreSQL"] },
-  { category: "AI & Data Systems", items: ["RAG", "LangChain", "OpenAI APIs", "FastAPI", "pgvector", "PostgreSQL", "NetworkX"] },
-  { category: "Cloud Platforms", items: ["AWS", "Azure", "GCP", "Linux"] },
-  { category: "CI/CD & Security", items: ["Azure Pipelines", "Jenkins", "ArgoCD", "SonarQube", "Trivy"] },
-  { category: "Automation & Containers", items: ["Terraform", "Ansible", "HashiCorp Packer", "Docker", "Kubernetes", "Helm", "AKS", "EKS", "Istio"] },
-  { category: "Monitoring & Observability", items: ["CloudWatch", "Prometheus", "Grafana", "Kiali", "Tableau"] },
-  { category: "Collaboration & Agile", items: ["Azure DevOps", "GitHub", "Jira", "Slack", "Microsoft Teams", "VS Code", "Scrum", "Kanban"] },
-  { category: "Other", items: ["AI Infrastructure", "Backend Systems", "Retrieval Pipelines", "GitOps", "MLOps", "DevSecOps", "Data Workflows", "Observability", "Research Infrastructure", "Security & Governance"] },
-];
-
-export const education = [
-  {
-    degree: "Master of Science - Computer Science",
-    university: "University of Illinois at Chicago",
-    duration: "Aug 2024 - May 2026",
-    location: "Chicago, Illinois",
-    gpa: "GPA: 3.88/4.00",
-    coursework: [
-      "Intro to Data Science",
-      "Intro to Networking",
-      "Programming Language Design",
-      "Responsible AI Engineering",
-      "Network and Privacy in Distributed Systems",
-      "Database Systems",
-      "Deep Learning for NLP",
-      "Query Processing in Database Systems",
-      "Natural Language Processing",
-    ],
-  },
-  {
-    degree: "Bachelor of Technology in Computer Science",
-    specialization: "Specialization: Artificial Intelligence",
-    university: "Jain University",
-    duration: "2020 - 2024",
-    location: "Bangalore, India",
-    gpa: "GPA: 3.91/4.00",
-    coursework: [],
-  },
-];
-
-export const leadership = {
-  role: "Graduate Student Council Representative, Computer Science Department",
-  org: "University of Illinois Chicago",
-  duration: "Aug 2025 - May 2026 | Chicago, Illinois",
-  points: [
-    "Represented the Computer Science Department in the Graduate Student Council (GSC), raising student concerns and coordinating with university administration.",
-    "Drove departmental participation in graduate travel, research, and project funding programs while fostering communication across faculty and student communities.",
-  ],
-};
-
-export const patent = {
-  title: "Book Issue Management System for Libraries",
-  number: "Patent No. 202341071153",
-  date: "Issued: November 24, 2023 | Intellectual Property India",
-  description:
-    "The invention leverages AI-enabled cameras, RFID systems, and automated access control to streamline book issuance and return processes in libraries through intelligent user identification and tracking.",
-  tags: ["AI-Enabled Cameras", "RFID Systems", "Access Control", "Computer Vision"],
-};
-
-export const navLinks = [
-  { id: "about", label: "About" },
-  { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
-  { id: "open-source", label: "Open Source" },
-  { id: "skills", label: "Skills" },
-  { id: "education", label: "Education" },
-  { id: "contact", label: "Contact" },
+  { category: "Languages", items: ["Python", "Bash", "SQL", "TypeScript", "JavaScript", "C++", "Rust", "Go"] },
+  { category: "Cloud & Infrastructure", items: ["AWS", "Azure", "GCP", "Terraform", "Ansible", "Kubernetes", "Helm", "Docker"] },
+  { category: "CI/CD & Security", items: ["Jenkins", "GitHub Actions", "ArgoCD", "GitOps", "Trivy", "SonarQube", "tfsec", "IAM / RBAC"] },
+  { category: "Observability", items: ["Prometheus", "Grafana", "Loki", "CloudWatch", "Datadog"] },
+  { category: "AI & Data Systems", items: ["RAG", "LangChain", "LlamaIndex", "Haystack", "OpenAI", "pgvector", "PyTorch", "FastAPI", "LLM Security"] },
+  { category: "Research", items: ["Fuzzing", "Bayesian Estimation", "LLVM", "FuzzBench", "Differential Testing"] },
 ];
