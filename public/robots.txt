@@ -1,3 +1,9 @@
+# *
 User-agent: *
 Allow: /
-Sitemap: https://srivatsa03.github.io/My-Portfolio/sitemap.xml
+
+# Host
+Host: https://shivypatel.com
+
+# Sitemaps
+Sitemap: https://shivypatel.com/sitemap.xml

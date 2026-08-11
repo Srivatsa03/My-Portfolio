@@ -1,43 +1,67 @@
-import { useInView, useMotionValue, useSpring } from "framer-motion";
-import { useEffect, useRef } from "react";
+"use client";
 
-interface NumberTickerProps {
+import { useInView, useMotionValue, useSpring } from "motion/react";
+import { ComponentPropsWithoutRef, useEffect, useRef } from "react";
+
+import { cn } from "@/lib/utils";
+
+interface NumberTickerProps extends ComponentPropsWithoutRef<"span"> {
   value: number;
-  decimals?: number;
-  suffix?: string;
-  className?: string;
+  startValue?: number;
+  direction?: "up" | "down";
+  delay?: number;
+  decimalPlaces?: number;
 }
 
-/** Counts up from 0 to `value` the first time it scrolls into view. */
 export function NumberTicker({
   value,
-  decimals = 0,
-  suffix = "",
+  startValue = 0,
+  direction = "up",
+  delay = 0,
   className,
+  decimalPlaces = 0,
+  ...props
 }: NumberTickerProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const motionValue = useMotionValue(0);
-  const spring = useSpring(motionValue, { damping: 34, stiffness: 90 });
-  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const motionValue = useMotionValue(direction === "down" ? value : startValue);
+  const springValue = useSpring(motionValue, {
+    damping: 60,
+    stiffness: 100,
+  });
+  const isInView = useInView(ref, { once: true, margin: "0px" });
 
   useEffect(() => {
-    if (inView) motionValue.set(value);
-  }, [inView, value, motionValue]);
+    if (isInView) {
+      const timer = setTimeout(() => {
+        motionValue.set(direction === "down" ? startValue : value);
+      }, delay * 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [motionValue, isInView, delay, value, direction, startValue]);
 
   useEffect(
     () =>
-      spring.on("change", (latest) => {
+      springValue.on("change", (latest) => {
         if (ref.current) {
-          ref.current.textContent = latest.toFixed(decimals) + suffix;
+          ref.current.textContent = Intl.NumberFormat("en-US", {
+            minimumFractionDigits: decimalPlaces,
+            maximumFractionDigits: decimalPlaces,
+          }).format(Number(latest.toFixed(decimalPlaces)));
         }
       }),
-    [spring, decimals, suffix]
+    [springValue, decimalPlaces],
   );
 
   return (
-    <span ref={ref} className={className}>
-      {(0).toFixed(decimals)}
-      {suffix}
+    <span
+      ref={ref}
+      className={cn(
+        "inline-block tabular-nums tracking-wider text-black dark:text-white",
+        className,
+      )}
+      {...props}
+    >
+      {startValue}
     </span>
   );
 }
