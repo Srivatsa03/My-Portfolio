@@ -1,4 +1,4 @@
-import { IconHome, IconBrandGithub, IconBriefcase2, IconBrandLinkedin, IconMail, IconPencil, IconBrush } from "@tabler/icons-react"
+import { IconHome, IconBrandGithub, IconBriefcase2, IconBrandLinkedin, IconMail, IconPencil, IconBrush, IconBrandInstagram } from "@tabler/icons-react"
 
 export const data = {
   experience: [
@@ -129,6 +129,13 @@ export const data = {
       label: "GitHub",
       icon: <IconBrandGithub className="h-5 w-5" />,
       aria: "GitHub",
+    },
+    {
+      // TODO: replace with your exact Instagram handle URL.
+      href: "https://www.instagram.com/",
+      label: "Instagram",
+      icon: <IconBrandInstagram className="h-5 w-5" />,
+      aria: "Instagram",
     },
   ],
 

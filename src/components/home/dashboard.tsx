@@ -87,7 +87,8 @@ export default function Dashboard() {
               <img
                 src="/dancer.svg"
                 alt="Dancing"
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-16 sm:h-16 object-contain z-10 pointer-events-none select-none"
+                style={{ transformOrigin: "bottom center" }}
+                className="absolute left-1/2 top-1/2 w-20 h-20 sm:w-16 sm:h-16 object-contain z-10 pointer-events-none select-none animate-[sway_1.6s_ease-in-out_infinite]"
               />
             </div>
             {/* Spotify Last Played Section */}

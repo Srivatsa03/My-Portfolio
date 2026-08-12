@@ -166,7 +166,6 @@ function ContactIcons({
     return (
         <div className="flex flex-row items-center justify-center space-x-6">
             {data.contact
-                .filter(link => link.label !== "Instagram")
                 .map(link => (
                     <Tooltip key={link.label}>
                         <TooltipTrigger asChild>

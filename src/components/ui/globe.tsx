@@ -9,11 +9,14 @@ import { cn } from "@/lib/utils";
 
 const MOVEMENT_DAMPING = 1400;
 
-// The journey: hometown -> undergrad -> master's.
+// The journey. Dubai + London are routing waypoints so the travel line
+// sweeps over the Middle East and Europe; only the education cities get dots.
 const CITIES = [
-  { name: "Tirupati", lat: 13.6288, lng: 79.4192 },
-  { name: "Bangalore", lat: 12.9716, lng: 77.5946 },
-  { name: "Chicago", lat: 41.8781, lng: -87.6298 },
+  { name: "Tirupati", lat: 13.6288, lng: 79.4192, dot: true },
+  { name: "Bangalore", lat: 12.9716, lng: 77.5946, dot: true },
+  { name: "Dubai", lat: 25.2048, lng: 55.2708, dot: false },
+  { name: "London", lat: 51.5074, lng: -0.1278, dot: false },
+  { name: "Chicago", lat: 41.8781, lng: -87.6298, dot: true },
 ];
 const DOT = "rgb(34, 197, 94)";
 
@@ -229,7 +232,7 @@ export function Globe({
         ctx.globalAlpha = 1;
       };
 
-      for (const c of CITIES) drawDot(c.lat, c.lng);
+      for (const c of CITIES) if (c.dot) drawDot(c.lat, c.lng);
 
       overlayAnimId = requestAnimationFrame(drawOverlay);
     };
