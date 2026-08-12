@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 
 const MOVEMENT_DAMPING = 1400;
 
-// The full flight path to Chicago; every stop is marked and the beam flows
-// through them continuously.
+// The flight path to Chicago. Dubai and London are fly-over waypoints (no dot)
+// so the line just sweeps over them; only real destinations are marked.
 const CITIES = [
   { name: "Tirupati", lat: 13.6288, lng: 79.4192, dot: true },
   { name: "Bangalore", lat: 12.9716, lng: 77.5946, dot: true },
-  { name: "Dubai", lat: 25.2048, lng: 55.2708, dot: true },
-  { name: "London", lat: 51.5074, lng: -0.1278, dot: true },
+  { name: "Dubai", lat: 25.2048, lng: 55.2708, dot: false },
+  { name: "London", lat: 51.5074, lng: -0.1278, dot: false },
   { name: "Chicago", lat: 41.8781, lng: -87.6298, dot: true },
 ];
 const DOT = "rgb(34, 197, 94)";

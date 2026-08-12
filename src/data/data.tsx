@@ -171,9 +171,7 @@ export const data = {
   ],
 
   scratchGifs: [
-    "/scratch/shield.svg",
     "/scratch/terminal.svg",
-    "/scratch/ai-graph.svg",
   ],
 
   tools: [

@@ -4,9 +4,8 @@ import { motion } from "motion/react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-// A single-stroke "S" spine, drawn like a signature.
-const S_PATH =
-  "M72 28 C72 17 53 14 43 21 C30 30 33 44 50 49 C67 54 70 65 60 73 C50 81 32 80 28 70";
+// A geometric, angular "S" (drawn as a continuous zig-zag stroke).
+const S_PATH = "M76 26 L30 26 L30 50 L70 50 L70 74 L24 74";
 
 export const AnimatedLogo = ({
   className,
