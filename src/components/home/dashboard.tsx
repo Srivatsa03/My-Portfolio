@@ -84,11 +84,11 @@ export default function Dashboard() {
             {/* Dancing Animation Section */}
             <div className="relative flex items-center justify-center w-full sm:w-12 h-16 sm:h-12 overflow-visible">
               {/* eslint-disable-next-line @next/next/no-img-element */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/dancer.svg"
+                src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3OXBwZGkzbG4zc2N1dTU4bmgyZDBkenk1amxoZG5meWcydWp2aGU0MyZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/NawOC2k0SQ5pYjTXLt/giphy.gif"
                 alt="Dancing"
-                style={{ transformOrigin: "bottom center" }}
-                className="absolute left-1/2 top-1/2 w-20 h-20 sm:w-16 sm:h-16 object-contain z-10 pointer-events-none select-none animate-[sway_1.6s_ease-in-out_infinite]"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-20 sm:h-20 object-contain z-10 pointer-events-none"
               />
             </div>
             {/* Spotify Last Played Section */}
