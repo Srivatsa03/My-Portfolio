@@ -24,7 +24,6 @@ export function useAlbumColor(albumImageUrl: string | null): string {
         }
       })
       .catch((error) => {
-        console.error('Failed to extract color from album cover:', error);
         // Keep the default or previous color on error
       });
 

@@ -3,7 +3,7 @@ import { IconHome, IconBrandGithub, IconBriefcase2, IconBrandLinkedin, IconMail,
 export const data = {
   experience: [
     {
-      image: "/experience/uic.svg",
+      image: "/experience/uic.png",
       company: "University of Illinois Chicago",
       role: "Software Developer, Software Testing",
       date: "Aug 2026 - Present",
@@ -14,7 +14,7 @@ export const data = {
       href: "https://github.com/Srivatsa03",
     },
     {
-      image: "/experience/uic.svg",
+      image: "/experience/uic.png",
       company: "University of Illinois Chicago",
       role: "Software Developer",
       date: "Aug 2024 - Jul 2026",
@@ -25,7 +25,7 @@ export const data = {
       href: "https://github.com/Srivatsa03",
     },
     {
-      image: "/experience/uic.svg",
+      image: "/experience/uic.png",
       company: "UIC College of Business Administration",
       role: "Software Developer, AI Engineer",
       date: "Aug 2025 - May 2026",
@@ -36,7 +36,7 @@ export const data = {
       href: "https://github.com/Srivatsa03",
     },
     {
-      image: "/experience/musigma.svg",
+      image: "/experience/musigma.png",
       company: "Mu Sigma",
       role: "Trainee Software Engineer",
       date: "May 2023 - Jun 2024",
@@ -164,11 +164,9 @@ export const data = {
   ],
 
   scratchGifs: [
-    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YXJld3JyYXo1Z3d1Nnh1ZzFxbXU3ZzV5N3JiamNsa3ByMHBvam1vaiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/eOjuCYIGqXSqfBy0MX/giphy.gif",
-    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWdnMDcycTF1ejAyNm1yamVuMTZpZTcxd3UwemhxbzcweGVsMDl5aSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/LqgrTA39s77U8JKhJd/giphy.gif",
-    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YXZjdjljYzM0NzhoOHNjajZldDQ2ZzU5YTF5MTExOXQxbGdpdjAxZSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/20JY76TfKAhR20SfJu/giphy.gif",
-    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2Y2N2FvYTl6bTkxeGlzanpxNmJrOXh1bXBuY3gyY2ljeHpweWVlMSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/d9UAwX6gd6d3zYrTF5/giphy.gif",
-    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NzAwZmVqd2tyM2t4c28xZHprem00dzR3bW9vZDZ2d2FzZDV5dTkxNiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/wMQTobBKTpmg5TLuZ5/giphy.gif",
+    "/scratch/shield.svg",
+    "/scratch/terminal.svg",
+    "/scratch/ai-graph.svg",
   ],
 
   tools: [

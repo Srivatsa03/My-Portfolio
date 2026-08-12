@@ -29,7 +29,6 @@ export function useWakaTime(): WakaTimeData {
         setTotalHours(combinedHours);
         setError(null);
       } catch (err) {
-        console.error('WakaTime fetch error:', err);
         setError(err instanceof Error ? err.message : 'Unknown error');
         // Keep using base hours on error
         setTotalHours(BASE_HOURS);

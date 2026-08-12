@@ -40,7 +40,7 @@ export default function Experience() {
         </SectionHeading>
         <div className="space-y-4">
           <ExperienceItem
-            image="/experience/uic.svg"
+            image="/experience/uic.png"
             company="University of Illinois Chicago"
             role="Master of Science, Computer Science"
             date="Aug 2024 - May 2026"
@@ -50,7 +50,7 @@ export default function Experience() {
             href="https://www.uic.edu"
           />
           <ExperienceItem
-            image="/experience/jain.svg"
+            image="/experience/jain.png"
             company="Jain University"
             role="B.Tech, Computer Science (AI Specialization)"
             date="2020 - 2024"

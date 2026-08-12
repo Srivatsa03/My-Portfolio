@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import profilePic from "@/images/profile-bw.jpg"
+import profilePic from "@/images/profile-color.jpg"
 import profilePicHover from "@/images/profile-color.jpg"
+import { AnimatedName } from "@/components/ui/animated-name";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
 import { HeroConstellation } from "@/components/ui/hero-constellation"
 import { BlurFade } from "@/components/ui/blur-fade";
@@ -55,12 +56,12 @@ export default function Hero() {
                                     src={profilePic}
                                     alt="Profile Picture"
                                     priority
-                                    className="absolute rounded-full transition-opacity duration-200 opacity-100 group-hover:opacity-0"
+                                    className="absolute inset-0 h-full w-full rounded-full object-cover object-[50%_15%] grayscale transition-opacity duration-200 opacity-100 group-hover:opacity-0"
                                 />
                                 <Image
                                     src={profilePicHover}
                                     alt="Profile Picture Hover"
-                                    className="absolute rounded-full transition-opacity duration-200 opacity-0 group-hover:opacity-100"
+                                    className="absolute inset-0 h-full w-full rounded-full object-cover object-[50%_15%] transition-opacity duration-200 opacity-0 group-hover:opacity-100"
                                 />
                             </BackgroundGradient>
                             <ShimmerButton onClick={handleShimmerButtonClick} className="z-50 mt-8">
@@ -88,9 +89,7 @@ export default function Hero() {
                                 <p className="z-50 subpixel-antialiased leading-[1.8] text-5xl sm:text-7xl font-bold text-center whitespace-nowrap">
                                     <span className="inline-block pb-2 bg-gradient-to-b from-zinc-200 dark:from-zinc-50 to-zinc-950 dark:to-zinc-300 bg-clip-text text-transparent">
                                         Hi. I&#39;m{" "}
-                                        <span className="font-script font-normal text-[1.05em] leading-none align-baseline">
-                                            Srivatsa
-                                        </span>
+                                        <AnimatedName className="font-script font-normal text-[1.05em] leading-none align-baseline" />
                                     </span>
                                 </p>
                                 <p className="text-base subpixel-antialiased tracking-tight font-medium sm:text-2xl text-center text-secondary-foreground">

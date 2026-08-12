@@ -40,7 +40,6 @@ export function useSpotify(): SpotifyData {
           throw new Error(data.error || 'Invalid data received');
         }
       } catch (err) {
-        console.error('Spotify fetch error:', err);
         setError(err instanceof Error ? err.message : 'Unknown error');
         // Don't clear track on error - keep showing last successful data
       } finally {

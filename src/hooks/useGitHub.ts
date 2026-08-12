@@ -43,7 +43,6 @@ export function useGitHub(): UseGitHubReturn {
           setError(result.error || 'Unknown error');
         }
       } catch (err) {
-        console.error('Error fetching GitHub data:', err);
         setError(err instanceof Error ? err.message : 'Failed to fetch GitHub data');
         // Keep previous data on error for graceful degradation
       } finally {

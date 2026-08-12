@@ -4,6 +4,23 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+@keyframes stretch {
+  0% { transform: scaleX(1); }
+  40% { transform: scaleX(1.22); }
+  68% { transform: scaleX(0.95); }
+  100% { transform: scaleX(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
 @keyframes wiggle {
   0%, 100% {
     transform: rotate(-10deg);

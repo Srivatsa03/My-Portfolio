@@ -36,7 +36,6 @@ export function useGitHubStars(): UseGitHubStarsReturn {
           setError(result.error || 'Unknown error');
         }
       } catch (err) {
-        console.error('Error fetching GitHub stars:', err);
         setError(err instanceof Error ? err.message : 'Failed to fetch GitHub stars');
         // Keep previous data on error for graceful degradation
       } finally {

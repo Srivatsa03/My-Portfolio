@@ -2,7 +2,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { IconTool, IconLink, IconCoffee, IconClockHour4, IconMapPin, IconHeart, IconHandClick, IconBrandGithub, IconBrandSpotifyFilled, IconRefresh } from "@tabler/icons-react";
+import { IconTool, IconLink, IconCoffee, IconClockHour4, IconMapPin, IconHeart, IconHandClick, IconBrandGithub, IconBrandYoutube, IconRefresh } from "@tabler/icons-react";
 import { Globe } from "@/components/ui/globe";
 import styles from "./dashboard.module.css";
 import { NumberTicker } from "@/components/ui/number-ticker";
@@ -20,7 +20,6 @@ import { ScratchToReveal } from "../magicui/scratch-to-reveal";
 import { useWakaTime } from "@/hooks/useWakaTime";
 import { useSpotify } from "@/hooks/useSpotify";
 import { useGitHub } from "@/hooks/useGitHub";
-import { Spotlight } from "@/components/ui/spotlight";
 import { useAlbumColor } from "@/hooks/useAlbumColor";
 import { GitHubHeatmap } from "./github-heatmap";
 import { SoundWave } from "@/components/ui/sound-wave";
@@ -65,7 +64,7 @@ export default function Dashboard() {
         <GridItem
           area="location"
           icon={<IconMapPin className={dashboardIconClass} />}
-          title="Chicago, IL"
+          title="Tirupati → Bangalore → Chicago"
           transitionDuration="100ms"
           cursorEmoji="✈️"
         >
@@ -78,38 +77,17 @@ export default function Dashboard() {
           icon={<SoundWave className={dashboardIconClass} color={spotlightColor} />}
           title="Last Played"
           transitionDuration="200ms"
-          tooltip="Spotify"
+          tooltip="YouTube Music"
           cursorEmoji="🎵"
         >
           <div className="flex flex-col-reverse sm:flex-row-reverse items-center gap-4 sm:gap-6 w-full">
             {/* Dancing Animation Section */}
             <div className="relative flex items-center justify-center w-full sm:w-12 h-16 sm:h-12 overflow-visible">
-              <div className="absolute -top-36 -right-20 sm:-top-72 sm:-right-32 w-64 h-64 sm:w-96 sm:h-96 pointer-events-none z-0 scale-x-[-1]" style={{ opacity: 1 }}>
-                <Spotlight
-                  className="!opacity-100 scale-75 z-50"
-                  fill={spotlightColor}
-                />
-              </div>
-              <div
-                aria-hidden
-                className="absolute left-1/2 top-1/2 w-40 sm:w-32 aspect-[480/65] overflow-hidden opacity-60 z-0 pointer-events-none"
-                style={{ transform: "translate(-50%, calc(-50% + 20px))" }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3N3J5dzE3dW9icXhlMHM0a2wwMzZhMDVmNmJ2bXNtZTZlcnljenhmayZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/GZQGgGtosl3Fm4k0A9/giphy.gif"
-                  alt=""
-                  className="absolute top-0 left-0 w-full aspect-square max-w-none"
-                  style={{ transform: "translateY(-67.7%)" }}
-                />
-              </div>
-              <Image
-                src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3OXBwZGkzbG4zc2N1dTU4bmgyZDBkenk1amxoZG5meWcydWp2aGU0MyZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/NawOC2k0SQ5pYjTXLt/giphy.gif"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/dancer.svg"
                 alt="Dancing"
-                width={80}
-                height={80}
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-20 sm:h-20 object-contain z-10 pointer-events-none"
-                unoptimized
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-16 sm:h-16 object-contain z-10 pointer-events-none select-none"
               />
             </div>
             {/* Spotify Last Played Section */}
@@ -343,8 +321,8 @@ const GridItem = ({ area, icon, title, children, transitionDuration = "300ms", t
             className="pointer-events-none whitespace-nowrap"
           >
             <p className="flex items-center gap-1.5">
-              {tooltip === "Spotify" && (
-                <IconBrandSpotifyFilled className="h-4 w-4 text-green-500" />
+              {tooltip === "YouTube Music" && (
+                <IconBrandYoutube className="h-4 w-4 text-red-500" />
               )}
               {tooltip}
             </p>
@@ -394,13 +372,13 @@ interface LastPlayedProps {
 const LastPlayed = ({ track }: LastPlayedProps) => {
   const [isReady, setIsReady] = useState(false);
 
-  // Fallback shown until Spotify credentials are configured.
+  // Fallback shown until a track is configured.
   const displayTrack = track || {
-    title: "Not playing",
-    artist: "Spotify",
+    title: "On repeat",
+    artist: "YouTube Music",
     album: "",
     albumImageUrl: "",
-    songUrl: "#",
+    songUrl: "https://music.youtube.com",
   };
 
   // A real track can arrive without cover art; fall back to a gradient tile
@@ -511,34 +489,50 @@ const ToolsMarquee = () => {
 };
 
 
+const FAV_TOOLS = [
+  { name: "Python", icon: "python", themeDependent: false },
+  { name: "Next.js", icon: "nextjs", themeDependent: true },
+  { name: "Kubernetes", icon: "kubernetes", themeDependent: false },
+  { name: "Terraform", icon: "terraform", themeDependent: false },
+  { name: "Docker", icon: "docker", themeDependent: false },
+];
+
 const FavoriteLanguage = () => {
   const { theme, resolvedTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
+  const [i, setI] = useState(0);
 
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => setI((n) => (n + 1) % FAV_TOOLS.length), 1900);
+    return () => clearInterval(id);
   }, []);
 
   if (!isMounted) {
     return null;
   }
 
-  const currentTheme = theme || resolvedTheme || "light";
-
-  const iconPath = "/tools/python.svg";
-  void currentTheme;
+  const currentTheme = theme || resolvedTheme || "dark";
+  const tool = FAV_TOOLS[i];
+  const iconPath = `/tools/${tool.icon}${tool.themeDependent && currentTheme === "dark" ? "-dark" : ""}.svg`;
 
   return (
-    <div className="flex items-center justify-start h-full">
+    <div
+      key={i}
+      className="flex items-center justify-start h-full animate-[fadeIn_0.5s_ease]"
+    >
       <Image
         src={iconPath}
-        alt="Python Icon"
+        alt={`${tool.name} icon`}
         width={24}
         height={24}
         className="h-6 w-6 sm:h-8 sm:w-8 ml-1 mb-1"
       />
       <span className="ml-2 sm:ml-3 mb-1 text-md sm:text-lg font-normal tracking-tight text-muted-foreground">
-        Python
+        {tool.name}
       </span>
     </div>
   );
