@@ -3,8 +3,10 @@
 import { useEffect, useRef } from "react";
 
 /**
- * An original little crawler that chases the cursor around the screen.
- * Demo/example only — the character is a generic spider, not any franchise.
+ * An original creature that appears suddenly and crawls across the screen on
+ * its own (edge to edge), then leaves — repeating on a random interval.
+ * Not cursor-driven. Desktop only, respects reduced-motion.
+ * The character is a generic spider, not any franchise character.
  */
 export function ScreenCrawler() {
   const ref = useRef<HTMLDivElement>(null);
@@ -13,46 +15,63 @@ export function ScreenCrawler() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (window.innerWidth < 768) return;
 
-    let x = window.innerWidth * 0.5;
-    let y = window.innerHeight * 0.5;
-    let px = x;
-    let py = y;
-    let angle = 0;
-    let tx = x;
-    let ty = y;
+    const el = ref.current;
+    if (!el) return;
+
     let raf = 0;
+    let timer: ReturnType<typeof setTimeout>;
+    let start = { x: 0, y: 0 };
+    let end = { x: 0, y: 0 };
+    let t0 = 0;
+    let duration = 6000;
 
-    const onMove = (e: MouseEvent) => {
-      tx = e.clientX;
-      ty = e.clientY;
-    };
-    window.addEventListener("mousemove", onMove);
+    const rand = (n: number) => Math.random() * n;
 
-    const tick = () => {
-      const dx = tx - x;
-      const dy = ty - y;
-      const dist = Math.hypot(dx, dy);
-      // Follow, but hang back a little so it "crawls after" the cursor.
-      if (dist > 40) {
-        x += dx * 0.045;
-        y += dy * 0.045;
-      }
-      if (Math.hypot(x - px, y - py) > 0.4) {
-        angle = (Math.atan2(y - py, x - px) * 180) / Math.PI + 90;
-      }
-      px = x;
-      py = y;
-      const el = ref.current;
-      if (el) {
-        el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) rotate(${angle}deg)`;
-      }
-      raf = requestAnimationFrame(tick);
+    const startTrip = () => {
+      const W = window.innerWidth;
+      const H = window.innerHeight;
+      const M = 90; // spawn/exit off-screen
+
+      const routes = [
+        { s: { x: -M, y: rand(H) }, e: { x: W + M, y: rand(H) } }, // left -> right
+        { s: { x: W + M, y: rand(H) }, e: { x: -M, y: rand(H) } }, // right -> left
+        { s: { x: rand(W), y: -M }, e: { x: rand(W), y: H + M } }, // top -> bottom
+        { s: { x: rand(W), y: H + M }, e: { x: rand(W), y: -M } }, // bottom -> top
+      ];
+      const r = routes[Math.floor(Math.random() * routes.length)];
+      start = r.s;
+      end = r.e;
+
+      const dist = Math.hypot(end.x - start.x, end.y - start.y);
+      duration = (dist / 140) * 1000; // ~140px/s crawl
+      t0 = performance.now();
+      raf = requestAnimationFrame(step);
     };
-    raf = requestAnimationFrame(tick);
+
+    const step = (now: number) => {
+      const p = Math.min(1, (now - t0) / duration);
+      const x = start.x + (end.x - start.x) * p;
+      const y = start.y + (end.y - start.y) * p;
+      const angle =
+        (Math.atan2(end.y - start.y, end.x - start.x) * 180) / Math.PI + 90;
+
+      el.style.opacity = "1";
+      el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) rotate(${angle}deg)`;
+
+      if (p < 1) {
+        raf = requestAnimationFrame(step);
+      } else {
+        el.style.opacity = "0";
+        timer = setTimeout(startTrip, 9000 + Math.random() * 18000);
+      }
+    };
+
+    // First appearance shortly after load.
+    timer = setTimeout(startTrip, 3500);
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("mousemove", onMove);
+      clearTimeout(timer);
     };
   }, []);
 
@@ -60,16 +79,16 @@ export function ScreenCrawler() {
     <div
       ref={ref}
       aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-[60] hidden md:block"
-      style={{ willChange: "transform" }}
+      className="pointer-events-none fixed left-0 top-0 z-[60] hidden opacity-0 transition-opacity duration-300 md:block"
+      style={{ willChange: "transform, opacity" }}
     >
-      <svg width="46" height="46" viewBox="0 0 100 100" className="drop-shadow-[0_3px_6px_rgba(0,0,0,0.55)]">
+      <svg width="48" height="48" viewBox="0 0 100 100" className="drop-shadow-[0_3px_6px_rgba(0,0,0,0.55)]">
         <g
           stroke="#0a0a0c"
           strokeWidth="4.5"
           strokeLinecap="round"
           fill="none"
-          className="origin-center animate-[legwiggle_0.32s_ease-in-out_infinite]"
+          className="origin-center animate-[legwiggle_0.3s_ease-in-out_infinite]"
         >
           <path d="M42 45 L18 30 L9 41" />
           <path d="M42 53 L13 52 L6 63" />
