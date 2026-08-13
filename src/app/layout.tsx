@@ -8,7 +8,6 @@ import { data } from "@/data/data";
 import Image from "next/image";
 import { Analytics } from "@vercel/analytics/next";
 import { CommandPalette } from "@/components/command-palette/command-palette";
-import { ScreenCrawler } from "@/components/ui/screen-crawler";
 import { getAllPosts } from "@/lib/blog";
 import { ViewTransitions } from "next-view-transitions";
 
@@ -93,7 +92,6 @@ export default function RootLayout({
               priority
             />
             {children}
-            <ScreenCrawler />
             <Footer />
           </ThemeProvider>
           <Analytics />
