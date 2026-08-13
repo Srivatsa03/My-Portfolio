@@ -4,8 +4,9 @@ import { motion } from "motion/react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-// A geometric, angular "S" (drawn as a continuous zig-zag stroke).
-const S_PATH = "M76 26 L30 26 L30 50 L70 50 L70 74 L24 74";
+// A flowing, calligraphic script "S" with an entry flourish, drawn like a signature.
+const S_PATH =
+  "M80 20 C73 17 69 23 71 29 C63 18 46 15 37 23 C25 32 30 45 48 49 C66 53 71 65 60 74 C50 82 34 81 26 70";
 
 export const AnimatedLogo = ({
   className,
@@ -33,7 +34,7 @@ export const AnimatedLogo = ({
           d={S_PATH}
           fill="none"
           stroke="currentColor"
-          strokeWidth={9}
+          strokeWidth={7.5}
           strokeLinecap="round"
           strokeLinejoin="round"
           className="text-violet-500 dark:text-violet-300"
