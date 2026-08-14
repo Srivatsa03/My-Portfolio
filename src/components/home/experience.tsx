@@ -179,17 +179,6 @@ export const ExperienceItem = ({
           {description}
         </p>
       )}
-      <div className="mt-4 flex flex-row flex-wrap gap-y-2 gap-x-2">
-        {skills.map((skill, index) => (
-          <BlurFade key={`${skill}-${index}`} delay={0.05 + index * 0.05} direction="up" inView>
-            <div className="flex items-center justify-center bg-secondary transition-colors px-2 py-1 rounded-sm">
-              <p className="leading-none tracking-tight text-xs md:text-sm font-semibold transition-colors text-zinc-700 dark:text-slate-200 ">
-                {skill}
-              </p>
-            </div>
-          </BlurFade>
-        ))}
-      </div>
     </div>
   );
 };
