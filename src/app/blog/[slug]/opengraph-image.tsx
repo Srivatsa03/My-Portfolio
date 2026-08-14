@@ -58,7 +58,7 @@ export default async function OGImage({ params }: Props) {
                                 boxShadow: "0 0 14px #22c55e",
                             }}
                         />
-                        www.srivatsakamballa.site / blog
+                        srivatsa-kamballa.vercel.app / blog
                     </div>
                     <div style={{ display: "flex", gap: "20px" }}>
                         {date && <span>{date}</span>}

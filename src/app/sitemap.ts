@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
 
-const SITE_URL = "https://www.srivatsakamballa.site";
+const SITE_URL = "https://srivatsa-kamballa.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

@@ -28,7 +28,7 @@ const pacifico = Pacifico({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.srivatsakamballa.site"),
+  metadataBase: new URL("https://srivatsa-kamballa.vercel.app"),
   title: "Srivatsa Kamballa - Software Engineer",
   description:
     "Srivatsa Kamballa — software, AI platform, and DevOps/SRE engineer working on the security and reliability of AI pipelines.",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    url: "https://www.srivatsakamballa.site",
+    url: "https://srivatsa-kamballa.vercel.app",
     title: "Srivatsa Kamballa — Software Engineer",
     description: "Software Engineer who breaks what he builds.",
     siteName: "Srivatsa Kamballa",

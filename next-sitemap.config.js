@@ -1,4 +1,4 @@
 module.exports = {
-  siteUrl: "https://www.srivatsakamballa.site",
+  siteUrl: "https://srivatsa-kamballa.vercel.app",
   generateRobotsTxt: true,
 };

@@ -39,7 +39,7 @@ export default async function OGImage() {
                             boxShadow: "0 0 16px #22c55e",
                         }}
                     />
-                    srivatsakamballa.site
+                    srivatsa-kamballa.vercel.app
                 </div>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>

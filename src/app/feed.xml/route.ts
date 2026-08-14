@@ -1,6 +1,6 @@
 import { getAllPosts } from "@/lib/blog";
 
-const SITE_URL = "https://www.srivatsakamballa.site";
+const SITE_URL = "https://srivatsa-kamballa.vercel.app";
 const SITE_TITLE = "Srivatsa Kamballa";
 const SITE_DESCRIPTION =
     "Thoughts on software engineering, design, and things I find interesting.";

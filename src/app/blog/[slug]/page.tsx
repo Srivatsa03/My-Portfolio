@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.description,
     openGraph: {
       type: "article",
-      url: `https://www.srivatsakamballa.site/blog/${slug}`,
+      url: `https://srivatsa-kamballa.vercel.app/blog/${slug}`,
       title: post.title,
       description: post.description,
       publishedTime: post.date,
