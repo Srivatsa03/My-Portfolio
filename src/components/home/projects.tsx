@@ -76,6 +76,7 @@ export function ProjectCard({ title, href, description, dates, tags, type, image
                             src={image}
                             alt={heading}
                             fill
+                            unoptimized
                             sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
                         />
