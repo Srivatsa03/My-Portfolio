@@ -131,8 +131,7 @@ export const data = {
       aria: "GitHub",
     },
     {
-      // TODO: replace with your exact Instagram handle URL.
-      href: "https://www.instagram.com/",
+      href: "https://www.instagram.com/its_srivatsa/",
       label: "Instagram",
       icon: <IconBrandInstagram className="h-5 w-5" />,
       aria: "Instagram",

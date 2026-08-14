@@ -2,17 +2,18 @@
 
 import { useEffect, useState } from "react";
 
-// Original one-liners about Srivatsa's actual work.
+// Original, dry-sarcastic one-liners about Srivatsa's actual work.
 const LINES = [
-  "whoami  →  builds AI infra, then breaks it before an attacker can.",
-  "recruiter: 'production experience?'  →  7 PRs merged into repos you import daily.",
-  "my RAG passed every eval. then rag-redteam looked at it. now it apologizes.",
-  "prod: 'everything is fine.'  →  that is exactly what a poisoned document would say.",
-  "fuzzing: still running. me: 'when do I stop?' PSBayes: 'one sec, doing the math.'",
-  "3am, cluster on fire. kubemend: 'six reversible actions, one git commit. go sleep.'",
-  "merged a fix into Pydantic. a core maintainer approved it. peak achieved.",
-  "found short secrets leaking through LiteLLM's masker. patched it. slept great.",
-  "coffee → hours coding → contributions → coffee.  recursion. base case: sleep.",
+  "whoami  →  builds AI infra, then breaks it before an attacker gets the chance.",
+  "recruiter: 'any production experience?'  →  7 PRs merged into libraries you imported this morning.",
+  "'the model hallucinated.'  no. the pipeline handed it a poisoned document and asked politely.",
+  "yes, I read strangers' code for fun. yes, I found the bug. no, it is not a personality disorder.",
+  "'it works on my machine.'  wonderful. I will ship your machine to prod then.",
+  "on-call rule: if kubemend can't fix it as one reversible git commit, it doesn't touch the cluster.",
+  "fixed a 10x pricing bug in prod billing. saved everyone real money. received one (1) thumbs-up.",
+  "a Pydantic maintainer approved my PR. I have peaked. it's all downhill and I've made peace with it.",
+  "impostor syndrome? I have a patent, an AWS cert, and 7 merged PRs. the impostor is thriving, honestly.",
+  "my commits are small. the regressions they quietly prevent are not. that's the whole trick.",
 ];
 
 export default function Terminal() {
