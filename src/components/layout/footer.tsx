@@ -147,7 +147,7 @@ export const Footer = () => {
                             Srivatsa Kamballa
                         </p>
                         <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">
-                            Software Engineer & Co-founder, building thoughtful products at the intersection of AI and great UX.
+                            Software, AI platform, and DevOps/SRE engineer. I build AI infrastructure, then break it before an attacker can.
                         </p>
                     </div>
 

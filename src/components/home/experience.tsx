@@ -6,7 +6,7 @@ import Image from "next/image";
 import { data } from "@/data/data"
 import { BlurFade } from "@/components/ui/blur-fade";
 import { SectionHeading, headingIconClass } from "@/components/layout/section-heading";
-import { IconBriefcase2, IconSchool } from "@tabler/icons-react"
+import { IconBriefcase2, IconSchool, IconCertificate, IconAward } from "@tabler/icons-react"
 import { SpotlightGlow } from "@/components/ui/spotlight-glow";
 
 export default function Experience() {
@@ -59,6 +59,53 @@ export default function Experience() {
             skills={["Python", "Machine Learning", "Data Structures", "C++", "SQL"]}
             href="https://www.jainuniversity.ac.in"
           />
+        </div>
+      </BlurFade>
+
+      <BlurFade delay={0.1} direction="right" inView>
+        <SectionHeading className="my-8" icon={<IconCertificate className={headingIconClass} />}>
+          Certifications &amp; Patent
+        </SectionHeading>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {/* AWS certification */}
+          <div className="group/glow relative overflow-hidden rounded-lg border bg-background p-4 transition-all duration-400 hover:shadow-md">
+            <SpotlightGlow />
+            <div className="flex items-start gap-3">
+              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-md border bg-white/95 p-1.5">
+                <Image src="/tools/aws.svg" alt="AWS" width={40} height={40} className="h-full w-full object-contain" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-bold leading-snug text-primary sm:text-base">
+                  AWS Certified Solutions Architect &ndash; Associate
+                </p>
+                <p className="mt-0.5 text-xs text-muted-foreground">Amazon Web Services &middot; Issued 2026</p>
+              </div>
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              Designing distributed, cost-optimized, and resilient systems on AWS: VPC and IAM, auto-scaling, and observability.
+            </p>
+          </div>
+
+          {/* Patent */}
+          <div className="group/glow relative overflow-hidden rounded-lg border bg-background p-4 transition-all duration-400 hover:shadow-md">
+            <SpotlightGlow />
+            <div className="flex items-start gap-3">
+              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-md border bg-secondary">
+                <IconAward className="h-6 w-6 text-violet-500 dark:text-violet-400" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-bold leading-snug text-primary sm:text-base">
+                  Book Issue Management System for Libraries
+                </p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  Patent No. 202341071153 &middot; Intellectual Property India &middot; Nov 2023
+                </p>
+              </div>
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              Co-invented an AI-enabled camera and RFID system for automated library book issuance, return, and access control.
+            </p>
+          </div>
         </div>
       </BlurFade>
     </div>
