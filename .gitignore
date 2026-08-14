@@ -44,7 +44,6 @@ next-env.d.ts
 # editor / IDE / tooling
 .idea
 .vscode
-.claude
 
 # raw photo originals (converted via npm run sunsets)
 sunsets-originals/
