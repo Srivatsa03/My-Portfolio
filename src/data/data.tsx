@@ -1,4 +1,4 @@
-import { IconHome, IconBrandGithub, IconBriefcase2, IconBrandLinkedin, IconMail, IconPencil, IconBrush, IconBrandInstagram } from "@tabler/icons-react"
+import { IconHome, IconBrandGithub, IconBriefcase2, IconBrandLinkedin, IconMail, IconPencil, IconBrush, IconBrandInstagram, IconGitPullRequest } from "@tabler/icons-react"
 
 export const data = {
   experience: [
@@ -151,6 +151,11 @@ export const data = {
       icon: <IconBrush className="subpixel-antialiased h-5 w-5 text-zinc-500 hover:text-zinc-950 dark:text-zinc-300 hover:dark:text-zinc-50 hover:animate-wiggle animate-wiggle transition-colors duration-100" />,
     },
     {
+      name: "Open Source",
+      link: "open-source",
+      icon: <IconGitPullRequest className="subpixel-antialiased h-5 w-5 text-zinc-500 hover:text-zinc-950 dark:text-zinc-300 hover:dark:text-zinc-50 hover:animate-wiggle animate-wiggle transition-colors duration-100" />,
+    },
+    {
       name: "Experience",
       link: "experience",
       icon: <IconBriefcase2 className="subpixel-antialiased h-5 w-5 text-zinc-500 hover:text-zinc-950 dark:text-zinc-300 hover:dark:text-zinc-50 hover:animate-wiggle animate-wiggle transition-colors duration-100" />,
@@ -196,5 +201,71 @@ export const data = {
     { name: "Node.js", icon: "nodejs", themeDependent: false },
     { name: "SQL", icon: "sql", themeDependent: false },
     { name: "Bash", icon: "bash", themeDependent: false },
+  ],
+
+  openSource: [
+    {
+      repo: "pydantic/pydantic",
+      stars: "28k+",
+      status: "PR #13374 · merged",
+      merged: true,
+      title: "Stopped a JSON schema config being silently dropped",
+      body: "When an Annotated field combined a dict json_schema_extra with a callable one, Pydantic warned the callable would be ignored, then did the opposite: it dropped the dict and could crash schema generation. I made the dict win as documented and added a regression test. Approved by a core maintainer.",
+      link: "https://github.com/pydantic/pydantic/pull/13374",
+    },
+    {
+      repo: "BerriAI/litellm",
+      stars: "53k+",
+      status: "PR #30764 · merged",
+      merged: true,
+      title: "Stopped short secrets leaking into logs",
+      body: "SensitiveDataMasker returned any secret of 8 characters or fewer verbatim, leaking short redis passwords, API keys, and tokens into logs and the admin UI. I made short values mask by default, audited all 16 call sites, and added regression tests.",
+      link: "https://github.com/BerriAI/litellm/pull/30764",
+    },
+    {
+      repo: "run-llama/llama_index",
+      stars: "51k+",
+      status: "PR #22133 · merged",
+      merged: true,
+      title: "Fixed silent data loss in the ingestion core",
+      body: "In IngestionPipeline upserts, nodes were keyed by document id in a dict, so every chunk of a document except the last was silently dropped, never embedded or stored. I fixed both the sync and async paths with regression tests for each.",
+      link: "https://github.com/run-llama/llama_index/pull/22133",
+    },
+    {
+      repo: "BerriAI/litellm",
+      stars: "53k+",
+      status: "PR #29693 · merged",
+      merged: true,
+      title: "Fixed a 10x cost-tracking error",
+      body: "amazon.titan-embed-text-v2 was priced ten times too high in the cost maps, inflating everyone's budget reports. I verified the number against AWS Bedrock pricing and fixed the primary and backup maps in sync so they would not drift apart again.",
+      link: "https://github.com/BerriAI/litellm/pull/29693",
+    },
+    {
+      repo: "deepset-ai/haystack",
+      stars: "26k+",
+      status: "PR #11670 · merged",
+      merged: true,
+      title: "Silenced noisy logs on empty inputs",
+      body: "HTMLToDocument dumped ERROR lines on empty ByteStream inputs because lxml logs its parse failures internally rather than raising. I skipped empty streams before extraction, and separately authored the OpenSearch and Elasticsearch SQL retriever docs (#11543, #11494).",
+      link: "https://github.com/deepset-ai/haystack/pull/11670",
+    },
+    {
+      repo: "BerriAI/litellm",
+      stars: "53k+",
+      status: "PR #31725 · open",
+      merged: false,
+      title: "Time-based off-peak pricing in the cost engine",
+      body: "A feature on a core billing path: models define a UTC window and discounted rate, and the calculator picks the rate by time of day, backward-compatible, with regression tests. Open and under review.",
+      link: "https://github.com/BerriAI/litellm/pull/31725",
+    },
+    {
+      repo: "stanfordnlp/dspy",
+      stars: "36k+",
+      status: "PR #9942 · open",
+      merged: false,
+      title: "Fixed value corruption in the chat parser",
+      body: "In ChatAdapter.parse, the field-header regex matched the stripped line but sliced the unstripped one, leaking stray marker characters into parsed values on indented headers. I aligned the match and the slice with regression tests. Open and under review.",
+      link: "https://github.com/stanfordnlp/dspy/pull/9942",
+    },
   ],
 };
