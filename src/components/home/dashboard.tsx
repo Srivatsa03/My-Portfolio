@@ -2,7 +2,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { IconTool, IconLink, IconCoffee, IconClockHour4, IconMapPin, IconHeart, IconHandClick, IconBrandGithub, IconBrandYoutube, IconRefresh } from "@tabler/icons-react";
+import { IconTool, IconLink, IconCoffee, IconClockHour4, IconMapPin, IconHeart, IconHandClick, IconBrandGithub, IconBrandSpotifyFilled, IconRefresh } from "@tabler/icons-react";
 import { Globe } from "@/components/ui/globe";
 import styles from "./dashboard.module.css";
 import { NumberTicker } from "@/components/ui/number-ticker";
@@ -77,7 +77,7 @@ export default function Dashboard() {
           icon={<SoundWave className={dashboardIconClass} color={spotlightColor} />}
           title="Last Played"
           transitionDuration="200ms"
-          tooltip="YouTube Music"
+          tooltip="Spotify"
           cursorEmoji="🎵"
         >
           <div className="flex flex-col-reverse sm:flex-row-reverse items-center gap-4 sm:gap-6 w-full">
@@ -322,8 +322,8 @@ const GridItem = ({ area, icon, title, children, transitionDuration = "300ms", t
             className="pointer-events-none whitespace-nowrap"
           >
             <p className="flex items-center gap-1.5">
-              {tooltip === "YouTube Music" && (
-                <IconBrandYoutube className="h-4 w-4 text-red-500" />
+              {tooltip === "Spotify" && (
+                <IconBrandSpotifyFilled className="h-4 w-4 text-green-500" />
               )}
               {tooltip}
             </p>
@@ -373,13 +373,13 @@ interface LastPlayedProps {
 const LastPlayed = ({ track }: LastPlayedProps) => {
   const [isReady, setIsReady] = useState(false);
 
-  // Fallback shown until a track is configured.
+  // Fallback shown until Spotify credentials are configured.
   const displayTrack = track || {
     title: "On repeat",
-    artist: "YouTube Music",
+    artist: "Spotify",
     album: "",
     albumImageUrl: "",
-    songUrl: "https://music.youtube.com",
+    songUrl: "https://open.spotify.com",
   };
 
   // A real track can arrive without cover art; fall back to a gradient tile

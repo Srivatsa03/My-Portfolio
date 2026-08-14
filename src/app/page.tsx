@@ -3,6 +3,7 @@ import Experience from "@/components/home/experience"
 import Dashboard from "@/components/home/dashboard";
 import Projects from "@/components/home/projects"
 import OpenSource from "@/components/home/open-source"
+import Terminal from "@/components/home/terminal"
 import Writing from "@/components/home/writing"
 import { BlurFade } from "@/components/ui/blur-fade";
 import { getAllPosts } from "@/lib/blog";
@@ -34,6 +35,11 @@ export default async function Home() {
         <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
           <section id="dashboard">
             <Dashboard />
+          </section>
+        </BlurFade>
+        <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
+          <section id="terminal">
+            <Terminal />
           </section>
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 3} inView>

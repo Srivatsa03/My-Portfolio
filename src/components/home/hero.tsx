@@ -51,7 +51,7 @@ export default function Hero() {
                 <BlurFade delay={0.005} inView>
                     <div className="relative flex-col space-y-1">
                         <div className="relative flex flex-col items-center justify-center">
-                            <BackgroundGradient className="z-50 h-16 w-16 sm:w-20 sm:h-20 md:w-20 md:h-20 ">
+                            <BackgroundGradient className="z-50 h-24 w-24 sm:w-28 sm:h-28 md:w-28 md:h-28 ">
                                 <Image
                                     src={profilePic}
                                     alt="Profile Picture"
