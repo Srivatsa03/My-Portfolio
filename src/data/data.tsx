@@ -9,7 +9,7 @@ export const data = {
       date: "Aug 2026 - Present",
       location: "Chicago, IL",
       description:
-        "Fuzzing and probabilistic-modeling research on a question most testing tools dodge: when is it actually safe to stop fuzzing? Built PSBayes, a per-seed Bayesian estimator of residual risk, and am first author on the resulting paper, now under submission.",
+        "First author on PSBayes, a per-seed Bayesian estimator of residual fuzzing risk. Paper under submission.",
       skills: ["Python", "Docker", "LLVM", "FuzzBench", "Rust", "AWS", "Bash"],
       href: "https://github.com/Srivatsa03",
     },
@@ -20,7 +20,7 @@ export const data = {
       date: "Aug 2024 - Jul 2026",
       location: "Chicago, IL",
       description:
-        "Research infrastructure and DevOps for the fuzzing platform. Rebuilt FuzzBench on AWS from scratch (about 60% faster setup), provisioned 10+ nodes with Terraform and Ansible, and cut MTTR from 3 hours to under 1 with Prometheus and Grafana.",
+        "Rebuilt FuzzBench on AWS (~60% faster setup), provisioned 10+ nodes with Terraform and Ansible, cut MTTR from 3 hours to under 1.",
       skills: ["AWS", "Terraform", "Ansible", "Docker", "Kubernetes", "Jenkins", "Prometheus", "Grafana"],
       href: "https://github.com/Srivatsa03",
     },
@@ -31,7 +31,7 @@ export const data = {
       date: "Aug 2025 - May 2026",
       location: "Chicago, IL",
       description:
-        "Led 5+ engineers on MetARAG, a GPU-accelerated RAG platform for CCC Intelligent Solutions reaching about 93% retrieval precision, and shipped ECI Pipeline for TransUnion, turning 10 live Android security feeds into evidence-backed risk tickets.",
+        "Led 5+ engineers on MetARAG, a GPU-accelerated RAG platform reaching ~93% retrieval precision, and shipped the ECI Pipeline for TransUnion.",
       skills: ["Python", "LangChain", "FastAPI", "pgvector", "ArgoCD", "AWS", "Next.js"],
       href: "https://github.com/Srivatsa03",
     },
@@ -42,7 +42,7 @@ export const data = {
       date: "May 2023 - Jun 2024",
       location: "Bangalore, India",
       description:
-        "Automated ETL workflows for extraction, cleaning, validation, and transformation in Python and SQL for enterprise decision-support clients, cutting recurring data-prep effort about 40%.",
+        "Automated Python and SQL ETL for enterprise decision-support clients, cutting recurring data-prep effort ~40%.",
       skills: ["Python", "SQL", "ETL", "Pandas", "Tableau"],
       href: "https://www.mu-sigma.com",
     },
