@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { RainbowButton } from "@/components/magicui/rainbow-button";
 import { IconRss, IconSend, IconBrandGithub, IconStar } from "@tabler/icons-react";
-import { motion, useInView } from "motion/react";
+import { AnimatePresence, motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
@@ -13,8 +13,16 @@ import { data } from "@/data/data";
 
 const FALLBACK_REPO_URL = "https://github.com/Srivatsa03/My-Portfolio";
 
+// Footer tagline rotates between two role-agnostic lines so the site reads
+// broad (full-stack, AI/ML, data, SRE, software) instead of DevOps-only.
+const TAGLINES = [
+    "Pleasantly difficult to put in one box: full-stack apps, ML and RAG pipelines, data plumbing, and the infrastructure holding it all up. I build things, then break them before production does it for me.",
+    "I'd give you a job title, but I keep outgrowing them: full-stack, AI/ML, data, and the infra that survives on-call. The throughline is simple, I build software, then try very hard to break it.",
+];
+
 export const Footer = () => {
     const [sent, setSent] = useState(false);
+    const [taglineIndex, setTaglineIndex] = useState(0);
     const waveRef = useRef<HTMLSpanElement>(null);
     const waveInView = useInView(waveRef, { amount: 0.5 });
     const [waveKey, setWaveKey] = useState(0);
@@ -34,6 +42,14 @@ export const Footer = () => {
     useEffect(() => {
         if (waveInView) setWaveKey((k) => k + 1);
     }, [waveInView]);
+
+    useEffect(() => {
+        const id = setInterval(
+            () => setTaglineIndex((i) => (i + 1) % TAGLINES.length),
+            6000,
+        );
+        return () => clearInterval(id);
+    }, []);
 
     const handleSendClick = () => {
         if (sent) return;
@@ -146,9 +162,20 @@ export const Footer = () => {
                         <p className="text-sm font-semibold tracking-tight text-primary">
                             Srivatsa Kamballa
                         </p>
-                        <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">
-                            Software, AI platform, and DevOps/SRE engineer. I build AI infrastructure, then break it before an attacker can.
-                        </p>
+                        <div className="relative min-h-[7rem] max-w-xs sm:min-h-[6rem]">
+                            <AnimatePresence mode="wait">
+                                <motion.p
+                                    key={taglineIndex}
+                                    initial={{ opacity: 0, y: 6 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -6 }}
+                                    transition={{ duration: 0.5, ease: "easeOut" }}
+                                    className="text-xs text-muted-foreground leading-relaxed"
+                                >
+                                    {TAGLINES[taglineIndex]}
+                                </motion.p>
+                            </AnimatePresence>
+                        </div>
                     </div>
 
                     <div className="flex flex-col gap-3">
