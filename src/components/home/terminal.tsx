@@ -2,18 +2,23 @@
 
 import { useEffect, useState } from "react";
 
-// Original, dry-sarcastic one-liners about Srivatsa's actual work.
+// Original coding-humor one-liners (my own writing, in the relatable-dev vibe).
 const LINES = [
   "whoami  →  builds AI infra, then breaks it before an attacker gets the chance.",
-  "recruiter: 'any production experience?'  →  7 PRs merged into libraries you imported this morning.",
-  "'the model hallucinated.'  no. the pipeline handed it a poisoned document and asked politely.",
-  "yes, I read strangers' code for fun. yes, I found the bug. no, it is not a personality disorder.",
-  "'it works on my machine.'  wonderful. I will ship your machine to prod then.",
-  "on-call rule: if kubemend can't fix it as one reversible git commit, it doesn't touch the cluster.",
-  "fixed a 10x pricing bug in prod billing. saved everyone real money. received one (1) thumbs-up.",
-  "a Pydantic maintainer approved my PR. I have peaked. it's all downhill and I've made peace with it.",
-  "impostor syndrome? I have a patent, an AWS cert, and 7 merged PRs. the impostor is thriving, honestly.",
-  "my commits are small. the regressions they quietly prevent are not. that's the whole trick.",
+  "git commit -m 'final'. git commit -m 'final for real'. git commit -m 'ok THIS one'.",
+  "'quick 5-minute fix.'  narrator: it was neither quick nor 5 minutes.",
+  "code review: comments left, 1. comments received, 47. the natural order holds.",
+  "prod is quiet. too quiet. I don't trust it. refreshing the dashboards again.",
+  "on-call at 3am: not a bug. a feature. a hostile, screaming feature.",
+  "works on my machine → deploys → breaks → works on my machine while I stare at it.",
+  "// TODO: fix later. git blame says 2 years ago, also me. we meet again.",
+  "estimated: 2 hours. actual: 2 hours, 3 refactors, and one small identity crisis.",
+  "reading a stranger's stack trace for fun isn't a red flag. it's a hobby. it found your bug.",
+  "the bug only reproduces when no one is watching. it's shy. it's also winning.",
+  "step 1: write the test. step 2: watch it pass. step 3: distrust it immediately.",
+  "impostor syndrome and a granted patent, sharing one desk. neither is leaving.",
+  "a Pydantic maintainer approved my PR. peak achieved; it's all downhill and I'm at peace.",
+  "my commits are small. the 3am incidents they quietly prevent are not. that's the trick.",
 ];
 
 export default function Terminal() {
