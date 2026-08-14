@@ -3,7 +3,7 @@ title: "RAG injection is a pipeline problem, not a model problem"
 description: "I built rag-redteam to test the pipeline that turns untrusted documents into trusted context. A frontier-model upgrade did not fix injection. That is the whole point."
 date: "2026-07-02"
 tags: ["security", "rag", "llm", "open-source"]
-image: "/blog/rag-injection.svg"
+image: "/blog/rag-injection.png"
 imageAlt: "rag-redteam cover: injection is a pipeline problem, not a model one."
 ---
 

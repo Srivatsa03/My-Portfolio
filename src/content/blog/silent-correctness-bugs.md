@@ -3,7 +3,7 @@ title: "Hunting silent-correctness bugs in LLM infrastructure"
 description: "Seven merged pull requests across LiteLLM, LlamaIndex, Pydantic, and Haystack. The pattern is always the same: no error, no warning, just quietly wrong."
 date: "2026-06-05"
 tags: ["open-source", "python", "correctness"]
-image: "/blog/silent-bugs.svg"
+image: "/blog/silent-bugs.png"
 imageAlt: "Silent-correctness bugs: seven merged fixes in LLM infrastructure."
 ---
 

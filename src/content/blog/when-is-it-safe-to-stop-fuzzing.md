@@ -3,7 +3,7 @@ title: "When is it actually safe to stop fuzzing?"
 description: "Most fuzzing campaigns stop on a wall-clock budget and a shrug. PSBayes estimates the residual risk you are actually carrying, per seed."
 date: "2026-06-18"
 tags: ["fuzzing", "research", "bayesian", "testing"]
-image: "/blog/stop-fuzzing.svg"
+image: "/blog/stop-fuzzing.png"
 imageAlt: "When to stop fuzzing: a Bayesian answer to a wall-clock question."
 ---
 
