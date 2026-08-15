@@ -130,7 +130,6 @@ export const ExperienceItem = ({
   date,
   description = "",
   location,
-  skills,
   href,
 }: ExperienceItemProps) => {
   const logo = (

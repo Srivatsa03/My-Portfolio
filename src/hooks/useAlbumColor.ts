@@ -23,7 +23,7 @@ export function useAlbumColor(albumImageUrl: string | null): string {
           setColor(extractedColor);
         }
       })
-      .catch((error) => {
+      .catch(() => {
         // Keep the default or previous color on error
       });
 

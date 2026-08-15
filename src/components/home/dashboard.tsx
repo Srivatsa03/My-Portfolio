@@ -84,7 +84,6 @@ export default function Dashboard() {
             {/* Dancing Animation Section */}
             <div className="relative flex items-center justify-center w-full sm:w-12 h-16 sm:h-12 overflow-visible">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3OXBwZGkzbG4zc2N1dTU4bmgyZDBkenk1amxoZG5meWcydWp2aGU0MyZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/NawOC2k0SQ5pYjTXLt/giphy.gif"
                 alt="Dancing"
