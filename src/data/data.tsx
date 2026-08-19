@@ -67,7 +67,7 @@ export const data = {
       type: "Open Source",
       technologies: ["Kubernetes", "Python", "SRE", "GitOps", "Agents"],
       description:
-        "A remediation agent that diagnoses freely and acts narrowly: six typed, reversible actions whose blast radius is computable before execution and whose only write surface is a git commit. Every constraint on it is code with tests, not a prompt.",
+        "A remediation agent that diagnoses freely and acts narrowly: six typed, reversible actions whose blast radius is computable before execution and whose only write surface is a git commit. Now with a published threat model, evaluation, and findings report, a live GitOps demo, and zero runtime dependencies.",
     },
     {
       title: "MetARAG | Document Intelligence Platform",
