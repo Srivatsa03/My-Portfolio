@@ -22,6 +22,8 @@ const PROJECT_IMAGES: Record<string, string> = {
     "https://github.com/Srivatsa03/ECI-Pipeline": "/projects/eci-pipeline.png",
     "https://github.com/Srivatsa03/Chain-of-Thought-on-CLEVR": "/projects/cot-clevr.png",
     "https://github.com/Srivatsa03/End-to-End-Kubernetes-Three-Tier-DevSecOps-Project": "/projects/devsecops-eks.png",
+    "https://github.com/Srivatsa03/Movie-Recommendation": "/projects/movie-recommendation.png",
+    "https://github.com/Srivatsa03/Counterfactual_Fact_Checking": "/projects/counterfactual.png",
 };
 
 export default function Projects() {

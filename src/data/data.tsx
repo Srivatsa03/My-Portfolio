@@ -109,6 +109,26 @@ export const data = {
       description:
         "A production 3-tier application on AWS EKS with 8 microservices and zero-downtime deploys, automated end to end with Jenkins, ArgoCD, Trivy, and SonarQube gates, provisioned with Terraform and observed with Prometheus and Grafana.",
     },
+    {
+      title: "Movie Recommendation | MLOps Lifecycle",
+      href: "https://github.com/Srivatsa03/Movie-Recommendation",
+      dates: "2025",
+      active: false,
+      type: "MLOps",
+      technologies: ["Python", "Docker", "Prometheus", "Grafana", "MLOps"],
+      description:
+        "The full recommender lifecycle, not just a notebook: training, model serving, A/B tests, drift detection, and Prometheus and Grafana dashboards, reaching RMSE 0.58.",
+    },
+    {
+      title: "Counterfactual Fact Verification",
+      href: "https://github.com/Srivatsa03/Counterfactual_Fact_Checking",
+      dates: "2026 - Present",
+      active: true,
+      type: "Research",
+      technologies: ["Python", "FEVER", "Phi-3", "Llama 3.1", "Mistral"],
+      description:
+        "Zero-shot fact-checking on FEVER with local quantized LLMs, generating counterfactual claim variants across complexity tiers to map where small models stay honest and where they break.",
+    },
   ],
 
   contact: [
@@ -184,6 +204,9 @@ export const data = {
     { name: "Python", icon: "python", themeDependent: false },
     { name: "TypeScript", icon: "typescript", themeDependent: false },
     { name: "JavaScript", icon: "javascript", themeDependent: false },
+    { name: "PyTorch", icon: "pytorch", themeDependent: false },
+    { name: "LangChain", icon: "langchain", themeDependent: true },
+    { name: "OpenAI", icon: "openai", themeDependent: true },
     { name: "React", icon: "react", themeDependent: false },
     { name: "Next.js", icon: "nextjs", themeDependent: true },
     { name: "Node.js", icon: "nodejs", themeDependent: false },
