@@ -8,6 +8,7 @@ import {
 } from "@/components/layout/section-heading";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { TransitionLink } from "@/components/ui/transition-link";
+import { ExternalPosts } from "./external-posts";
 
 export interface HomeWritingPost {
     slug: string;
@@ -84,7 +85,9 @@ export default function Writing({ posts }: { posts: HomeWritingPost[] }) {
                 })}
             </ul>
 
-            <div className="mt-8 flex flex-col items-center gap-3">
+            <ExternalPosts />
+
+            <div className="mt-8 flex justify-center">
                 <TransitionLink
                     href="/blog"
                     className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -92,27 +95,6 @@ export default function Writing({ posts }: { posts: HomeWritingPost[] }) {
                     Read all posts
                     <IconArrowUpRight className="h-4 w-4" />
                 </TransitionLink>
-                <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
-                    <span className="uppercase tracking-wider text-[11px]">Also on</span>
-                    <a
-                        href="https://medium.com/@srivatsakamballa.sk"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 font-medium hover:text-foreground transition-colors"
-                    >
-                        Medium
-                        <IconArrowUpRight className="h-3 w-3" />
-                    </a>
-                    <a
-                        href="https://dev.to/srivatsa_kamballa"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 font-medium hover:text-foreground transition-colors"
-                    >
-                        Dev.to
-                        <IconArrowUpRight className="h-3 w-3" />
-                    </a>
-                </div>
             </div>
         </div>
     );
