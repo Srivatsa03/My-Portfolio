@@ -5,34 +5,23 @@ export const data = {
     {
       image: "/experience/uic.png",
       company: "University of Illinois Chicago",
-      role: "Software Developer, Software Testing",
+      role: "Research Specialist",
       date: "Aug 2026 - Present",
       location: "Chicago, IL",
       description:
         "First author on PSBayes, a per-seed Bayesian estimator of residual fuzzing risk. Paper under submission.",
-      skills: ["Python", "Docker", "LLVM", "FuzzBench", "Rust", "AWS", "Bash"],
+      skills: ["Python", "LLVM", "FuzzBench", "Rust", "AWS", "Docker", "Bash"],
       href: "https://github.com/Srivatsa03",
     },
     {
       image: "/experience/uic.png",
       company: "University of Illinois Chicago",
       role: "Software Developer",
-      date: "Aug 2024 - Jul 2026",
+      date: "Sep 2024 - May 2026",
       location: "Chicago, IL",
       description:
-        "Rebuilt FuzzBench on AWS (~60% faster setup), provisioned 10+ nodes with Terraform and Ansible, cut MTTR from 3 hours to under 1.",
-      skills: ["AWS", "Terraform", "Ansible", "Docker", "Kubernetes", "Jenkins", "Prometheus", "Grafana"],
-      href: "https://github.com/Srivatsa03",
-    },
-    {
-      image: "/experience/uic.png",
-      company: "UIC College of Business Administration",
-      role: "Software Developer, AI Engineer",
-      date: "Aug 2025 - May 2026",
-      location: "Chicago, IL",
-      description:
-        "Led 5+ engineers on MetARAG, a GPU-accelerated RAG platform reaching ~93% retrieval precision, and shipped the ECI Pipeline for TransUnion.",
-      skills: ["Python", "LangChain", "FastAPI", "pgvector", "ArgoCD", "AWS", "Next.js"],
+        "Rebuilt FuzzBench on AWS (~60% faster) with Terraform and Ansible, and led 5+ engineers on MetARAG, a GPU-accelerated RAG platform reaching ~93% retrieval precision.",
+      skills: ["AWS", "Terraform", "Ansible", "Docker", "Kubernetes", "LangChain", "FastAPI", "pgvector"],
       href: "https://github.com/Srivatsa03",
     },
     {
