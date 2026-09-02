@@ -1,10 +1,10 @@
 ---
 title: "Hunting silent-correctness bugs in LLM infrastructure"
-description: "Seven merged pull requests across LiteLLM, LlamaIndex, Pydantic, and Haystack. The pattern is always the same: no error, no warning, just quietly wrong."
+description: "Ten merged pull requests across LiteLLM, LlamaIndex, Pydantic, and Haystack. The pattern is always the same: no error, no warning, just quietly wrong."
 date: "2026-06-05"
 tags: ["open-source", "python", "correctness"]
 image: "/blog/silent-bugs.png"
-imageAlt: "Silent-correctness bugs: seven merged fixes in LLM infrastructure."
+imageAlt: "Silent-correctness bugs: ten merged fixes in LLM infrastructure."
 ---
 
 The bugs I like are the ones that throw no error. No stack trace, no warning line, just output that is quietly wrong while everything reports success. Those are the ones that survive in production for months, because nothing is on fire.

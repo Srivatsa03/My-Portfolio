@@ -18,12 +18,12 @@ const REPO_LOGOS: Record<string, string> = {
 
 // Live diff stats pulled from the GitHub API.
 const DIFF: Record<string, { add: number; del: number; approved?: boolean }> = {
+  "https://github.com/BerriAI/litellm/pull/31725": { add: 1039, del: 25, approved: true },
   "https://github.com/pydantic/pydantic/pull/13374": { add: 9, del: 0, approved: true },
   "https://github.com/BerriAI/litellm/pull/30764": { add: 59, del: 5 },
   "https://github.com/run-llama/llama_index/pull/22133": { add: 68, del: 9 },
   "https://github.com/BerriAI/litellm/pull/29693": { add: 36, del: 2 },
   "https://github.com/deepset-ai/haystack/pull/11670": { add: 27, del: 0 },
-  "https://github.com/BerriAI/litellm/pull/31725": { add: 259, del: 8 },
   "https://github.com/stanfordnlp/dspy/pull/9942": { add: 24, del: 2 },
 };
 
@@ -57,9 +57,9 @@ export default function OpenSource() {
       {/* Proof band */}
       <BlurFade delay={0.05} inView>
         <div className="mb-7 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-          <Stat value={7} label="merged" />
-          <Stat value={2} label="open" />
-          <Stat value={194} suffix="K★" label="combined stars" />
+          <Stat value={10} label="merged" />
+          <Stat value={3} label="open" />
+          <Stat value={164} suffix="K★" label="combined stars" />
           <Stat value={5} label="major projects" />
         </div>
       </BlurFade>
