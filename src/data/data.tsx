@@ -9,8 +9,8 @@ export const data = {
       date: "Aug 2026 - Present",
       location: "Chicago, IL",
       description:
-        "First author on PSBayes, a per-seed Bayesian estimator of residual fuzzing risk, built on Google FuzzBench and LLVM. Paper under submission.",
-      skills: ["Python", "LLVM", "FuzzBench", "Rust", "AWS", "Docker", "Bash"],
+        "Building a system that translates C to Rust and validates each port with differential fuzzing across CRUST-bench and DARPA TRACTOR. First author on PSBayes, a Bayesian estimator of residual fuzzing risk built on Google FuzzBench and LLVM. Paper under submission.",
+      skills: ["Python", "Rust", "C", "LLVM", "FuzzBench", "AWS", "Docker", "Bash"],
       href: "https://github.com/Srivatsa03",
     },
     {
@@ -27,12 +27,12 @@ export const data = {
     {
       image: "/experience/musigma.png",
       company: "Mu Sigma",
-      role: "Trainee Software Engineer",
+      role: "Software Engineer",
       date: "May 2023 - Jun 2024",
       location: "Bangalore, India",
       description:
-        "Automated Python and SQL ETL for enterprise decision-support clients, cutting recurring data-prep effort ~40%.",
-      skills: ["Python", "SQL", "ETL", "Pandas", "Tableau"],
+        "Wrote the Python modules that turn demand, inventory and capacity into daily build plans for 2 US plants of a global medical-technology manufacturer, and automated weekly data prep from 6 hours to under 2.",
+      skills: ["Python", "SQL", "Pandas", "Airflow", "Azure Data Factory", "Power BI", "React", "Java"],
       href: "https://www.mu-sigma.com",
     },
   ],
@@ -46,17 +46,17 @@ export const data = {
       type: "Open Source",
       technologies: ["Python", "LLM Security", "GitHub Action", "PyPI", "RAG"],
       description:
-        "Red-teams retrieval pipelines across 7 vulnerability classes as a CLI and a CI-gating GitHub Action, with deterministic canary detection and zero runtime dependencies. Benchmarked LangChain, LlamaIndex, and Haystack defaults, all exploitable at 50 to 75%, proving injection is a pipeline problem, not a model one.",
+        "Red-teams retrieval pipelines with 7 probes, shipped as a CLI and a CI-gating GitHub Action, with deterministic canary detection and a zero-dependency core. Benchmarked LangChain, LlamaIndex, and Haystack defaults at 42 to 48% attack success, and found a real retriever makes injection more effective than handing the model the whole corpus.",
     },
     {
-      title: "kubemend | Kubernetes SRE Agent",
+      title: "kubemend | Kubernetes Remediation Tool",
       href: "https://github.com/Srivatsa03/kubemend",
       dates: "Aug 2026 - Present",
       active: true,
       type: "Open Source",
-      technologies: ["Kubernetes", "Python", "SRE", "GitOps", "Agents"],
+      technologies: ["Kubernetes", "Python", "SRE", "GitOps", "k3d"],
       description:
-        "A remediation agent that diagnoses freely and acts narrowly: six typed, reversible actions whose blast radius is computable before execution and whose only write surface is a git commit. Now with a published threat model, evaluation, and findings report, a live GitOps demo, and zero runtime dependencies.",
+        "A remediation tool that holds no cluster credentials and whose only write surface is a reviewed git commit. Six typed, reversible actions, a deterministic planner, and 164 tests, verified end to end on a live k3d cluster, with a 13-page technical report and zero runtime dependencies.",
     },
     {
       title: "MetARAG | Document Intelligence Platform",
@@ -66,7 +66,7 @@ export const data = {
       type: "Industry - CCC Intelligent Solutions",
       technologies: ["RAG", "LangChain", "GPU", "AWS", "Kubernetes"],
       description:
-        "Led 5+ engineers on a GPU-accelerated RAG platform covering parsing, chunking, embeddings, and retrieval tuning, reaching about 93% retrieval precision across 100+ GB with about 65% better processing efficiency and 40% lower latency.",
+        "Led 5+ engineers on a GPU-accelerated RAG platform covering parsing, chunking, metadata enrichment, embeddings, and source-grounded answers. Reached 93% retrieval precision across hundreds of PDFs, and batched GPU inference on a 100+ GB pipeline to cut processing time by two thirds and latency by a third.",
     },
     {
       title: "ECI Pipeline | Android Risk Intelligence",
@@ -74,9 +74,9 @@ export const data = {
       dates: "Jan 2026 - May 2026",
       active: false,
       type: "Industry - TransUnion",
-      technologies: ["FastAPI", "pgvector", "Graph-RAG", "Next.js", "AWS Lambda"],
+      technologies: ["FastAPI", "pgvector", "Graph-RAG", "Groq", "Next.js"],
       description:
-        "A DeltaRAG and Graph-RAG platform on AWS Lambda ingesting 10 live Android security and CVE feeds, turning them into evidence-backed risk tickets with a Sentinel scoring agent and a live Next.js dashboard.",
+        "A 5-agent DeltaRAG and Graph-RAG pipeline watching 14 live Android security and CVE feeds, turning changes into evidence-backed risk tickets with a Sentinel triage agent and a live Next.js console.",
     },
     {
       title: "Chain-of-Thought on CLEVR",
@@ -94,9 +94,9 @@ export const data = {
       dates: "2025",
       active: false,
       type: "Platform - SRE",
-      technologies: ["AWS EKS", "Terraform", "ArgoCD", "Jenkins", "DevSecOps"],
+      technologies: ["AWS EKS", "Terraform", "ArgoCD", "Jenkins", "Trivy"],
       description:
-        "A production 3-tier application on AWS EKS with 8 microservices and zero-downtime deploys, automated end to end with Jenkins, ArgoCD, Trivy, and SonarQube gates, provisioned with Terraform and observed with Prometheus and Grafana.",
+        "My deployment of a community 3-tier reference app on AWS EKS: 8 microservices rolling out with zero downtime, provisioned with Terraform, released through Jenkins and ArgoCD, and gated by Trivy and SonarQube so unscanned images never reach ECR.",
     },
     {
       title: "Movie Recommendation | MLOps Lifecycle",
@@ -104,9 +104,9 @@ export const data = {
       dates: "2025",
       active: false,
       type: "MLOps",
-      technologies: ["Python", "Docker", "Prometheus", "Grafana", "MLOps"],
+      technologies: ["Python", "FastAPI", "Docker", "LaunchDarkly", "Grafana"],
       description:
-        "The full recommender lifecycle, not just a notebook: training, model serving, A/B tests, drift detection, and Prometheus and Grafana dashboards, reaching RMSE 0.58.",
+        "The full recommender lifecycle on a 6-person team: FastAPI serving, provenance logged on every inference, models at RMSE 0.58 rolled out to live traffic slices behind LaunchDarkly flags, schema checks that catch drift, and Prometheus and Grafana dashboards.",
     },
     {
       title: "Counterfactual Fact Verification",
@@ -114,9 +114,9 @@ export const data = {
       dates: "2026 - Present",
       active: true,
       type: "Research",
-      technologies: ["Python", "FEVER", "Phi-3", "Llama 3.1", "Mistral"],
+      technologies: ["Python", "FEVER", "Phi-3 Mini", "Mistral 7B", "4-bit"],
       description:
-        "Zero-shot fact-checking on FEVER with local quantized LLMs, generating counterfactual claim variants across complexity tiers to map where small models stay honest and where they break.",
+        "Zero-shot fact-checking on FEVER with 4-bit Phi-3 Mini and Mistral 7B running locally, generating counterfactual claim variants across complexity tiers to map where small models stay honest and where they break.",
     },
   ],
 
