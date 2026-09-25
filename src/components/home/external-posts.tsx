@@ -15,9 +15,9 @@ interface ExternalPost {
   readingMinutes: number | null;
 }
 
-const PLATFORM_STYLE: Record<string, string> = {
-  Medium: "bg-black text-white",
-  "Dev.to": "bg-white text-black",
+const PLATFORM_ICON: Record<string, string> = {
+  Medium: "/blog/medium.svg",
+  "Dev.to": "/blog/devto.svg",
 };
 
 export function ExternalPosts() {
@@ -75,8 +75,16 @@ export function ExternalPosts() {
                       />
                     )}
                     <span
-                      className={`absolute left-2 top-2 rounded-full px-2 py-0.5 text-[11px] font-semibold backdrop-blur ${PLATFORM_STYLE[post.platform] ?? "bg-black/70 text-white"}`}
+                      title={post.platform}
+                      className="absolute left-2 top-2 flex items-center gap-1.5 rounded-full bg-white/95 px-2 py-1 text-[11px] font-semibold text-black shadow-sm"
                     >
+                      <Image
+                        src={PLATFORM_ICON[post.platform]}
+                        alt={post.platform}
+                        width={14}
+                        height={14}
+                        className="h-3.5 w-3.5"
+                      />
                       {post.platform}
                     </span>
                   </div>

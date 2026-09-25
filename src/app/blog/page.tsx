@@ -4,6 +4,7 @@ import Image from "next/image";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { IconArrowLeft, IconArrowUpRight } from "@tabler/icons-react";
 import { TransitionLink } from "@/components/ui/transition-link";
+import { ExternalPosts } from "@/components/home/external-posts";
 
 export const metadata = {
   title: "Blog — Srivatsa Kamballa",
@@ -109,6 +110,8 @@ export default function BlogPage() {
             ))}
           </ul>
         )}
+
+        <ExternalPosts />
       </div>
     </div>
   );
