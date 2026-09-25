@@ -9,18 +9,18 @@ export const data = {
       date: "Aug 2026 - Present",
       location: "Chicago, IL",
       description:
-        "First author on PSBayes, a per-seed Bayesian estimator of residual fuzzing risk. Paper under submission.",
+        "First author on PSBayes, a per-seed Bayesian estimator of residual fuzzing risk, built on Google FuzzBench and LLVM. Paper under submission.",
       skills: ["Python", "LLVM", "FuzzBench", "Rust", "AWS", "Docker", "Bash"],
       href: "https://github.com/Srivatsa03",
     },
     {
       image: "/experience/uic.png",
       company: "University of Illinois Chicago",
-      role: "Software Developer",
+      role: "IT Technical Associate",
       date: "Sep 2024 - May 2026",
       location: "Chicago, IL",
       description:
-        "Rebuilt FuzzBench on AWS (~60% faster) with Terraform and Ansible, and led 5+ engineers on MetARAG, a GPU-accelerated RAG platform reaching ~93% retrieval precision.",
+        "Automated cloud and HPC infrastructure with Terraform and Ansible, taking provisioning from 4 hours to 45 minutes, and led 5+ engineers building MetARAG, a GPU-accelerated RAG platform for CCC Intelligent Solutions.",
       skills: ["AWS", "Terraform", "Ansible", "Docker", "Kubernetes", "LangChain", "FastAPI", "pgvector"],
       href: "https://github.com/Srivatsa03",
     },
