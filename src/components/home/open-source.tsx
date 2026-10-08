@@ -60,7 +60,7 @@ export default function OpenSource() {
           <Stat value={10} label="merged" />
           <Stat value={3} label="open" />
           <Stat value={164} suffix="K★" label="combined stars" />
-          <Stat value={5} label="major projects" />
+          <Stat value={4} label="projects merged into" />
         </div>
       </BlurFade>
 

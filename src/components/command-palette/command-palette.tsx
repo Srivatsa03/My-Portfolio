@@ -31,11 +31,18 @@ export interface PaletteBlogPost {
     date: string;
 }
 
-interface CommandPaletteProps {
-    posts: PaletteBlogPost[];
+export interface PaletteProject {
+    slug: string;
+    title: string;
+    tagline: string;
 }
 
-export function CommandPalette({ posts }: CommandPaletteProps) {
+interface CommandPaletteProps {
+    posts: PaletteBlogPost[];
+    projects: PaletteProject[];
+}
+
+export function CommandPalette({ posts, projects }: CommandPaletteProps) {
     const [open, setOpen] = useState(false);
     const [copied, setCopied] = useState(false);
     const [viewport, setViewport] = useState<{ height: number; offsetTop: number } | null>(null);
@@ -181,7 +188,7 @@ export function CommandPalette({ posts }: CommandPaletteProps) {
                             <Item
                                 icon={<IconBrush className="h-4 w-4" />}
                                 label="Projects"
-                                onSelect={() => run(() => goToSection("projects"))}
+                                onSelect={() => run(() => router.push("/projects"))}
                             />
                             <Item
                                 icon={<IconBriefcase2 className="h-4 w-4" />}
@@ -194,6 +201,22 @@ export function CommandPalette({ posts }: CommandPaletteProps) {
                                 onSelect={() => run(() => router.push("/blog"))}
                             />
                         </Group>
+
+                        {projects.length > 0 && (
+                            <Group heading="Projects">
+                                {projects.map((project) => (
+                                    <Item
+                                        key={project.slug}
+                                        icon={<IconArrowRight className="h-4 w-4" />}
+                                        label={project.title}
+                                        keywords={[project.tagline, ...project.title.split(" ")]}
+                                        onSelect={() =>
+                                            run(() => router.push(`/projects/${project.slug}`))
+                                        }
+                                    />
+                                ))}
+                            </Group>
+                        )}
 
                         {posts.length > 0 && (
                             <Group heading="Recent writing">

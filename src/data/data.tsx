@@ -37,89 +37,6 @@ export const data = {
     },
   ],
 
-  projects: [
-    {
-      title: "rag-redteam | Open-Source RAG Security Tool",
-      href: "https://github.com/Srivatsa03/rag-redteam",
-      dates: "Jun 2026 - Present",
-      active: true,
-      type: "Open Source",
-      technologies: ["Python", "LLM Security", "GitHub Action", "PyPI", "RAG"],
-      description:
-        "Red-teams retrieval pipelines with 7 probes, shipped as a CLI and a CI-gating GitHub Action, with deterministic canary detection and a zero-dependency core. Benchmarked LangChain, LlamaIndex, and Haystack defaults at 42 to 48% attack success, and found a real retriever makes injection more effective than handing the model the whole corpus.",
-    },
-    {
-      title: "kubemend | Kubernetes Remediation Tool",
-      href: "https://github.com/Srivatsa03/kubemend",
-      dates: "Aug 2026 - Present",
-      active: true,
-      type: "Open Source",
-      technologies: ["Kubernetes", "Python", "SRE", "GitOps", "k3d"],
-      description:
-        "A remediation tool that holds no cluster credentials and whose only write surface is a reviewed git commit. Six typed, reversible actions, a deterministic planner, and 164 tests, verified end to end on a live k3d cluster, with a 13-page technical report and zero runtime dependencies.",
-    },
-    {
-      title: "MetARAG | Document Intelligence Platform",
-      href: "https://github.com/Srivatsa03/UICLaborDocsChatbot",
-      dates: "Aug 2025 - Dec 2025",
-      active: false,
-      type: "Industry - CCC Intelligent Solutions",
-      technologies: ["RAG", "LangChain", "GPU", "AWS", "Kubernetes"],
-      description:
-        "Led 5+ engineers on a GPU-accelerated RAG platform covering parsing, chunking, metadata enrichment, embeddings, and source-grounded answers. Reached 93% retrieval precision across hundreds of PDFs, and batched GPU inference on a 100+ GB pipeline to cut processing time by two thirds and latency by a third.",
-    },
-    {
-      title: "ECI Pipeline | Android Risk Intelligence",
-      href: "https://github.com/Srivatsa03/ECI-Pipeline",
-      dates: "Jan 2026 - May 2026",
-      active: false,
-      type: "Industry - TransUnion",
-      technologies: ["FastAPI", "pgvector", "Graph-RAG", "Groq", "Next.js"],
-      description:
-        "A 5-agent DeltaRAG and Graph-RAG pipeline watching 14 live Android security and CVE feeds, turning changes into evidence-backed risk tickets with a Sentinel triage agent and a live Next.js console.",
-    },
-    {
-      title: "Chain-of-Thought on CLEVR",
-      href: "https://github.com/Srivatsa03/Chain-of-Thought-on-CLEVR",
-      dates: "Jan 2026 - May 2026",
-      active: false,
-      type: "Research - CS533",
-      technologies: ["PyTorch", "BLIP-2", "LoRA", "Vision-Language"],
-      description:
-        "Fine-tuned BLIP-2 with LoRA on 50,000 CLEVR samples, lifting accuracy from 8.75% zero-shot to 45.95%. A controlled study found chain-of-thought wins on short reasoning chains and loses on long ones, the opposite of the usual assumption.",
-    },
-    {
-      title: "End-to-End DevSecOps EKS Platform",
-      href: "https://github.com/Srivatsa03/End-to-End-Kubernetes-Three-Tier-DevSecOps-Project",
-      dates: "2025",
-      active: false,
-      type: "Platform - SRE",
-      technologies: ["AWS EKS", "Terraform", "ArgoCD", "Jenkins", "Trivy"],
-      description:
-        "My deployment of a community 3-tier reference app on AWS EKS: 8 microservices rolling out with zero downtime, provisioned with Terraform, released through Jenkins and ArgoCD, and gated by Trivy and SonarQube so unscanned images never reach ECR.",
-    },
-    {
-      title: "Movie Recommendation | MLOps Lifecycle",
-      href: "https://github.com/Srivatsa03/Movie-Recommendation",
-      dates: "2025",
-      active: false,
-      type: "MLOps",
-      technologies: ["Python", "FastAPI", "Docker", "LaunchDarkly", "Grafana"],
-      description:
-        "The full recommender lifecycle on a 6-person team: FastAPI serving, provenance logged on every inference, models at RMSE 0.58 rolled out to live traffic slices behind LaunchDarkly flags, schema checks that catch drift, and Prometheus and Grafana dashboards.",
-    },
-    {
-      title: "Counterfactual Fact Verification",
-      href: "https://github.com/Srivatsa03/Counterfactual_Fact_Checking",
-      dates: "2026 - Present",
-      active: true,
-      type: "Research",
-      technologies: ["Python", "FEVER", "Phi-3 Mini", "Mistral 7B", "4-bit"],
-      description:
-        "Zero-shot fact-checking on FEVER with 4-bit Phi-3 Mini and Mistral 7B running locally, generating counterfactual claim variants across complexity tiers to map where small models stay honest and where they break.",
-    },
-  ],
-
   contact: [
     {
       href: "mailto:srivatsakamballa02@gmail.com",
@@ -270,7 +187,7 @@ export const data = {
       status: "PR #30764 · merged",
       merged: true,
       title: "Stopped short secrets leaking into logs",
-      body: "SensitiveDataMasker returned any secret of 8 characters or fewer verbatim, leaking short redis passwords, API keys, and tokens into logs and the admin UI. I made short values mask by default, audited all 16 call sites, and added regression tests.",
+      body: "SensitiveDataMasker returned any secret of 8 characters or fewer verbatim, leaking short redis passwords, API keys, and tokens into logs and the admin UI. I made short values mask by default and added regression tests.",
       link: "https://github.com/BerriAI/litellm/pull/30764",
     },
     {
@@ -319,21 +236,21 @@ export const data = {
       link: "https://github.com/BerriAI/litellm/pull/38164",
     },
     {
-      repo: "BerriAI/litellm",
-      stars: "57k+",
-      status: "PR #37747 · open",
+      repo: "567-labs/instructor",
+      stars: "13k+",
+      status: "PR #2673 · open",
       merged: false,
-      title: "Fixing a request that permanently blanks a model's pricing",
-      body: "A single malformed request could permanently blank a model's pricing in /v2/model/info for the whole process. Open, CI green, 100% patch coverage.",
-      link: "https://github.com/BerriAI/litellm/pull/37747",
+      title: "Fixing an SSRF guard that IPv6 transition addresses slip past",
+      body: "instructor's remote-media guard trusted ipaddress.is_global, which treats IPv6 transition formats carrying an internal IPv4 as public. On NAT64 networks, including IPv6-only AWS and GCP subnets, a URL like that reaches the cloud metadata endpoint. The fix rejects them. Open.",
+      link: "https://github.com/567-labs/instructor/pull/2673",
     },
     {
       repo: "stanfordnlp/dspy",
       stars: "37k+",
       status: "PR #9942 · open",
       merged: false,
-      title: "Fixed value corruption in the chat parser",
-      body: "In ChatAdapter.parse, the field-header regex matched the stripped line but sliced the unstripped one, leaking stray marker characters into parsed values on indented headers. I aligned the match and the slice with regression tests. Open and under review.",
+      title: "Fixing value corruption in the chat parser",
+      body: "In ChatAdapter.parse, the field-header regex matched the stripped line but sliced the unstripped one, leaking stray marker characters into parsed values on indented headers. The fix aligns the match and the slice, with regression tests. Open.",
       link: "https://github.com/stanfordnlp/dspy/pull/9942",
     },
   ],

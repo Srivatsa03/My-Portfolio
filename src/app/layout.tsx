@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Analytics } from "@vercel/analytics/next";
 import { CommandPalette } from "@/components/command-palette/command-palette";
 import { getAllPosts } from "@/lib/blog";
+import { getAllProjects } from "@/lib/projects";
 import { ViewTransitions } from "next-view-transitions";
 
 const geistSans = Geist({
@@ -71,6 +72,11 @@ export default function RootLayout({
     description: p.description,
     date: p.date,
   }));
+  const paletteProjects = getAllProjects().map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    tagline: p.tagline,
+  }));
 
   return (
     <ViewTransitions>
@@ -80,7 +86,7 @@ export default function RootLayout({
         >
           <ThemeProvider attribute="class" defaultTheme="dark">
             <Navbar navItems={data.nav} />
-            <CommandPalette posts={palettePosts} />
+            <CommandPalette posts={palettePosts} projects={paletteProjects} />
             <Image
               src="/layout/background-ellipse3.svg"
               alt=""
