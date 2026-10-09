@@ -8,6 +8,8 @@ import { TableOfContents } from "@/components/blog/table-of-contents";
 import { ProjectFlow } from "@/components/projects/project-flow";
 import { ProjectResults } from "@/components/projects/project-results";
 import { ProjectFacts } from "@/components/projects/project-facts";
+import { ProjectMedia } from "@/components/projects/project-media";
+import Image from "next/image";
 import { IconArrowLeft, IconBrandGithub, IconExternalLink } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
@@ -103,6 +105,21 @@ export default async function ProjectPage({ params }: Props) {
           </header>
         </BlurFade>
 
+        {project.hero && (
+          <div className="mt-10 overflow-hidden rounded-xl border border-border/60">
+            <Image
+              src={project.hero}
+              alt={project.heroAlt ?? ""}
+              width={1600}
+              height={1000}
+              priority
+              unoptimized
+              sizes="(max-width: 1024px) 100vw, 1024px"
+              className="h-auto w-full"
+            />
+          </div>
+        )}
+
 
         <div className="mt-12 lg:grid lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-14">
           <div className="min-w-0 max-w-[68ch]">
@@ -113,6 +130,7 @@ export default async function ProjectPage({ params }: Props) {
             {parts.map((part, i) => {
               if (part.kind === "flow") return <ProjectFlow key={i} stages={project.flow} />;
               if (part.kind === "results") return <ProjectResults key={i} results={project.results} />;
+              if (part.kind === "media") return <ProjectMedia key={i} items={project.media} />;
               return (
                 <div key={i} className={proseClasses} dangerouslySetInnerHTML={{ __html: part.html ?? "" }} />
               );

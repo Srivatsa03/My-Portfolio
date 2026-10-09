@@ -23,6 +23,13 @@ export interface ProjectResult {
   source: string;
 }
 
+/** A screenshot, demo GIF or chart from the project's own repo. */
+export interface ProjectMedia {
+  src: string;
+  alt: string;
+  caption: string;
+}
+
 export type ProjectCategory = "Open source" | "Industry" | "Research" | "Coursework" | "Personal";
 
 export interface Project {
@@ -41,6 +48,12 @@ export interface Project {
   /** Drafts are written but never built into the site. */
   draft: boolean;
   cover?: string;
+  /** "contain" for charts and diagrams that must not be cropped. */
+  coverFit: "cover" | "contain";
+  /** A real image of the project shown at the top of its page. */
+  hero?: string;
+  heroAlt?: string;
+  media: ProjectMedia[];
   stack: string[];
   links: ProjectLink[];
   flow: ProjectStage[];
@@ -65,6 +78,10 @@ function readProject(file: string): Project {
     featured: data.featured ?? false,
     draft: data.draft ?? false,
     cover: data.cover,
+    coverFit: data.coverFit === "contain" ? "contain" : "cover",
+    hero: data.hero,
+    heroAlt: data.heroAlt,
+    media: data.media ?? [],
     stack: data.stack ?? [],
     links: data.links ?? [],
     flow: data.flow ?? [],
@@ -101,16 +118,16 @@ export function getProjectBySlug(slug: string): Project | null {
 }
 
 /**
- * Splits the body at the <!-- flow --> and <!-- results --> markers so the
- * page can drop the diagram and the results table in where the prose refers
- * to them. Each part is rendered to HTML separately.
+ * Splits the body at the <!-- flow -->, <!-- results --> and <!-- media -->
+ * markers so the page can drop the diagram, the results table and the
+ * screenshots in where the prose refers to them. Each part is rendered to HTML separately.
  */
 export async function renderProjectBody(content: string) {
-  const parts = content.split(/<!--\s*(flow|results)\s*-->/);
-  const out: { kind: "html" | "flow" | "results"; html?: string }[] = [];
+  const parts = content.split(/<!--\s*(flow|results|media)\s*-->/);
+  const out: { kind: "html" | "flow" | "results" | "media"; html?: string }[] = [];
   for (let i = 0; i < parts.length; i++) {
     if (i % 2 === 1) {
-      out.push({ kind: parts[i] as "flow" | "results" });
+      out.push({ kind: parts[i] as "flow" | "results" | "media" });
     } else if (parts[i].trim()) {
       out.push({ kind: "html", html: await renderMarkdown(parts[i]) });
     }

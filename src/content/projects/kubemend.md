@@ -8,7 +8,13 @@ dates: Aug 2026 - Present
 status: v0.2.0, alpha
 order: 3
 featured: true
-cover: /projects/kubemend.png
+cover: /projects/media/kubemend-console-crop.jpg
+hero: /projects/media/kubemend-demo.gif
+heroAlt: kubemend committing a fix, watching it recover, and reverting a second fix that did not hold
+media:
+  - src: /projects/media/kubemend-console-crop.jpg
+    alt: The kubemend incident console showing two incidents, one verified and one reverted
+    caption: The read-only incident console after the demo. One fix was verified and kept, and the other was reverted when the workload kept failing.
 stack: [Python, Kubernetes, k3d, Git, GitHub Actions, SQLite]
 links:
   - label: View the code
@@ -57,6 +63,8 @@ kubemend's answer is that every constraint on it is code with tests. It diagnose
 ## How it works
 
 <!-- flow -->
+
+<!-- media -->
 
 The planner is deterministic and there's no model in the loop yet. That's on purpose. The safety layer has to hold before anything smarter gets to propose changes.
 

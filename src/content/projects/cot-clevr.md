@@ -8,7 +8,15 @@ dates: Jan 2026 - May 2026
 status: Complete
 order: 6
 featured: true
-cover: /projects/cot-clevr.png
+cover: /projects/media/cot-clevr-overall.png
+coverFit: contain
+media:
+  - src: /projects/media/cot-clevr-overall.png
+    alt: Bar chart of overall accuracy, zero-shot 8.8 percent, answer-only 46.0 percent, chain-of-thought 28.9 percent
+    caption: Overall accuracy on the 2,000 validation questions.
+  - src: /projects/media/cot-clevr-depth.png
+    alt: Bar chart of accuracy by reasoning depth for the three models
+    caption: Accuracy by reasoning depth, from the project report. The short bucket on the left is only 35 questions, so the chain-of-thought lead there is a hint, not a result.
 stack: [PyTorch, Transformers, PEFT, LoRA, BLIP-2, AWS EC2]
 links:
   - label: View the code
@@ -68,6 +76,8 @@ A BOS/EOS token collision collapsed the chain-of-thought model to single-token o
 ## Results
 
 <!-- results -->
+
+<!-- media -->
 
 Fine-tuning helped a lot, and answer-only supervision helped far more than chain-of-thought. On long reasoning chains, chain-of-thought clearly hurt. It looked better on short chains, but that bucket is only 35 questions, a gap of six answers, so I don't lean on it.
 

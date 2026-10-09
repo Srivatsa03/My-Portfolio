@@ -59,8 +59,8 @@ export default function ProjectsPage() {
                         className="group flex items-start gap-4 py-6 sm:gap-6"
                       >
                         {p.cover && (
-                          <div className="relative aspect-[3/2] w-24 shrink-0 overflow-hidden rounded-md border border-border/60 sm:w-40">
-                            <Image src={p.cover} alt="" fill unoptimized sizes="(max-width: 640px) 96px, 160px" className="object-cover object-left" />
+                          <div className={`relative aspect-[16/10] w-24 shrink-0 overflow-hidden rounded-md border border-border/60 sm:w-40 ${p.coverFit === "contain" ? "bg-white" : ""}`}>
+                            <Image src={p.cover} alt="" fill unoptimized sizes="(max-width: 640px) 96px, 160px" className={p.coverFit === "contain" ? "object-contain p-1" : "object-cover object-left-top"} />
                           </div>
                         )}
                         <div className="min-w-0 flex-1">

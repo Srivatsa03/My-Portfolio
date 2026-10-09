@@ -9,6 +9,10 @@ status: Complete
 order: 8
 featured: false
 cover: /projects/movie-recommendation.png
+media:
+  - src: /projects/media/movie-metrics.png
+    alt: Line charts of click-through rate, watch-through rate and average rating over two weeks
+    caption: The team's online telemetry over two weeks of simulated users. It shows the logging working end to end, not real engagement.
 stack: [Python, FastAPI, Surprise, Docker, Jenkins, LaunchDarkly, Evidently]
 links:
   - label: View the code
@@ -57,7 +61,7 @@ There were six of us. My part was provenance: every recommendation records the m
 
 <!-- results -->
 
-The users are simulated, so the online numbers show the telemetry working end to end rather than real engagement.
+<!-- media -->
 
 ## Limits
 

@@ -8,7 +8,9 @@ dates: Jan 2026 - Aug 2026
 status: Delivered, live console online
 order: 4
 featured: true
-cover: /projects/eci-pipeline.png
+cover: /projects/media/eci-console.jpg
+hero: /projects/media/eci-console.jpg
+heroAlt: The live SENTINEL console showing an escalated CVE with its risk score and the pipeline's source, change and ticket counts
 stack: [Python, FastAPI, PostgreSQL, pgvector, NetworkX, Groq, Next.js, React]
 links:
   - label: View the code

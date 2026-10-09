@@ -83,18 +83,26 @@ export function Globe({
     window.addEventListener("resize", onResize);
     onResize();
 
-    const globe = createGlobe(canvasRef.current!, {
-      ...globeConfig,
-      width: width * 2,
-      height: width * 2,
-      onRender: (state) => {
-        if (!pointerInteracting.current) phi += 0.004;
-        state.phi = phi + rs.get();
-        state.width = width * 2;
-        state.height = width * 2;
-        currentPhi = state.phi;
-      },
-    } as COBEOptions);
+    let globe: ReturnType<typeof createGlobe>;
+    try {
+      globe = createGlobe(canvasRef.current!, {
+        ...globeConfig,
+        width: width * 2,
+        height: width * 2,
+        onRender: (state) => {
+          if (!pointerInteracting.current) phi += 0.004;
+          state.phi = phi + rs.get();
+          state.width = width * 2;
+          state.height = width * 2;
+          currentPhi = state.phi;
+        },
+      } as COBEOptions);
+    } catch {
+      // No WebGL context (hardware acceleration off, blocked, or the browser
+      // is out of contexts). Skip the globe rather than take the page down.
+      window.removeEventListener("resize", onResize);
+      return;
+    }
 
     setTimeout(() => (canvasRef.current!.style.opacity = "1"), 0);
 

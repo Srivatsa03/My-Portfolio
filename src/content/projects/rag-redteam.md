@@ -8,7 +8,16 @@ dates: Jun 2026 - Present
 status: v0.8.0, beta, actively maintained
 order: 1
 featured: true
-cover: /projects/rag-redteam.png
+cover: /projects/media/rag-redteam-hero.jpg
+hero: /projects/media/rag-redteam-hero.jpg
+heroAlt: rag-redteam sits between your RAG pipeline and what it produces, with seven attack probes, OWASP and MITRE ATLAS mapping, and statistical assurance
+media:
+  - src: /projects/media/rag-redteam-demo.gif
+    alt: Wrapping a RAG pipeline in three methods and running rag-redteam against it
+    caption: Wrap your pipeline in three methods and run a scan. Each finding comes back with its rate, a confidence interval, and its OWASP and MITRE ATLAS IDs.
+  - src: /projects/media/rag-redteam-run.gif
+    alt: A run across all seven probes with rate bars, confidence intervals and a statistical-assurance block
+    caption: A full run across all seven probes, ending with the block that bounds how much risk a clean run actually rules out.
 stack: [Python, GitHub Actions, SARIF, FastAPI, SQLite, React, TypeScript]
 links:
   - label: View the code
@@ -67,6 +76,8 @@ There was a second problem I kept running into. A scan that says "no vulnerabili
 <!-- flow -->
 
 The core package has zero runtime dependencies, so it drops into any CI job. A FastAPI, SQLite and React dashboard in the same repo stores scans and compares them over time.
+
+<!-- media -->
 
 ## Decisions and tradeoffs
 

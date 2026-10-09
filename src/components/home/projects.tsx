@@ -56,14 +56,14 @@ export function ProjectCard({ project }: { project: Project }) {
         <TransitionLink href={`/projects/${project.slug}`} className="group block h-full">
             <Card className="relative flex h-full flex-col overflow-hidden border transition-all duration-300 ease-out hover:shadow-md">
                 {project.cover && (
-                    <div className="relative h-44 overflow-hidden sm:h-48">
+                    <div className={`relative aspect-[16/10] overflow-hidden border-b border-border/60 ${project.coverFit === "contain" ? "bg-white" : ""}`}>
                         <Image
                             src={project.cover}
                             alt=""
                             fill
                             unoptimized
                             sizes="(max-width: 768px) 100vw, 50vw"
-                            className="object-cover object-left transition-transform duration-500 group-hover:scale-[1.04]"
+                            className={`${project.coverFit === "contain" ? "object-contain p-2" : "object-cover object-left-top"} transition-transform duration-500 group-hover:scale-[1.03]`}
                         />
                     </div>
                 )}
