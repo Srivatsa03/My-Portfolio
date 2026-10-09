@@ -74,6 +74,15 @@ function readProject(file: string): Project {
   };
 }
 
+/** The project's own repo under Srivatsa03, if it has a public one. */
+export function repoOf(project: Project): string | null {
+  for (const link of project.links) {
+    const m = link.href.match(/^https:\/\/github\.com\/Srivatsa03\/([^/]+)\/?$/);
+    if (m) return m[1];
+  }
+  return null;
+}
+
 export function getAllProjects(): Project[] {
   if (!fs.existsSync(PROJECTS_DIR)) return [];
   return fs

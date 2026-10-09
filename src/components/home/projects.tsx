@@ -6,13 +6,17 @@ import { BlurFade } from "../ui/blur-fade";
 import { TransitionLink } from "@/components/ui/transition-link";
 import { IconBrush, IconArrowRight } from "@tabler/icons-react";
 import { SectionHeading, headingIconClass } from "@/components/layout/section-heading";
-import { getAllProjects, type Project } from "@/lib/projects";
+import { getAllProjects, repoOf, type Project } from "@/lib/projects";
+import { RepoCard } from "@/components/projects/repo-card";
 
 // Server component: reads the project write-ups in src/content/projects and
 // shows the featured ones. Each card opens that project's own page.
 export default function Projects() {
     const all = getAllProjects();
     const featured = all.filter((p) => p.featured);
+    const repos = all
+        .map((p) => ({ project: p, repo: repoOf(p) }))
+        .filter((r): r is { project: Project; repo: string } => r.repo !== null);
 
     return (
         <div className="flex flex-col">
@@ -33,6 +37,16 @@ export default function Projects() {
                 See all {all.length} projects
                 <IconArrowRight className="h-4 w-4" />
             </TransitionLink>
+
+            <h3 className="mt-14 text-center text-lg font-semibold tracking-tight">On GitHub</h3>
+            <p className="mt-1 text-center text-sm text-muted-foreground">
+                Live stars and forks, refreshed every week.
+            </p>
+            <div className="mx-auto mt-6 grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+                {repos.map(({ project, repo }) => (
+                    <RepoCard key={repo} repo={repo} label={project.title} />
+                ))}
+            </div>
         </div>
     );
 }

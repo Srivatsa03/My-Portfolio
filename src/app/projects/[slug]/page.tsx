@@ -1,4 +1,5 @@
-import { getAllProjects, getProjectBySlug, renderProjectBody } from "@/lib/projects";
+import { getAllProjects, getProjectBySlug, renderProjectBody, repoOf } from "@/lib/projects";
+import { RepoCard } from "@/components/projects/repo-card";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { BlurFade } from "@/components/ui/blur-fade";
@@ -51,6 +52,7 @@ export default async function ProjectPage({ params }: Props) {
   if (!project) notFound();
 
   const parts = await renderProjectBody(project.content);
+  const repo = repoOf(project);
   const all = getAllProjects();
   const next = all[(all.findIndex((p) => p.slug === slug) + 1) % all.length];
 
@@ -91,6 +93,11 @@ export default async function ProjectPage({ params }: Props) {
                     </a>
                   );
                 })}
+              </div>
+            )}
+            {repo && (
+              <div className="mt-8 max-w-[420px]">
+                <RepoCard repo={repo} label={project.title} />
               </div>
             )}
           </header>
