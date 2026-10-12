@@ -2,7 +2,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { IconTool, IconLink, IconCoffee, IconClockHour4, IconMapPin, IconHeart, IconHandClick, IconBrandGithub, IconBrandSpotifyFilled, IconRefresh } from "@tabler/icons-react";
+import { IconTool, IconLink, IconGitMerge, IconGitCommit, IconMapPin, IconHeart, IconHandClick, IconBrandGithub, IconBrandSpotifyFilled, IconRefresh } from "@tabler/icons-react";
 import { Globe } from "@/components/ui/globe";
 import styles from "./dashboard.module.css";
 import { NumberTicker } from "@/components/ui/number-ticker";
@@ -17,7 +17,6 @@ import Image from "next/image";
 import { data } from "@/data/data";
 import { useTheme } from "next-themes";
 import { ScratchToReveal } from "../magicui/scratch-to-reveal";
-import { useWakaTime } from "@/hooks/useWakaTime";
 import { useSpotify } from "@/hooks/useSpotify";
 import { useGitHub } from "@/hooks/useGitHub";
 import { useAlbumColor } from "@/hooks/useAlbumColor";
@@ -28,8 +27,8 @@ import { SpotlightGlow } from "@/components/ui/spotlight-glow";
 
 
 export default function Dashboard() {
-  const { totalHours } = useWakaTime();
-  const totalCoffees = Math.ceil(totalHours / 4);
+  // Real numbers instead of WakaTime, which has no key configured and showed 0.
+  const mergedPRs = data.openSource.filter((pr) => pr.merged).length;
   const { track } = useSpotify();
   const { data: githubData, isLoading: isLoadingGitHub } = useGitHub();
   const [scratchGif, setScratchGif] = useState("");
@@ -162,27 +161,27 @@ export default function Dashboard() {
         </GridItem>
         <GridItem
           area="hours"
-          icon={<IconClockHour4 className={dashboardIconClass} />}
-          title="Hours Coding"
+          icon={<IconGitMerge className={dashboardIconClass} />}
+          title="Merged PRs"
           transitionDuration="800ms"
-          tooltip="Powered by WakaTime"
-          cursorEmoji="🕐"
+          tooltip="Into LiteLLM, LlamaIndex, Pydantic and Haystack"
+          cursorEmoji="🔀"
         >
           <NumberTicker
-            value={totalHours}
+            value={mergedPRs}
             className="whitespace-pre-wrap text-3xl font-semibold tracking-tighter text-muted-foreground"
           />
         </GridItem>
         <GridItem
           area="coffees"
-          icon={<IconCoffee className={dashboardIconClass} />}
-          title="Coffees Drank"
+          icon={<IconGitCommit className={dashboardIconClass} />}
+          title="Contributions"
           transitionDuration="700ms"
-          tooltip="1 Coffee ☕ = 4 Hours Coding"
-          cursorEmoji="☕"
+          tooltip="GitHub contributions, last 7 weeks"
+          cursorEmoji="💻"
         >
           <NumberTicker
-            value={totalCoffees}
+            value={githubData?.totalContributions ?? 0}
             className="whitespace-pre-wrap text-3xl font-semibold tracking-tighter text-muted-foreground"
           />
         </GridItem>

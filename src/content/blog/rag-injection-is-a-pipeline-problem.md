@@ -5,6 +5,7 @@ date: "2026-07-02"
 tags: ["security", "rag", "llm", "open-source"]
 image: "/blog/rag-injection.png"
 imageAlt: "rag-redteam cover: injection is a pipeline problem, not a model one."
+crosspost: "i-tried-to-break-the-three-most-popular-rag-frameworks"
 ---
 
 Everyone tests the model. Almost nobody tests the pipeline that feeds it.

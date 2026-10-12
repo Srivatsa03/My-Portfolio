@@ -9,7 +9,7 @@ imageAlt: "Silent-correctness bugs: ten merged fixes in LLM infrastructure."
 
 The bugs I like are the ones that throw no error. No stack trace, no warning line, just output that is quietly wrong while everything reports success. Those are the ones that survive in production for months, because nothing is on fire.
 
-Here are a few I found and fixed, all solo, in libraries a lot of people build on.
+Here are a few I found and fixed in libraries a lot of people build on.
 
 ## A masker that leaked short secrets
 
@@ -25,4 +25,4 @@ In Pydantic, a `json_schema_extra` dict was silently dropped, and JSON-schema ge
 
 ## The pattern
 
-A 10x embedding price error inflating everyone's cost reports. Parser corruption leaking marker characters into values. The common thread is that correctness bugs hide in the gap between what a warning promises and what the code does. You find them by reading carefully and distrusting the happy path.
+A 10x embedding price error inflating everyone's cost reports. Parser corruption leaking marker characters into values, in a DSPy fix that's still open. The common thread is that correctness bugs hide in the gap between what a warning promises and what the code does. You find them by reading carefully and distrusting the happy path.

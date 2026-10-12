@@ -6,23 +6,17 @@ import OpenSource from "@/components/home/open-source"
 import Terminal from "@/components/home/terminal"
 import Writing from "@/components/home/writing"
 import { BlurFade } from "@/components/ui/blur-fade";
-import { getAllPosts } from "@/lib/blog";
+import { getWriting } from "@/lib/writing";
 
 
 const BLUR_FADE_DELAY = 0.005;
 
+// Medium and Dev.to are re-read at most once an hour.
+export const revalidate = 3600;
+
 export default async function Home() {
-  const recentPosts = getAllPosts()
-    .slice(0, 3)
-    .map((p) => ({
-      slug: p.slug,
-      title: p.title,
-      description: p.description,
-      date: p.date,
-      readingTime: p.readingTime,
-      image: p.image,
-      imageAlt: p.imageAlt,
-    }));
+  // Latest engineering posts; opinion pieces and the full list are on /blog.
+  const writing = (await getWriting()).filter((item) => item.technical).slice(0, 3);
 
   return (
     <div className="relative min-h-screen w-full bg-background">
@@ -54,7 +48,7 @@ export default async function Home() {
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY} inView>
           <section id="writing">
-            <Writing posts={recentPosts} />
+            <Writing items={writing} />
           </section>
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY} inView>

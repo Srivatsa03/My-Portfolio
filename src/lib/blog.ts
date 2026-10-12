@@ -46,6 +46,9 @@ export interface BlogPost {
   image?: string;
   /** Accessible description for the cover image. Defaults to the title. */
   imageAlt?: string;
+  /** URL fragment of the same article on Medium or Dev.to, so the writing
+   *  list shows it once, with links to those copies. */
+  crosspost?: string;
 }
 
 // Extract level-2 and level-3 headings from markdown, skipping code blocks.
@@ -91,6 +94,7 @@ export function getAllPosts(): BlogPost[] {
       headings: extractHeadings(content),
       image: data.image,
       imageAlt: data.imageAlt,
+      crosspost: data.crosspost,
     };
   });
 
@@ -120,5 +124,6 @@ export function getPostBySlug(slug: string): BlogPost | null {
     headings: extractHeadings(content),
     image: data.image,
     imageAlt: data.imageAlt,
+    crosspost: data.crosspost,
   };
 }

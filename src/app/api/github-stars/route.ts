@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 // Full repo path "owner/name". Defaults to this portfolio's repo.
-const GITHUB_REPO = process.env.GITHUB_REPO ?? 'Srivatsa03/portfolio-website';
+const GITHUB_REPO = process.env.GITHUB_REPO ?? 'Srivatsa03/My-Portfolio';
 
 interface RepoResponse {
   stargazers_count: number;

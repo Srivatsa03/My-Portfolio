@@ -58,7 +58,7 @@ export default function OpenSource() {
       <BlurFade delay={0.05} inView>
         <div className="mb-7 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
           <Stat value={10} label="merged" />
-          <Stat value={3} label="open" />
+          <Stat value={4} label="open" />
           <Stat value={164} suffix="K★" label="combined stars" />
           <Stat value={4} label="projects merged into" />
         </div>

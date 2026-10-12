@@ -229,6 +229,15 @@ export const data = {
     {
       repo: "BerriAI/litellm",
       stars: "57k+",
+      status: "PR #45970 · open",
+      merged: false,
+      title: "Adding per-team cumulative token budgets",
+      body: "LiteLLM caps a team's spend in dollars, but a dollar cap drifts the moment a team mixes models priced differently per token. This feature lets a team cap tokens over a window, built to mirror the existing dollar budget: a nullable cap, an accumulator, and the same reset window and enforcement path. Teams without one are untouched. +420 / -15 across 22 files. Open.",
+      link: "https://github.com/BerriAI/litellm/pull/45970",
+    },
+    {
+      repo: "BerriAI/litellm",
+      stars: "57k+",
       status: "PR #38164 · open",
       merged: false,
       title: "Fixing a cost-based routing tie that ignores cache-read price",
