@@ -5,7 +5,7 @@ export const data = {
     {
       image: "/experience/uic.png",
       company: "University of Illinois Chicago",
-      role: "Research Specialist",
+      role: "Software Developer",
       date: "Aug 2026 - Present",
       location: "Chicago, IL",
       description:
@@ -16,7 +16,7 @@ export const data = {
     {
       image: "/experience/uic.png",
       company: "University of Illinois Chicago",
-      role: "IT Technical Associate",
+      role: "Software Developer",
       date: "Sep 2024 - May 2026",
       location: "Chicago, IL",
       description:
