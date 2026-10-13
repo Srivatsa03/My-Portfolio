@@ -229,8 +229,17 @@ export const Footer = () => {
                     <p className="text-xs text-muted-foreground leading-none">
                         &copy; {new Date().getFullYear()} Srivatsa Kamballa. All rights reserved.
                     </p>
-                    <p className="text-xs text-muted-foreground leading-none">
-                        Built with ❤️ using React, Next.js and Tailwind
+                    <p className="text-xs text-muted-foreground leading-none text-center">
+                        Built with ❤️ using React, Next.js and Tailwind ·{" "}
+                        <a
+                            href="https://googlefonts.github.io/noto-emoji-animation/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline-offset-2 hover:text-foreground hover:underline"
+                        >
+                            Animated emoji by Google Noto
+                        </a>{" "}
+                        (CC BY 4.0)
                     </p>
                 </div>
             </div>

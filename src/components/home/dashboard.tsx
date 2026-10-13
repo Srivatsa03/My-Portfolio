@@ -1,7 +1,7 @@
 
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { IconTool, IconLink, IconGitMerge, IconGitCommit, IconMapPin, IconHeart, IconHandClick, IconBrandGithub, IconBrandSpotifyFilled, IconRefresh } from "@tabler/icons-react";
+import { IconTool, IconLink, IconGitMerge, IconGitCommit, IconMapPin, IconHeart, IconHandClick, IconBrandGithub, IconBrandSpotifyFilled } from "@tabler/icons-react";
 import { Globe } from "@/components/ui/globe";
 import styles from "./dashboard.module.css";
 import { NumberTicker } from "@/components/ui/number-ticker";
@@ -15,7 +15,7 @@ import {
 import Image from "next/image";
 import { data } from "@/data/data";
 import { useTheme } from "next-themes";
-import { ScratchToReveal } from "../magicui/scratch-to-reveal";
+import { ScratchCard } from "./scratch-card";
 import { useSpotify } from "@/hooks/useSpotify";
 import { useGitHub } from "@/hooks/useGitHub";
 import { useAlbumColor } from "@/hooks/useAlbumColor";
@@ -30,26 +30,9 @@ export default function Dashboard() {
   const mergedPRs = data.openSource.filter((pr) => pr.merged).length;
   const { track } = useSpotify();
   const { data: githubData, isLoading: isLoadingGitHub } = useGitHub();
-  const [scratchGif, setScratchGif] = useState("");
   const spotlightColor = useAlbumColor(track?.albumImageUrl || null);
 
   const dashboardIconClass = "h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-primary";
-
-  useEffect(() => {
-    // Randomly select a GIF on mount
-    const randomGif = data.scratchGifs[Math.floor(Math.random() * data.scratchGifs.length)];
-    setScratchGif(randomGif);
-  }, []);
-
-  const pickNewGif = () => {
-    const availableGifs = data.scratchGifs.filter(gif => gif !== scratchGif);
-    const randomGif = availableGifs[Math.floor(Math.random() * availableGifs.length)];
-    setScratchGif(randomGif);
-  };
-
-  const handleScratchComplete = () => {
-    pickNewGif();
-  };
 
   return (
     <div className="flex flex-col w-full">
@@ -118,6 +101,7 @@ export default function Dashboard() {
           title="Connect"
           transitionDuration="500ms"
           cursorEmoji="🔗"
+          grow
         >
           <ContactMe />
         </GridItem>
@@ -126,37 +110,9 @@ export default function Dashboard() {
           icon={<IconHandClick className={dashboardIconClass} />}
           title="Scratch Me"
           transitionDuration="600ms"
+          grow
         >
-          <div className="relative">
-            <ScratchToReveal
-              minScratchPercentage={20}
-              className="flex items-center h-24 sm:h-35 justify-center overflow-hidden rounded-2xl bg-foreground/[0.05]"
-              gradientColors={["#A97CF933", "#F38CB933", "#FDCC9233"]}
-              onComplete={handleScratchComplete}
-              resetKey={scratchGif}
-            >
-              {scratchGif && (
-                <Image
-                  src={scratchGif}
-                  alt="Scratch to reveal"
-                  width={100}
-                  height={100}
-                  className="h-14 sm:h-16 object-contain"
-                  unoptimized
-                />
-              )}
-            </ScratchToReveal>
-            <button
-              type="button"
-              onClick={pickNewGif}
-              onMouseDown={(e) => e.stopPropagation()}
-              onTouchStart={(e) => e.stopPropagation()}
-              aria-label="Refresh scratch"
-              className="absolute top-1 right-1 z-10 p-1 rounded-md text-muted-foreground hover:text-primary hover:bg-foreground/10 transition-colors group"
-            >
-              <IconRefresh className="h-4 w-4 transition-transform group-hover:rotate-180 duration-300" />
-            </button>
-          </div>
+          <ScratchCard />
         </GridItem>
         <GridItem
           area="hours"
@@ -228,9 +184,11 @@ interface GridItemProps {
   transitionDuration?: string;
   tooltip?: string;
   cursorEmoji?: string;
+  /** Let the content fill the tile instead of sitting at the bottom. */
+  grow?: boolean;
 }
 
-const GridItem = ({ area, icon, title, children, transitionDuration = "300ms", tooltip, cursorEmoji }: GridItemProps) => {
+const GridItem = ({ area, icon, title, children, transitionDuration = "300ms", tooltip, cursorEmoji, grow }: GridItemProps) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const itemRef = useRef<HTMLLIElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -283,7 +241,7 @@ const GridItem = ({ area, icon, title, children, transitionDuration = "300ms", t
               </h3>
             </div>
           </div>
-          <div>{children}</div>
+          <div className={grow ? "relative flex min-h-0 flex-1 flex-col" : undefined}>{children}</div>
         </div>
       </div>
     </li>
@@ -325,7 +283,8 @@ const GridItem = ({ area, icon, title, children, transitionDuration = "300ms", t
 
 const ContactMe = () => {
   return (
-    <div className="flex flex-col gap-4 sm:p-4">
+    // Centered on phones, where the tile runs three rows tall.
+    <div className="flex flex-1 flex-col justify-center gap-4 sm:p-4 min-[700px]:justify-end">
       {data.contact.map(({ href, label, icon, aria }) => (
         <a
           key={label}

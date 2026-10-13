@@ -510,49 +510,111 @@ html:not(.dark) {
   background: color-mix(in oklab, var(--foreground) 6%, transparent);
 }
 
-/* Wallpaper palette. Light is airy pastel; dark is deep indigo with the
- * folds kept moody so text on glass stays readable. */
+/* Wallpaper palette. A soft mesh of color as the base, then glossy shapes:
+ * four sphere tones (each lit -hi, mid, and a deep -lo edge), a ribbon and a
+ * ring. Shadows use a deep hue of the palette, never black. */
 :root {
-  --wp-base-1: #e9eeff;
-  --wp-base-2: #fbeef8;
-  --wp-glow-1: #b9d0ff;
-  --wp-glow-2: #ffc9e4;
-  --wp-a1: #6f97ff;
-  --wp-a2: #a07bff;
-  --wp-b1: #ff86b8;
-  --wp-b2: #ffbf80;
-  --wp-c1: #5fd8c9;
-  --wp-c2: #7aa6ff;
-  --wp-d1: #ffc2e0;
-  --wp-d2: #a98aff;
-  --wp-shadow: #4b4fa8;
-  --wp-strength: 0.8;
-  --wp-gloss: 0.7;
+  --wp-base-1: #eef1fb;
+  --wp-base-2: #f7eff8;
+  --wp-1: rgb(128 160 255 / 0.5);
+  --wp-2: rgb(196 156 255 / 0.45);
+  --wp-3: rgb(255 168 204 / 0.4);
+  --wp-4: rgb(120 220 205 / 0.38);
+  --wp-5: rgb(255 204 150 / 0.36);
+  --wp-6: rgb(255 255 255 / 0.3);
+
+  --wp-a-hi: #ffe0f6;
+  --wp-a: #b98bff;
+  --wp-a-lo: #6b55f0;
+  --wp-b-hi: #d4fff6;
+  --wp-b: #56d0c0;
+  --wp-b-lo: #2b7fd6;
+  --wp-c-hi: #fff4cf;
+  --wp-c: #ffbd66;
+  --wp-c-lo: #ff7a62;
+  --wp-d-hi: #ffe1ec;
+  --wp-d: #ff8ab5;
+  --wp-d-lo: #d9508f;
+  --wp-r1: #7da4ff;
+  --wp-r2: #ad8bff;
+  --wp-r3: #ff9bc6;
+  --wp-ring-1: #8cb2ff;
+  --wp-ring-2: #ffb0d6;
+  --wp-shade: #5a52c8;
+  --wp-shadow-strength: 0.28;
+  --wp-gloss: 0.75;
+  --wp-veil: rgb(255 255 255 / 0.12);
+  --wp-grain: 0.05;
 }
 
 .dark {
-  --wp-base-1: #0c1236;
-  --wp-base-2: #170c30;
-  --wp-glow-1: #2140a8;
-  --wp-glow-2: #6a1e63;
-  --wp-a1: #2f5be6;
-  --wp-a2: #6a3be0;
-  --wp-b1: #c02a72;
-  --wp-b2: #e0782c;
-  --wp-c1: #10a091;
-  --wp-c2: #2a64e8;
-  --wp-d1: #e0589e;
-  --wp-d2: #5b35c8;
-  --wp-shadow: #02030c;
-  --wp-strength: 0.82;
+  --wp-base-1: #0a0e24;
+  --wp-base-2: #110c2a;
+  --wp-1: rgb(52 92 255 / 0.4);
+  --wp-2: rgb(132 70 255 / 0.36);
+  --wp-3: rgb(236 72 153 / 0.24);
+  --wp-4: rgb(20 170 160 / 0.22);
+  --wp-5: rgb(255 140 60 / 0.14);
+  --wp-6: rgb(88 80 220 / 0.14);
+
+  --wp-a-hi: #e4a6ff;
+  --wp-a: #7a46f0;
+  --wp-a-lo: #2a1880;
+  --wp-b-hi: #8ef2e2;
+  --wp-b: #109d92;
+  --wp-b-lo: #0a3f78;
+  --wp-c-hi: #ffe3a6;
+  --wp-c: #f59a3c;
+  --wp-c-lo: #a8380c;
+  --wp-d-hi: #ffb0cf;
+  --wp-d: #d63f7c;
+  --wp-d-lo: #66123c;
+  --wp-r1: #2f5ff0;
+  --wp-r2: #6c3fe6;
+  --wp-r3: #d4407f;
+  --wp-ring-1: #4a78ff;
+  --wp-ring-2: #b44cf5;
+  --wp-shade: #050820;
+  --wp-shadow-strength: 0.55;
   --wp-gloss: 0.5;
+  --wp-veil: rgb(6 8 26 / 0.3);
+  --wp-grain: 0.07;
 }
 
-.liquid-wallpaper-veil {
-  background: radial-gradient(120% 90% at 50% 0%, rgb(255 255 255 / 0.3), transparent 65%);
+.liquid-wallpaper {
+  background-color: var(--wp-base-1);
+  background-image:
+    radial-gradient(48% 58% at 6% 8%, var(--wp-1), transparent 100%),
+    radial-gradient(46% 54% at 94% 4%, var(--wp-2), transparent 100%),
+    radial-gradient(40% 50% at 100% 58%, var(--wp-3), transparent 100%),
+    radial-gradient(50% 52% at 2% 96%, var(--wp-4), transparent 100%),
+    radial-gradient(44% 46% at 72% 104%, var(--wp-5), transparent 100%),
+    radial-gradient(60% 50% at 50% 42%, var(--wp-6), transparent 100%),
+    linear-gradient(165deg, var(--wp-base-1), var(--wp-base-2));
 }
-.dark .liquid-wallpaper-veil {
-  background: radial-gradient(120% 90% at 50% 20%, rgb(6 8 24 / 0.2), rgb(6 8 24 / 0.45));
+
+/* Landscape and portrait compositions, so phones still see the shapes. */
+.liquid-wallpaper-wide {
+  display: none;
+}
+@media (min-aspect-ratio: 1/1) {
+  .liquid-wallpaper-wide {
+    display: block;
+  }
+  .liquid-wallpaper-tall {
+    display: none;
+  }
+}
+
+/* Keeps text that sits straight on the wallpaper readable. */
+.liquid-wallpaper-veil {
+  background: var(--wp-veil);
+}
+
+/* Fine grain hides the banding that wide, dark gradients show on 8-bit panels. */
+.liquid-wallpaper-grain {
+  opacity: var(--wp-grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 body {

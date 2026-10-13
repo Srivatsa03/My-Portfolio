@@ -100,8 +100,25 @@ export const data = {
     },
   ],
 
-  scratchGifs: [
-    "/scratch/terminal.svg",
+  // Scratch card deck. `emoji` is a Noto animated emoji codepoint (Google,
+  // CC BY 4.0, credited in the footer); one card is drawn per scratch.
+  scratchCards: [
+    { emoji: "1f41b", name: "Bug", line: "Not a bug. A surprise feature." },
+    { emoji: "1f525", name: "Fire", line: "Prod is fine. Probably." },
+    { emoji: "2615", name: "Coffee", line: "Powered by coffee and retries." },
+    { emoji: "1f648", name: "See-no-evil monkey", line: "I didn't see that stack trace." },
+    { emoji: "1f916", name: "Robot", line: "Have you tried turning it off and on?" },
+    { emoji: "1fae0", name: "Melting face", line: "Me reading YAML at 2 AM." },
+    { emoji: "1f92f", name: "Mind blown", line: "It worked on my machine." },
+    { emoji: "1f973", name: "Party face", line: "Tests passed first try. Suspicious." },
+    { emoji: "1f47b", name: "Ghost", line: "Boo. I'm a zombie process." },
+    { emoji: "1f422", name: "Turtle", line: "Still waiting on CI." },
+    { emoji: "1f913", name: "Nerd face", line: "Well, actually, it's a race condition." },
+    { emoji: "1f634", name: "Sleeping face", line: "On call. Pager's quiet. For now." },
+    { emoji: "1fae1", name: "Saluting face", line: "Rolling back. Respectfully." },
+    { emoji: "1f921", name: "Clown", line: "Me saying it'd take an hour." },
+    { emoji: "1f62d", name: "Crying face", line: "Merge conflict in the lockfile." },
+    { emoji: "1f431", name: "Cat", line: "The cat pushed to main." },
   ],
 
   tools: [
