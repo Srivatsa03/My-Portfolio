@@ -1,7 +1,6 @@
 
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { IconTool, IconLink, IconGitMerge, IconGitCommit, IconMapPin, IconHeart, IconHandClick, IconBrandGithub, IconBrandSpotifyFilled, IconRefresh } from "@tabler/icons-react";
 import { Globe } from "@/components/ui/globe";
 import styles from "./dashboard.module.css";
@@ -131,7 +130,7 @@ export default function Dashboard() {
           <div className="relative">
             <ScratchToReveal
               minScratchPercentage={20}
-              className="flex items-center h-24 sm:h-35 justify-center overflow-hidden rounded-md bg-background"
+              className="flex items-center h-24 sm:h-35 justify-center overflow-hidden rounded-2xl bg-foreground/[0.05]"
               gradientColors={["#A97CF933", "#F38CB933", "#FDCC9233"]}
               onComplete={handleScratchComplete}
               resetKey={scratchGif}
@@ -153,7 +152,7 @@ export default function Dashboard() {
               onMouseDown={(e) => e.stopPropagation()}
               onTouchStart={(e) => e.stopPropagation()}
               aria-label="Refresh scratch"
-              className="absolute top-1 right-1 z-10 p-1 rounded-md text-muted-foreground hover:text-primary hover:bg-background/60 transition-colors group"
+              className="absolute top-1 right-1 z-10 p-1 rounded-md text-muted-foreground hover:text-primary hover:bg-foreground/10 transition-colors group"
             >
               <IconRefresh className="h-4 w-4 transition-transform group-hover:rotate-180 duration-300" />
             </button>
@@ -169,7 +168,7 @@ export default function Dashboard() {
         >
           <NumberTicker
             value={mergedPRs}
-            className="whitespace-pre-wrap text-3xl font-semibold tracking-tighter text-muted-foreground"
+            className="whitespace-pre-wrap text-4xl font-semibold tracking-tighter text-foreground"
           />
         </GridItem>
         <GridItem
@@ -182,7 +181,7 @@ export default function Dashboard() {
         >
           <NumberTicker
             value={githubData?.totalContributions ?? 0}
-            className="whitespace-pre-wrap text-3xl font-semibold tracking-tighter text-muted-foreground"
+            className="whitespace-pre-wrap text-4xl font-semibold tracking-tighter text-foreground"
           />
         </GridItem>
         <GridItem
@@ -271,25 +270,15 @@ const GridItem = ({ area, icon, title, children, transitionDuration = "300ms", t
         ...(cursorEmoji ? { cursor: "none" } : {}),
       }}
     >
-      <div className="relative mx-auto h-full rounded-xl border p-2 md:rounded-2xl md:p-2">
-        <GlowingEffect
-          spread={40}
-          glow={true}
-          disabled={false}
-          proximity={64}
-          inactiveZone={0.01}
-        />
+      <div className="h-full">
         <div
-          className="group/glow relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-lg border-0.75 p-4 shadow-[0px_0px_12px_0px_#ebecf0] dark:shadow-[0px_0px_27px_0px_#2D2D2D] bg-background transition-all"
-          style={{
-            transitionDuration,
-          }}
+          className="glass glass-hover group/glow relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-[1.75rem] p-4 sm:p-5"
         >
           <SpotlightGlow />
           <div className="relative flex flex-row items-center gap-2 sm:gap-3">
             <div className="pt-0">{icon}</div>
             <div className="space-y-2">
-              <h3 className="text-sm sm:text-md md:text-base tracking-tight text-start font-semibold text-black dark:text-white">
+              <h3 className="text-sm sm:text-md md:text-base tracking-tight text-start font-semibold text-foreground">
                 {title}
               </h3>
             </div>
@@ -473,9 +462,7 @@ const ToolsMarquee = () => {
     icon: `/tools/${icon}${themeDependent && currentTheme === "dark" ? "-dark" : ""}.svg`,
   }));
   return (
-    <div className="relative overflow-hidden">
-      <div className="fade-mask-left transition-all duration-400" />
-      <div className="fade-mask-right transition-all duration-400" />
+    <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_18%,#000_82%,transparent)]">
       <Marquee pauseOnHover className="[--duration:20s]">
         <div className="flex items-center gap-6">
           {processedToolsData.map(({ name, icon }) => (

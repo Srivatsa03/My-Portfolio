@@ -5,7 +5,8 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { data } from "@/data/data";
-import Image from "next/image";
+import { LiquidWallpaper } from "@/components/layout/liquid-wallpaper";
+import { LiquidFilters } from "@/components/layout/liquid-filters";
 import { Analytics } from "@vercel/analytics/next";
 import { CommandPalette } from "@/components/command-palette/command-palette";
 import { getAllPosts } from "@/lib/blog";
@@ -85,18 +86,10 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} ${pacifico.variable} antialiased relative`}
         >
           <ThemeProvider attribute="class" defaultTheme="dark">
+            <LiquidWallpaper />
+            <LiquidFilters />
             <Navbar navItems={data.nav} />
             <CommandPalette posts={palettePosts} projects={paletteProjects} />
-            <Image
-              src="/layout/background-ellipse3.svg"
-              alt=""
-              fill={false}
-              width={0}
-              height={0}
-              className="z-1 blur-lg absolute max-w-5xl top-0 left-1/2 transform -translate-x-1/2 -translate-y-5/9 w-full pointer-events-none select-none"
-              aria-hidden="true"
-              priority
-            />
             {children}
             <Footer />
           </ThemeProvider>

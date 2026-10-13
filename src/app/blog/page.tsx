@@ -27,7 +27,7 @@ export default async function BlogPage() {
         <BlurFade delay={0.005} inView>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+            className="glass glass-hover mb-8 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground"
           >
             <IconArrowLeft className="h-4 w-4" />
             Back home
@@ -47,18 +47,18 @@ export default async function BlogPage() {
         {items.length === 0 ? (
           <p className="text-muted-foreground">No posts yet. Check back soon.</p>
         ) : (
-          <ul className="flex flex-col divide-y divide-border/60">
+          <ul className="flex flex-col gap-4">
             {items.map((item) => (
-              <li key={item.key} className="py-8 first:pt-0">
+              <li key={item.key} className="glass glass-hover rounded-[1.75rem] p-3 sm:p-4">
                 <WritingLink item={item} className="group flex items-start gap-4 sm:gap-5">
                   {item.cover && (
-                    <div className="relative aspect-video w-24 shrink-0 overflow-hidden rounded-md border border-border/60 bg-muted sm:w-40">
+                    <div className="relative aspect-video w-24 shrink-0 overflow-hidden rounded-[1.1rem] bg-foreground/5 sm:w-40">
                       <WritingCover item={item} sizes="(max-width: 640px) 96px, 160px" />
                     </div>
                   )}
-                  <div className="min-w-0 flex-1">
-                    <WritingTitle item={item} className="mb-2 text-xl font-semibold tracking-tight text-primary sm:text-2xl" />
-                    <p className="leading-relaxed text-muted-foreground">{item.description}</p>
+                  <div className="min-w-0 flex-1 sm:pt-1">
+                    <WritingTitle item={item} className="mb-2 text-lg font-semibold tracking-tight text-foreground sm:text-xl" />
+                    <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{item.description}</p>
                   </div>
                 </WritingLink>
                 <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground sm:pl-[11.25rem]">

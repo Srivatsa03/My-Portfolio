@@ -68,14 +68,14 @@ export default function Experience() {
         </SectionHeading>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {/* AWS certification */}
-          <div className="group/glow relative overflow-hidden rounded-lg border bg-background p-4 transition-all duration-400 hover:shadow-md">
+          <div className="glass glass-hover group/glow relative overflow-hidden rounded-[1.5rem] p-5">
             <SpotlightGlow />
             <div className="flex items-start gap-3">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-md border bg-white/95 p-1.5">
+              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white p-1.5">
                 <Image src="/tools/aws.svg" alt="AWS" width={40} height={40} className="h-full w-full object-contain" />
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-bold leading-snug text-primary sm:text-base">
+                <p className="text-sm font-bold leading-snug text-foreground sm:text-base">
                   AWS Certified Solutions Architect &ndash; Associate
                 </p>
                 <p className="mt-0.5 text-xs text-muted-foreground">Amazon Web Services &middot; Issued 2026</p>
@@ -87,14 +87,14 @@ export default function Experience() {
           </div>
 
           {/* Patent */}
-          <div className="group/glow relative overflow-hidden rounded-lg border bg-background p-4 transition-all duration-400 hover:shadow-md">
+          <div className="glass glass-hover group/glow relative overflow-hidden rounded-[1.5rem] p-5">
             <SpotlightGlow />
             <div className="flex items-start gap-3">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-md border bg-secondary">
+              <div className="glass-chip grid h-11 w-11 shrink-0 place-items-center rounded-xl">
                 <IconAward className="h-6 w-6 text-violet-500 dark:text-violet-400" />
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-bold leading-snug text-primary sm:text-base">
+                <p className="text-sm font-bold leading-snug text-foreground sm:text-base">
                   Book Issue Management System for Libraries
                 </p>
                 <p className="mt-0.5 text-xs text-muted-foreground">
@@ -108,14 +108,14 @@ export default function Experience() {
           </div>
 
           {/* Research paper */}
-          <div className="group/glow relative overflow-hidden rounded-lg border bg-background p-4 transition-all duration-400 hover:shadow-md">
+          <div className="glass glass-hover group/glow relative overflow-hidden rounded-[1.5rem] p-5">
             <SpotlightGlow />
             <div className="flex items-start gap-3">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-md border bg-secondary">
+              <div className="glass-chip grid h-11 w-11 shrink-0 place-items-center rounded-xl">
                 <IconMicroscope className="h-6 w-6 text-violet-500 dark:text-violet-400" />
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-bold leading-snug text-primary sm:text-base">
+                <p className="text-sm font-bold leading-snug text-foreground sm:text-base">
                   PSBayes: Bayesian Residual-Risk for Fuzzing
                 </p>
                 <p className="mt-0.5 text-xs text-muted-foreground">
@@ -160,12 +160,12 @@ export const ExperienceItem = ({
       height={100}
       alt={`${company} logo`}
       priority
-      className="h-8 w-8 rounded-sm sm:h-10 sm:w-10 sm:rounded-md mt-1"
+      className="h-8 w-8 rounded-lg sm:h-10 sm:w-10 sm:rounded-xl mt-1"
     />
   );
 
   return (
-    <div className="group/glow relative overflow-hidden p-4 border rounded-xl sm:rounded-lg bg-background transition-all duration-400">
+    <div className="glass glass-hover group/glow relative overflow-hidden rounded-[1.5rem] p-5">
       <SpotlightGlow />
       <div className="flex flex-row space-x-2">
         {href ? (
@@ -182,7 +182,7 @@ export const ExperienceItem = ({
           logo
         )}
         <div className="flex flex-col mb-2">
-          <p className="font-bold tracking-tight leading-normal text-balance text-sm sm:text-base text-primary">
+          <p className="font-bold tracking-tight leading-normal text-balance text-sm sm:text-base text-foreground">
             {role}
             <span className="mx-1"> • </span>
             {company}

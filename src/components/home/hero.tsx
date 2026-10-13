@@ -4,11 +4,7 @@ import Image from "next/image";
 import profilePic from "@/images/profile-color.jpg"
 import profilePicHover from "@/images/profile-color.jpg"
 import { AnimatedName } from "@/components/ui/animated-name";
-import { BackgroundGradient } from "@/components/ui/background-gradient";
-import { HeroConstellation } from "@/components/ui/hero-constellation"
 import { BlurFade } from "@/components/ui/blur-fade";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
-import { ShimmerBorder } from "@/components/ui/shimmer-border";
 import { IconArrowRight } from "@tabler/icons-react";
 import React, { useRef, useState } from "react";
 import {
@@ -46,25 +42,30 @@ export default function Hero() {
 
     return (
         <div className="pt-32 pb-16 sm:pt-56 relative flex items-center justify-center overflow-hidden">
-            <HeroConstellation desktopDots={300} mobileDots={75} />
             <TooltipProvider>
                 <BlurFade delay={0.005} inView>
                     <div className="relative flex-col space-y-1">
                         <div className="relative flex flex-col items-center justify-center">
-                            <BackgroundGradient className="z-50 h-24 w-24 sm:w-28 sm:h-28 md:w-28 md:h-28 ">
-                                <Image
-                                    src={profilePic}
-                                    alt="Profile Picture"
-                                    priority
-                                    className="absolute inset-0 h-full w-full rounded-full object-cover object-[50%_15%] grayscale transition-opacity duration-200 opacity-100 group-hover:opacity-0"
-                                />
-                                <Image
-                                    src={profilePicHover}
-                                    alt="Profile Picture Hover"
-                                    className="absolute inset-0 h-full w-full rounded-full object-cover object-[50%_15%] transition-opacity duration-200 opacity-0 group-hover:opacity-100"
-                                />
-                            </BackgroundGradient>
-                            <ShimmerButton onClick={handleShimmerButtonClick} className="z-50 mt-8">
+                            <div className="glass group z-50 h-28 w-28 rounded-full p-1.5 sm:h-32 sm:w-32">
+                                <div className="relative h-full w-full overflow-hidden rounded-full">
+                                    <Image
+                                        src={profilePic}
+                                        alt="Profile Picture"
+                                        priority
+                                        className="absolute inset-0 h-full w-full rounded-full object-cover object-[50%_15%] grayscale transition-opacity duration-200 opacity-100 group-hover:opacity-0"
+                                    />
+                                    <Image
+                                        src={profilePicHover}
+                                        alt="Profile Picture Hover"
+                                        className="absolute inset-0 h-full w-full rounded-full object-cover object-[50%_15%] transition-opacity duration-200 opacity-0 group-hover:opacity-100"
+                                    />
+                                </div>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={handleShimmerButtonClick}
+                                className="glass glass-hover z-50 mt-7 flex items-center rounded-full px-3.5 py-1.5"
+                            >
                                 <div className="z-50 relative flex items-center justify-center">
                                     <div
                                         className={`absolute h-1.5 w-1.5 rounded-full border-1 ${dotColor === "green"
@@ -79,48 +80,48 @@ export default function Hero() {
                                             } mr-2`}
                                     ></div>
                                 </div>
-                                <span className="whitespace-pre-wrap text-center font-semibold leading-none text-muted-foreground text-xs sm:text-base py-[0.5]">
+                                <span className="whitespace-pre-wrap text-center text-xs font-semibold leading-none text-foreground/80 sm:text-sm">
                                     {status}
                                 </span>
-                            </ShimmerButton>
+                            </button>
                         </div>
                         <div className="w-full space-y-6">
                             <BlurFade delay={0.005 * 1} inView>
                                 <p className="z-50 subpixel-antialiased leading-[1.8] text-5xl sm:text-7xl font-bold text-center whitespace-nowrap">
-                                    <span className="inline-block pb-2 bg-gradient-to-b from-zinc-200 dark:from-zinc-50 to-zinc-950 dark:to-zinc-300 bg-clip-text text-transparent">
+                                    <span className="inline-block pb-2 bg-gradient-to-b from-zinc-700 to-zinc-950 dark:from-white dark:to-zinc-300 bg-clip-text text-transparent">
                                         Hi. I&#39;m{" "}
                                         <AnimatedName className="font-script font-normal text-[1.05em] leading-none align-baseline" />
                                     </span>
                                 </p>
-                                <p className="text-base subpixel-antialiased tracking-tight font-medium sm:text-2xl text-center text-secondary-foreground">
+                                <p className="text-base subpixel-antialiased tracking-tight font-medium sm:text-2xl text-center text-foreground/85">
                                     A Software Engineer who{" "}
-                                    <span className="font-script font-normal text-[1.05em] leading-none align-baseline text-secondary-foreground">
+                                    <span className="font-script font-normal text-[1.05em] leading-none align-baseline">
                                         breaks what he builds
                                     </span>
                                     .
                                 </p>
                             </BlurFade>
                             <BlurFade delay={0.005 * 2} direction="down" inView>
-                                <div className="z-50 flex flex-row items-center justify-center gap-5">
-                                    <ContactIcons wiggleIcon={wiggleIcon} handleIconClick={handleIconClick} />
-                                    <span className="h-5 w-px bg-zinc-300/60 dark:bg-zinc-700/60" aria-hidden />
+                                <div className="z-50 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                                    <div className="glass rounded-full px-5 py-2.5">
+                                        <ContactIcons wiggleIcon={wiggleIcon} handleIconClick={handleIconClick} />
+                                    </div>
                                     <a
                                         ref={ctaRef}
                                         onMouseMove={handleCtaMove}
                                         href="#projects"
-                                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-zinc-300/60 dark:border-zinc-700/60 bg-background/40 backdrop-blur-sm px-4 py-1.5 text-sm font-medium text-secondary-foreground transition-colors hover:text-foreground"
+                                        className="glass-tint glass-hover group inline-flex items-center gap-2 overflow-hidden rounded-full px-5 py-2.5 text-sm font-semibold"
                                     >
                                         <span
                                             aria-hidden
-                                            className="pointer-events-none absolute inset-0 rounded-full text-foreground opacity-0 transition-opacity duration-300 group-hover:opacity-20"
+                                            className="pointer-events-none absolute inset-0 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-30"
                                             style={{
                                                 background:
-                                                    "radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), currentColor, transparent 60%)",
+                                                    "radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), white, transparent 60%)",
                                             }}
                                         />
                                         <span className="relative">View my work</span>
                                         <IconArrowRight className="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                                        <ShimmerBorder />
                                     </a>
                                 </div>
                             </BlurFade>
@@ -151,7 +152,7 @@ const getStatus = () => {
 
 
 const iconClass = (label: string, wiggleIcon: string | null) =>
-    `text-secondary-foreground ${wiggleIcon === label.toLowerCase()
+    `text-foreground/80 hover:text-foreground ${wiggleIcon === label.toLowerCase()
         ? "animate-wiggle scale-150 transition-transform duration-200"
         : ""
     } hover:scale-130 hover:animate-wiggle transition-transform duration-300`;
@@ -164,7 +165,7 @@ function ContactIcons({
     handleIconClick: (label: string) => void;
 }) {
     return (
-        <div className="flex flex-row items-center justify-center space-x-6">
+        <div className="flex flex-row items-center justify-center space-x-5">
             {data.contact
                 .map(link => (
                     <Tooltip key={link.label}>

@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import { RainbowButton } from "@/components/magicui/rainbow-button";
 import { IconRss, IconSend, IconBrandGithub, IconStar } from "@tabler/icons-react";
 import { AnimatePresence, motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
@@ -76,8 +74,8 @@ export const Footer = () => {
     const handleLogoClick = () => router.push("/");
 
     return (
-        <footer className="relative w-full bg-background text-secondary-foreground overflow-hidden">
-            <div className="relative z-10 mx-auto flex max-w-5xl flex-col px-4 pt-20 sm:pt-28">
+        <footer className="relative w-full text-foreground overflow-hidden">
+            <div className="relative z-10 mx-auto flex max-w-5xl flex-col px-4 pt-20 pb-6 sm:pt-28">
                 {/* CTA */}
                 <div className="flex flex-col items-center justify-center mb-16 sm:mb-24">
                     <h2 className="mx-16 sm:mx-none text-center text-pretty text-3xl sm:text-4xl font-bold mb-8">
@@ -98,12 +96,9 @@ export const Footer = () => {
                     <a
                         href="mailto:srivatsakamballa02@gmail.com"
                         onClick={handleSendClick}
-                        className="group inline-block active:scale-95 transition-transform duration-150"
+                        className="group inline-block"
                     >
-                        <RainbowButton
-                            variant="default"
-                            className="overflow-visible pl-5 pr-6 sm:pl-7 sm:pr-8 before:transition-[width,height,bottom,filter] before:duration-300 hover:before:w-4/5 hover:before:h-1/3 hover:before:bottom-[-35%] hover:before:[filter:blur(1.1rem)]"
-                        >
+                        <span className="glass-tint glass-hover inline-flex items-center gap-2 rounded-full py-3 pl-5 pr-6 text-base font-semibold sm:pl-7 sm:pr-8">
                             <motion.span
                                 aria-hidden
                                 className="inline-flex will-change-transform"
@@ -132,15 +127,15 @@ export const Footer = () => {
                             >
                                 <IconSend className="transition-transform duration-200 group-hover:-rotate-12 group-hover:-translate-y-0.5" />
                             </motion.span>
-                            <p className="tracking-tight">Contact Me</p>
-                        </RainbowButton>
+                            <span className="tracking-tight">Contact Me</span>
+                        </span>
                     </a>
                     <a
                         href={repoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Star this site's repository on GitHub"
-                        className="group mt-6 inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors"
+                        className="glass glass-hover group mt-6 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs text-foreground/80 hover:text-foreground sm:text-sm"
                     >
                         <IconBrandGithub className="h-4 w-4" />
                         <span>This site is open source: star it on GitHub</span>
@@ -150,7 +145,7 @@ export const Footer = () => {
                 </div>
 
                 {/* Links + Logo */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-12 border-t border-border/50 pt-10 pb-8">
+                <div className="glass grid grid-cols-2 gap-8 rounded-[2rem] px-6 pb-8 pt-8 sm:grid-cols-3 sm:gap-12 sm:px-10 sm:pt-10">
                     <div className="col-span-2 sm:col-span-1 flex flex-col items-start gap-3">
                         {mounted && (
                             <AnimatedLogo
@@ -230,7 +225,7 @@ export const Footer = () => {
                 </div>
 
                 {/* Bottom row */}
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between items-center border-t border-border/50 pt-6 pb-6">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between items-center px-4 pt-6 pb-2">
                     <p className="text-xs text-muted-foreground leading-none">
                         &copy; {new Date().getFullYear()} Srivatsa Kamballa. All rights reserved.
                     </p>
@@ -239,16 +234,6 @@ export const Footer = () => {
                     </p>
                 </div>
             </div>
-            <Image
-                src="/layout/background-ellipse3.svg"
-                alt=""
-                fill={false}
-                width={100}
-                height={900}
-                className="absolute bottom-0 blur-md left-1/2 transform -translate-x-1/2 translate-y-3/5 w-auto z-0 pointer-events-none select-none"
-                aria-hidden="true"
-                priority
-            />
         </footer>
     );
 };

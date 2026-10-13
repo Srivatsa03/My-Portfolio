@@ -52,9 +52,12 @@ export function BlurFade({
       filter: `blur(${blur})`,
     },
     visible: {
-      [direction === "left" || direction === "right" ? "x" : "y"]: 0,
+      ...(direction === "left" || direction === "right" ? { x: 0 } : { y: 0 }),
       opacity: 1,
       filter: `blur(0px)`,
+      // A leftover filter, even blur(0px), would stop the glass sheets inside
+      // from seeing the wallpaper behind them.
+      transitionEnd: { filter: "none" },
     },
   };
   const combinedVariants = variant || defaultVariants;

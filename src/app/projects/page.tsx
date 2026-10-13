@@ -29,7 +29,7 @@ export default function ProjectsPage() {
         <BlurFade delay={0.005} inView>
           <Link
             href="/"
-            className="mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="glass glass-hover mb-8 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground"
           >
             <IconArrowLeft className="h-4 w-4" />
             Back home
@@ -47,25 +47,25 @@ export default function ProjectsPage() {
             if (group.length === 0) return null;
             return (
               <section key={category} aria-labelledby={`cat-${category}`}>
-                <h2 id={`cat-${category}`} className="text-xl font-semibold tracking-tight">
+                <h2 id={`cat-${category}`} className="glass inline-flex rounded-full px-4 py-1.5 text-lg font-semibold tracking-tight">
                   {category}
                 </h2>
-                <p className="mt-1 text-sm text-muted-foreground">{blurb}</p>
-                <ul className="mt-6 divide-y divide-border/60">
+                <p className="mt-3 pl-1 text-sm text-muted-foreground">{blurb}</p>
+                <ul className="mt-5 flex flex-col gap-4">
                   {group.map((p) => (
                     <li key={p.slug}>
                       <TransitionLink
                         href={`/projects/${p.slug}`}
-                        className="group flex items-start gap-4 py-6 sm:gap-6"
+                        className="glass glass-hover group flex items-start gap-4 rounded-[1.75rem] p-3 sm:gap-6 sm:p-4"
                       >
                         {p.cover && (
-                          <div className={`relative aspect-[16/10] w-24 shrink-0 overflow-hidden rounded-md border border-border/60 sm:w-40 ${p.coverFit === "contain" ? "bg-white" : ""}`}>
+                          <div className={`relative aspect-[16/10] w-24 shrink-0 overflow-hidden rounded-[1.1rem] sm:w-40 ${p.coverFit === "contain" ? "bg-white" : "bg-foreground/5"}`}>
                             <Image src={p.cover} alt="" fill unoptimized sizes="(max-width: 640px) 96px, 160px" className={p.coverFit === "contain" ? "object-contain p-1" : "object-cover object-left-top"} />
                           </div>
                         )}
-                        <div className="min-w-0 flex-1">
+                        <div className="min-w-0 flex-1 sm:pt-1">
                           <div className="flex items-baseline justify-between gap-4">
-                            <h3 className="text-lg font-semibold tracking-tight text-primary group-hover:underline sm:text-xl">
+                            <h3 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl">
                               {p.title}
                             </h3>
                             <span className="shrink-0 text-xs tabular-nums text-muted-foreground">{p.dates}</span>

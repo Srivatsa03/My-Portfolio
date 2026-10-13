@@ -9,7 +9,7 @@ export function ProjectMedia({ items }: { items: Media[] }) {
     <div className="not-prose my-8 space-y-8">
       {items.map((m) => (
         <figure key={m.src}>
-          <div className="overflow-hidden rounded-lg border border-border/60 bg-white">
+          <div className="overflow-hidden rounded-[1.25rem] bg-white shadow-[0_10px_30px_-12px_rgb(0_0_0/0.35)]">
             <Image
               src={m.src}
               alt={m.alt}

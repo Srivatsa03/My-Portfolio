@@ -37,24 +37,18 @@ export function ModeToggle() {
   };
 
   return (
-    <div className="flex relative items-center mr-4">
-      {/* Sun Icon for Light Mode */}
+    <button
+      type="button"
+      onClick={handleToggle}
+      aria-label="Switch between light and dark mode"
+      className="grid h-8 w-8 place-items-center rounded-full text-foreground/75 transition-colors hover:bg-foreground/[0.08] hover:text-foreground"
+    >
       <IconSun
-        onClick={handleToggle}
-        className={`absolute cursor-pointer h-5 w-5 text-zinc-500 dark:text-zinc-300 dark:hidden hover:text-zinc-950 transition-transform duration-500 ${
-          isToggling ? "animate-spin-grow" : ""
-        }`}
-        aria-label="Switch to Light Mode"
+        className={`h-[18px] w-[18px] dark:hidden ${isToggling ? "animate-spin-grow" : ""}`}
       />
-
-      {/* Moon Icon for Dark Mode */}
       <IconMoonStars
-        onClick={handleToggle}
-        className={`absolute cursor-pointer h-5 w-5 hidden text-zinc-500 dark:block dark:text-zinc-300 hover:text-zinc-50 transition-transform duration-500 ${
-          isToggling ? "animate-spin-grow" : ""
-        }`}
-        aria-label="Switch to Dark Mode"
+        className={`hidden h-[18px] w-[18px] dark:block ${isToggling ? "animate-spin-grow" : ""}`}
       />
-    </div>
+    </button>
   );
 }

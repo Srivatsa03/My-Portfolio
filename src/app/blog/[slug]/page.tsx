@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: Props) {
           <BlurFade delay={0.005} inView>
             <TransitionLink
               href="/blog"
-              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+              className="glass glass-hover mb-8 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground"
             >
               <IconArrowLeft className="h-4 w-4" />
               All posts
@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: Props) {
 
             {post.image && (
               <div
-                className="relative aspect-[16/9] w-full mb-10 overflow-hidden rounded-xl border border-border/60"
+                className="glass relative aspect-[16/9] w-full mb-10 overflow-hidden rounded-[2rem]"
                 style={{ viewTransitionName: `post-image-${slug}` }}
               >
                 <Image
@@ -116,7 +116,7 @@ export default async function BlogPostPage({ params }: Props) {
             </header>
           </BlurFade>
 
-          <BlurFade delay={0.01} inView>
+          <BlurFade delay={0.01} inView className="glass-thick rounded-[2rem] px-5 py-7 sm:px-10 sm:py-10">
             <article
               id="post-article"
               className="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-headings:scroll-mt-[50px] prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl"
@@ -128,7 +128,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         <aside className="hidden xl:block">
           {post.headings.length > 0 && (
-            <div className="sticky top-32 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
+            <div className="glass sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto rounded-[1.5rem] p-5">
               <TableOfContents headings={post.headings} />
             </div>
           )}

@@ -19,7 +19,7 @@ export default async function Home() {
   const writing = (await getWriting()).filter((item) => item.technical).slice(0, 3);
 
   return (
-    <div className="relative min-h-screen w-full bg-background">
+    <div className="relative min-h-screen w-full">
       <div className="mx-auto flex max-w-5xl flex-col space-y-12 sm:space-y-32 px-4">
         <BlurFade delay={BLUR_FADE_DELAY} inView>
           <section id="hero">

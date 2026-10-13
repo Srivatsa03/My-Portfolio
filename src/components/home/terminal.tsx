@@ -57,15 +57,15 @@ export default function Terminal() {
   }, [qi, typed, isMulti, quote]);
 
   return (
-    <div className="mx-auto w-full max-w-3xl overflow-hidden rounded-xl border border-white/10 bg-[#0c0e16] shadow-xl">
-      <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-2.5">
+    <div className="glass-dark mx-auto w-full max-w-3xl overflow-hidden rounded-[1.5rem]">
+      <div className="flex items-center gap-1.5 border-b border-white/[0.08] px-5 py-3">
         <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
         <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
         <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-        <span className="ml-2 font-mono text-xs text-zinc-500">srivatsa@chicago: ~/portfolio</span>
+        <span className="ml-2 font-mono text-xs text-zinc-400">srivatsa@chicago: ~/portfolio</span>
       </div>
 
-      <div className="min-h-[172px] p-4 font-mono text-[13px] leading-relaxed sm:text-sm">
+      <div className="min-h-[172px] px-5 py-4 font-mono text-[13px] leading-relaxed sm:text-sm">
         {isMulti ? (
           quote.map((line, i) => (
             <p key={i} className="text-zinc-100">

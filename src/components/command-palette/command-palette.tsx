@@ -142,7 +142,7 @@ export function CommandPalette({ posts, projects }: CommandPaletteProps) {
             <div
                 aria-hidden
                 onClick={() => setOpen(false)}
-                className="fixed inset-0 z-[6000] bg-black/60 backdrop-blur-sm animate-in fade-in duration-150"
+                className="fixed inset-0 z-[6000] bg-black/25 animate-in fade-in duration-150"
             />
             <div
                 role="dialog"
@@ -160,16 +160,16 @@ export function CommandPalette({ posts, projects }: CommandPaletteProps) {
             >
                 <Command
                     label="Command palette"
-                    className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-border/60 bg-background/95 shadow-2xl backdrop-blur-xl"
+                    className="glass-thick flex min-h-0 flex-1 flex-col overflow-hidden rounded-[1.75rem]"
                 >
-                    <div className="flex shrink-0 items-center gap-2 border-b border-border/60 px-4">
+                    <div className="flex shrink-0 items-center gap-2 border-b border-foreground/10 px-5">
                         <IconSearch className="h-4 w-4 text-muted-foreground" />
                         <Command.Input
                             placeholder="Type a command or search…"
                             className="flex-1 bg-transparent py-4 text-sm text-foreground placeholder:text-muted-foreground outline-none"
                             autoFocus
                         />
-                        <kbd className="hidden sm:inline-flex items-center rounded border border-border/60 bg-background/80 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
+                        <kbd className="hidden sm:inline-flex items-center rounded-full bg-foreground/[0.08] px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
                             esc
                         </kbd>
                     </div>
@@ -371,12 +371,12 @@ function Item({
             value={`${label} ${sublabel ?? ""} ${keywords?.join(" ") ?? ""}`.trim()}
             onSelect={onSelect}
             className={cn(
-                "flex cursor-pointer items-center gap-3 rounded-md px-2 py-2 text-sm text-foreground/80",
-                "data-[selected=true]:bg-accent/60 data-[selected=true]:text-foreground",
+                "flex cursor-pointer items-center gap-3 rounded-xl px-2 py-2 text-sm text-foreground/80",
+                "data-[selected=true]:bg-foreground/[0.08] data-[selected=true]:text-foreground",
                 "transition-colors",
             )}
         >
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border/50 bg-background/60 text-muted-foreground">
+            <span className="glass-chip flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-muted-foreground">
                 {icon}
             </span>
             <span className="flex-1 truncate">{label}</span>

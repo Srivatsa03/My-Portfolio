@@ -341,3 +341,220 @@ html.dark code[data-theme] span {
   text-align: right;
   color: var(--muted-foreground);
 }
+/* ------------------------------------------------------------------------
+ * Liquid Glass
+ *
+ * Every surface is a sheet of glass over one fixed wallpaper
+ * (components/layout/liquid-wallpaper.tsx). A sheet blurs and saturates what
+ * is behind it, lights its top-left rim, and casts a soft shadow.
+ *
+ *   .glass          the standard material: cards, panels, controls
+ *   .glass-thick    a denser sheet behind long-form reading
+ *   .glass-dark     smoked glass, for the terminal
+ *   .glass-tint     the accent color poured into the glass, for primary actions
+ *   .glass-hover    lifts on hover and presses in on click
+ *   .glass-refract  bends the backdrop like a lens (Chromium only, see below)
+ *
+ * A backdrop-filter only sees up to the nearest ancestor with a filter,
+ * opacity below 1 or a mask, so animated wrappers must clear their filter
+ * when they finish (BlurFade does).
+ * ---------------------------------------------------------------------- */
+:root {
+  --glass-tint-color: rgb(255 255 255 / 0.46);
+  --glass-tint-hover: rgb(255 255 255 / 0.6);
+  --glass-thick-color: rgb(255 255 255 / 0.72);
+  --glass-rim: rgb(255 255 255 / 0.95);
+  --glass-rim-soft: rgb(255 255 255 / 0.35);
+  --glass-rim-far: rgb(255 255 255 / 0.7);
+  --glass-inner: inset 0 1px 1px 0 rgb(255 255 255 / 0.85), inset 0 -1px 1px 0 rgb(255 255 255 / 0.35),
+    inset 0 0 22px -6px rgb(255 255 255 / 0.65);
+  --glass-shadow: 0 18px 40px -18px rgb(40 50 120 / 0.35), 0 2px 8px -2px rgb(40 50 120 / 0.12);
+  --glass-shadow-hover: 0 26px 50px -18px rgb(40 50 120 / 0.42), 0 4px 12px -2px rgb(40 50 120 / 0.16);
+  --glass-accent: oklch(0.6 0.2 258);
+  --glass-blur: 22px;
+  --glass-saturate: 1.5;
+}
+
+.dark {
+  --glass-saturate: 1.3;
+  --glass-tint-color: rgb(255 255 255 / 0.08);
+  --glass-tint-hover: rgb(255 255 255 / 0.11);
+  --glass-thick-color: rgb(14 17 32 / 0.66);
+  --glass-rim: rgb(255 255 255 / 0.42);
+  --glass-rim-soft: rgb(255 255 255 / 0.07);
+  --glass-rim-far: rgb(255 255 255 / 0.2);
+  --glass-inner: inset 0 1px 1px 0 rgb(255 255 255 / 0.16), inset 0 -1px 1px 0 rgb(255 255 255 / 0.05),
+    inset 0 0 22px -8px rgb(255 255 255 / 0.12);
+  --glass-shadow: 0 20px 44px -18px rgb(0 0 0 / 0.7), 0 2px 10px -2px rgb(0 0 0 / 0.35);
+  --glass-shadow-hover: 0 28px 56px -18px rgb(0 0 0 / 0.8), 0 4px 14px -2px rgb(0 0 0 / 0.4);
+  --glass-accent: oklch(0.58 0.2 262);
+  --muted-foreground: oklch(0.78 0.02 261);
+}
+
+html:not(.dark) {
+  --muted-foreground: oklch(0.47 0.03 264);
+}
+
+@layer components {
+  .glass,
+  .glass-thick,
+  .glass-dark,
+  .glass-tint {
+    position: relative;
+    background-color: var(--glass-tint-color);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    box-shadow: var(--glass-inner), var(--glass-shadow);
+  }
+
+  /* The rim: bright where the light hits (top left), faint on the far edge. */
+  .glass::before,
+  .glass-thick::before,
+  .glass-dark::before,
+  .glass-tint::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      var(--glass-rim) 0%,
+      var(--glass-rim-soft) 28%,
+      transparent 50%,
+      var(--glass-rim-soft) 72%,
+      var(--glass-rim-far) 100%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .glass-thick {
+    background-color: var(--glass-thick-color);
+    --glass-blur: 40px;
+  }
+
+  .glass-dark {
+    background-color: rgb(8 10 20 / 0.6);
+    --glass-rim: rgb(255 255 255 / 0.32);
+    --glass-rim-soft: rgb(255 255 255 / 0.05);
+    --glass-rim-far: rgb(255 255 255 / 0.14);
+    box-shadow: inset 0 1px 1px 0 rgb(255 255 255 / 0.12), var(--glass-shadow);
+  }
+
+  .glass-tint {
+    color: white;
+    background-color: color-mix(in oklab, var(--glass-accent) 72%, transparent);
+    --glass-rim: rgb(255 255 255 / 0.75);
+    --glass-rim-soft: rgb(255 255 255 / 0.18);
+    --glass-rim-far: rgb(255 255 255 / 0.45);
+    box-shadow: inset 0 1px 1px 0 rgb(255 255 255 / 0.45), inset 0 0 18px -6px rgb(255 255 255 / 0.5),
+      0 12px 30px -12px color-mix(in oklab, var(--glass-accent) 80%, transparent);
+  }
+
+  .glass-hover {
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease,
+      background-color 0.3s ease;
+  }
+  .glass-hover:hover {
+    transform: translateY(-3px);
+    background-color: var(--glass-tint-hover);
+    box-shadow: var(--glass-inner), var(--glass-shadow-hover);
+  }
+  .glass-tint.glass-hover:hover {
+    background-color: color-mix(in oklab, var(--glass-accent) 85%, transparent);
+  }
+  .glass-hover:active {
+    transform: translateY(0) scale(0.97);
+    transition-duration: 0.15s;
+  }
+
+  /* Small controls that sit inside a glass sheet. */
+  .glass-chip {
+    background-color: color-mix(in oklab, var(--foreground) 7%, transparent);
+    box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.12);
+  }
+}
+
+/*
+ * Chromium can run an SVG filter on the backdrop, which bends the light like a
+ * lens. Safari and Firefox drop the whole declaration if it holds url(), so
+ * this only applies once LiquidFilters marks <html> as able to render it.
+ */
+.lg-refract .glass-refract {
+  -webkit-backdrop-filter: url(#lg-refract) blur(3px) saturate(2) brightness(1.04);
+  backdrop-filter: url(#lg-refract) blur(3px) saturate(2) brightness(1.04);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .glass-thick {
+    background-color: var(--glass-thick-color);
+    --glass-thick-color: color-mix(in oklab, var(--background) 94%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-hover,
+  .glass-hover:hover,
+  .glass-hover:active {
+    transform: none;
+  }
+}
+
+/* Long text and tables read on the denser sheet. */
+.glass-thick .prose pre {
+  background: color-mix(in oklab, var(--foreground) 6%, transparent);
+}
+
+/* Wallpaper palette. Light is airy pastel; dark is deep indigo with the
+ * folds kept moody so text on glass stays readable. */
+:root {
+  --wp-base-1: #e9eeff;
+  --wp-base-2: #fbeef8;
+  --wp-glow-1: #b9d0ff;
+  --wp-glow-2: #ffc9e4;
+  --wp-a1: #6f97ff;
+  --wp-a2: #a07bff;
+  --wp-b1: #ff86b8;
+  --wp-b2: #ffbf80;
+  --wp-c1: #5fd8c9;
+  --wp-c2: #7aa6ff;
+  --wp-d1: #ffc2e0;
+  --wp-d2: #a98aff;
+  --wp-shadow: #4b4fa8;
+  --wp-strength: 0.8;
+  --wp-gloss: 0.7;
+}
+
+.dark {
+  --wp-base-1: #0c1236;
+  --wp-base-2: #170c30;
+  --wp-glow-1: #2140a8;
+  --wp-glow-2: #6a1e63;
+  --wp-a1: #2f5be6;
+  --wp-a2: #6a3be0;
+  --wp-b1: #c02a72;
+  --wp-b2: #e0782c;
+  --wp-c1: #10a091;
+  --wp-c2: #2a64e8;
+  --wp-d1: #e0589e;
+  --wp-d2: #5b35c8;
+  --wp-shadow: #02030c;
+  --wp-strength: 0.82;
+  --wp-gloss: 0.5;
+}
+
+.liquid-wallpaper-veil {
+  background: radial-gradient(120% 90% at 50% 0%, rgb(255 255 255 / 0.3), transparent 65%);
+}
+.dark .liquid-wallpaper-veil {
+  background: radial-gradient(120% 90% at 50% 20%, rgb(6 8 24 / 0.2), rgb(6 8 24 / 0.45));
+}
+
+body {
+  background-color: var(--wp-base-1);
+}

@@ -101,59 +101,52 @@ export const Navbar = ({
             duration: 0.2,
           }}
           className={cn(
-            "flex sm:max-w-5xl w-full justify-self-center backdrop-blur-lg fixed top-0 sm:top-4 inset-x-0 mx-auto md:rounded-lg sm:bg-none dark:bg-background/10 sm:dark:bg-background/20 bg-white/30 z-[5000] pr-4 pl-6 py-4 items-center justify-between",
+            "pointer-events-none fixed inset-x-0 top-3 z-[5000] flex justify-center px-3 sm:top-5",
             className
           )}
-
         >
-          {/* Logo on the left */}
-          <div className="flex items-center mr-4 sm:mr-16">
-            {mounted && (
-              <AnimatedLogo
-                theme={resolvedTheme === "dark" ? "dark" : "light"}
-                className="w-6 h-6 sm:w-7 sm:h-7"
-                onClick={handleLogoClick}
-              />
-            )}
-          </div>
+          <nav className="glass glass-refract pointer-events-auto flex w-full max-w-3xl items-center justify-between gap-2 rounded-full py-2 pl-4 pr-2 sm:pl-5">
+            {/* Logo on the left */}
+            <div className="flex items-center">
+              {mounted && (
+                <AnimatedLogo
+                  theme={resolvedTheme === "dark" ? "dark" : "light"}
+                  className="h-6 w-6 sm:h-7 sm:w-7"
+                  onClick={handleLogoClick}
+                />
+              )}
+            </div>
 
-          {/* Links in the center */}
-          <div className="flex items-center gap-3 sm:gap-6 ml-auto mr-0 sm:mr-4">
-            {navItems.map((navItem, idx) => (
-              <button
-                key={`link=${idx}`}
-                onClick={() => handleNavClick(navItem.link)}
-                className={cn(
-                  "relative font-semibold text-slate-700 dark:text-muted-foreground items-center flex space-x-1 hover:text-black dark:hover:text-white transition-colors duration-300"
-                )}
+            {/* Links, then the controls */}
+            <div className="flex items-center gap-0.5 sm:gap-1">
+              {navItems.map((navItem, idx) => (
+                <button
+                  key={`link=${idx}`}
+                  onClick={() => handleNavClick(navItem.link)}
+                  className="relative flex items-center rounded-full px-2.5 py-1.5 text-sm font-semibold text-foreground/75 transition-colors duration-300 hover:bg-foreground/[0.08] hover:text-foreground sm:px-3.5"
+                >
+                  <span className="block sm:hidden">{navItem.icon}</span>
+                  <span className="hidden sm:block">{navItem.name}</span>
+                </button>
+              ))}
+              <span aria-hidden className="mx-1 h-5 w-px self-center bg-foreground/15" />
+              <a
+                href={repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Star this site on GitHub (${stars} stars)`}
+                className="glass-chip group hidden items-center gap-1.5 rounded-full px-2.5 py-1.5 text-xs text-foreground/75 transition-colors hover:text-foreground xs:inline-flex"
               >
-                <span className="block sm:hidden">{navItem.icon}</span>
-                <span className="hidden sm:block text-sm">{navItem.name}</span>
-              </button>
-            ))}
-            <span
-              aria-hidden
-              className="h-5 w-px self-center bg-zinc-300/60 dark:bg-zinc-700/60"
-            />
-            <a
-              href={repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Star this site on GitHub (${stars} stars)`}
-              className="group inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-background/40 hover:bg-background/70 hover:border-border px-2 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <IconBrandGithub className="h-3.5 w-3.5" />
-              <span className="flex items-center gap-0.5 tabular-nums">
-                <IconStar className="h-3 w-3 transition-colors group-hover:text-amber-400 group-hover:animate-spin-grow" />
-                {stars}
-              </span>
-            </a>
-            <CommandPaletteButton />
-            <ModeToggle />
-          </div>
-
-          <div className="flex items-center">
-          </div>
+                <IconBrandGithub className="h-3.5 w-3.5" />
+                <span className="flex items-center gap-0.5 tabular-nums">
+                  <IconStar className="h-3 w-3 transition-colors group-hover:animate-spin-grow group-hover:text-amber-400" />
+                  {stars}
+                </span>
+              </a>
+              <CommandPaletteButton />
+              <ModeToggle />
+            </div>
+          </nav>
         </motion.div>
       )}
     </AnimatePresence>

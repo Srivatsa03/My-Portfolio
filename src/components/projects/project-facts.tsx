@@ -26,7 +26,7 @@ export function ProjectFacts({ project }: { project: Project }) {
           <dd>
             <ul className="flex flex-wrap gap-1.5">
               {project.stack.map((s) => (
-                <li key={s} className="rounded-sm border border-border px-1.5 py-0.5 font-mono text-[11px] text-foreground/80">
+                <li key={s} className="glass-chip rounded-full px-2 py-0.5 font-mono text-[11px] text-foreground/80">
                   {s}
                 </li>
               ))}

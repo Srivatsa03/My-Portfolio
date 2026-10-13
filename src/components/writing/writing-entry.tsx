@@ -27,7 +27,7 @@ export function PlatformChips({ item }: { item: WritingItem }) {
           target="_blank"
           rel="noopener noreferrer"
           title={`Read on ${l.platform}`}
-          className="inline-flex items-center gap-1 rounded-full bg-white px-1.5 py-0.5 text-[11px] font-semibold text-black transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-semibold text-black shadow-[inset_0_1px_0_white,0_1px_3px_rgb(0_0_0/0.15)] transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Image src={PLATFORM_ICON[l.platform]} alt="" width={12} height={12} className="h-3 w-3" />
           {l.platform}

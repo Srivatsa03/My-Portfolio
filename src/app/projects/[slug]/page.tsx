@@ -64,7 +64,7 @@ export default async function ProjectPage({ params }: Props) {
         <BlurFade delay={0.005} inView>
           <TransitionLink
             href="/projects"
-            className="mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="glass glass-hover mb-8 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground"
           >
             <IconArrowLeft className="h-4 w-4" />
             All projects
@@ -84,10 +84,8 @@ export default async function ProjectPage({ params }: Props) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={cn(
-                        "inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                        i === 0
-                          ? "border-foreground bg-foreground text-background hover:bg-foreground/90"
-                          : "border-border text-foreground hover:bg-secondary",
+                        "glass-hover inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                        i === 0 ? "glass-tint" : "glass text-foreground",
                       )}
                     >
                       {isRepo ? <IconBrandGithub className="h-4 w-4" /> : <IconExternalLink className="h-4 w-4" />}
@@ -106,7 +104,7 @@ export default async function ProjectPage({ params }: Props) {
         </BlurFade>
 
         {project.hero && (
-          <div className="mt-10 overflow-hidden rounded-xl border border-border/60">
+          <div className="glass mt-10 overflow-hidden rounded-[2rem] p-2">
             <Image
               src={project.hero}
               alt={project.heroAlt ?? ""}
@@ -115,15 +113,15 @@ export default async function ProjectPage({ params }: Props) {
               priority
               unoptimized
               sizes="(max-width: 1024px) 100vw, 1024px"
-              className="h-auto w-full"
+              className="h-auto w-full rounded-[1.6rem]"
             />
           </div>
         )}
 
 
-        <div className="mt-12 lg:grid lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-14">
-          <div className="min-w-0 max-w-[68ch]">
-            <div className="mb-10 rounded-lg border border-border/60 p-4 lg:hidden">
+        <div className="mt-12 lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-8">
+          <div className="glass-thick min-w-0 rounded-[2rem] px-5 py-7 sm:px-10 sm:py-10 [&>div:nth-child(2)>h2:first-child]:mt-0">
+            <div className="glass-chip mb-10 rounded-[1.25rem] p-4 lg:hidden">
               <ProjectFacts project={project} />
             </div>
 
@@ -138,24 +136,28 @@ export default async function ProjectPage({ params }: Props) {
           </div>
 
           <aside className="hidden lg:block">
-            <div className="sticky top-32 space-y-10">
-              <ProjectFacts project={project} />
-              {project.headings.length > 0 && <TableOfContents headings={project.headings} />}
+            <div className="sticky top-28 space-y-4">
+              <div className="glass rounded-[1.5rem] p-5">
+                <ProjectFacts project={project} />
+              </div>
+              {project.headings.length > 0 && (
+                <div className="glass rounded-[1.5rem] p-5">
+                  <TableOfContents headings={project.headings} />
+                </div>
+              )}
             </div>
           </aside>
         </div>
 
         {next && next.slug !== slug && (
-          <div className="mt-20 border-t pt-8">
+          <TransitionLink
+            href={`/projects/${next.slug}`}
+            className="glass glass-hover mt-12 block rounded-[1.75rem] p-6 sm:p-8"
+          >
             <p className="text-sm text-muted-foreground">Next project</p>
-            <TransitionLink
-              href={`/projects/${next.slug}`}
-              className="mt-1 inline-block text-xl font-semibold tracking-tight text-foreground hover:underline"
-            >
-              {next.title}
-            </TransitionLink>
+            <p className="mt-1 text-xl font-semibold tracking-tight text-foreground">{next.title}</p>
             <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{next.tagline}</p>
-          </div>
+          </TransitionLink>
         )}
       </div>
     </div>

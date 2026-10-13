@@ -18,11 +18,11 @@ export function CommandPaletteButton() {
             type="button"
             onClick={open}
             aria-label="Open command palette"
-            className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/40 hover:bg-background/70 hover:border-border px-2 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            className="glass-chip inline-flex items-center gap-2 rounded-full px-2.5 py-1.5 text-xs text-foreground/75 transition-colors hover:text-foreground"
         >
             <IconSearch className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Search</span>
-            <kbd className="hidden sm:inline-flex items-center gap-0.5 rounded border border-border/60 bg-background/80 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
+            <kbd className="hidden sm:inline-flex items-center gap-0.5 rounded-full bg-foreground/[0.08] px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
                 <span className="text-[11px] leading-none">{isMac ? "⌘" : "Ctrl"}</span>
                 K
             </kbd>

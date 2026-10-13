@@ -38,7 +38,7 @@ const LOGO_WALL = [
 function Stat({ value, suffix = "", label }: { value: number; suffix?: string; label: string }) {
   return (
     <div className="text-center">
-      <div className="text-2xl font-bold tracking-tight text-primary sm:text-3xl">
+      <div className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
         <NumberTicker value={value} />
         {suffix}
       </div>
@@ -56,7 +56,7 @@ export default function OpenSource() {
 
       {/* Proof band */}
       <BlurFade delay={0.05} inView>
-        <div className="mb-7 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+        <div className="glass mx-auto mb-7 flex w-full max-w-3xl flex-wrap items-center justify-around gap-x-8 gap-y-4 rounded-[1.75rem] px-6 py-5">
           <Stat value={10} label="merged" />
           <Stat value={4} label="open" />
           <Stat value={164} suffix="K★" label="combined stars" />
@@ -71,9 +71,9 @@ export default function OpenSource() {
             <div
               key={l.name}
               title={l.name}
-              className="grid h-11 w-11 place-items-center rounded-lg border bg-white/95 p-1.5 opacity-90 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:opacity-100 sm:h-12 sm:w-12"
+              className="glass glass-hover grid h-12 w-12 place-items-center rounded-2xl p-2 sm:h-14 sm:w-14"
             >
-              <Image src={l.src} alt={l.name} width={40} height={40} className="h-full w-full object-contain" />
+              <span className="grid h-full w-full place-items-center rounded-xl bg-white p-1"><Image src={l.src} alt={l.name} width={40} height={40} className="h-full w-full object-contain" /></span>
             </div>
           ))}
         </div>
@@ -90,7 +90,7 @@ export default function OpenSource() {
                 href={pr.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group/glow relative flex h-full flex-col overflow-hidden rounded-lg border bg-background p-4 transition-all duration-400 hover:shadow-md"
+                className="glass glass-hover group/glow relative flex h-full flex-col overflow-hidden rounded-[1.5rem] p-5"
               >
                 <SpotlightGlow />
 
@@ -126,7 +126,7 @@ export default function OpenSource() {
                   <IconArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover/glow:-translate-y-0.5 group-hover/glow:translate-x-0.5" />
                 </div>
 
-                <h3 className="mt-2 text-sm font-bold leading-snug text-primary sm:text-base">{pr.title}</h3>
+                <h3 className="mt-2 text-sm font-bold leading-snug text-foreground sm:text-base">{pr.title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{pr.body}</p>
               </a>
             </BlurFade>

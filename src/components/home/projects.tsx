@@ -28,7 +28,7 @@ export default function Projects() {
             </div>
             <TransitionLink
                 href="/projects"
-                className="mx-auto mt-8 inline-flex items-center gap-1.5 rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+                className="glass glass-hover mx-auto mt-8 inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-semibold text-foreground"
             >
                 See all {all.length} projects
                 <IconArrowRight className="h-4 w-4" />
@@ -40,9 +40,9 @@ export default function Projects() {
 export function ProjectCard({ project }: { project: Project }) {
     return (
         <TransitionLink href={`/projects/${project.slug}`} className="group block h-full">
-            <Card className="relative flex h-full flex-col overflow-hidden border transition-all duration-300 ease-out hover:shadow-md">
+            <Card className="glass glass-hover relative flex h-full flex-col overflow-hidden rounded-[1.75rem] p-2">
                 {project.cover && (
-                    <div className={`relative aspect-[16/10] overflow-hidden border-b border-border/60 ${project.coverFit === "contain" ? "bg-white" : ""}`}>
+                    <div className={`relative aspect-[16/10] overflow-hidden rounded-[1.35rem] ${project.coverFit === "contain" ? "bg-white" : "bg-foreground/5"}`}>
                         <Image
                             src={project.cover}
                             alt=""
@@ -53,7 +53,7 @@ export function ProjectCard({ project }: { project: Project }) {
                         />
                     </div>
                 )}
-                <CardHeader className="px-2">
+                <CardHeader className="px-3">
                     <div className="space-y-1">
                         <CardTitle className="mt-2 text-base">{project.title}</CardTitle>
                         <div className="text-xs text-muted-foreground">
@@ -63,11 +63,11 @@ export function ProjectCard({ project }: { project: Project }) {
                         <p className="mt-2 text-pretty text-sm text-muted-foreground">{project.tagline}</p>
                     </div>
                 </CardHeader>
-                <CardContent className="mt-auto flex flex-col px-2 pb-3">
+                <CardContent className="mt-auto flex flex-col px-3 pb-3">
                     {project.stack.length > 0 && (
                         <div className="mt-2 flex flex-wrap gap-2">
                             {project.stack.slice(0, 5).map((tag) => (
-                                <Badge className="px-1 py-0.5 text-[12px]" variant="secondary" key={tag}>
+                                <Badge className="px-2 py-0.5 text-[12px]" variant="secondary" key={tag}>
                                     {tag}
                                 </Badge>
                             ))}
