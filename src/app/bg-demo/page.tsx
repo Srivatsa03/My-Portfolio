@@ -14,7 +14,7 @@ export default function BackgroundDemos() {
       <section className="px-4 pt-32 pb-14 text-center sm:pt-40">
         <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">Pick a background</h1>
         <p className="mx-auto mt-3 max-w-xl text-lg text-muted-foreground">
-          Six ideas, each with the site&apos;s glass on top. Scroll through, try the theme toggle, then tell me the number.
+          Round two: the kinds of backgrounds glass portfolios use. Each has the site&apos;s glass on top. Scroll through, try the theme toggle, then tell me the number.
         </p>
         <nav className="mt-8 flex flex-wrap justify-center gap-2">
           {WALLPAPERS.map((w, i) => (

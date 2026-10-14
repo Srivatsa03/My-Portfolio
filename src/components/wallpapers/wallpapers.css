@@ -1,79 +1,91 @@
-/* Colors for the background demos. Light first, then the dark override. */
+/* Background demos, round two. Light first, then the dark override. */
 
-.wp-ripple {
-  --base-1: #f5f4fc; --base-2: #e6e3f3;
-  --glow: #cbbfff; --glow-a: 0.75;
-  --crest: #ffffff; --crest-a: 0.95;
-  --shade: #7f74c4; --trough-a: 0.34;
-  --line: #ffffff; --line-a: 1;
+.wp-photo {
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-.dark .wp-ripple {
-  --base-1: #110f33; --base-2: #050516;
-  --glow: #5b43ea; --glow-a: 0.42;
-  --crest: #a493ff; --crest-a: 0.5;
-  --shade: #010108; --trough-a: 0.7;
-  --line: #ddd5ff; --line-a: 0.5;
+.wp-photo-veil {
+  background: rgb(255 255 255 / 0.18);
+}
+.dark .wp-photo-veil {
+  background: linear-gradient(180deg, rgb(4 4 16 / 0.25), rgb(4 4 16 / 0.45));
 }
 
-.wp-contour {
-  --base-1: #f6f5fb; --base-2: #eae8f4;
-  --glow: #d9d2ff; --glow-a: 0.8;
-  --line: #5f57b0; --line-a: 0.22; --index-a: 0.42; --index-glow-a: 0;
-}
-.dark .wp-contour {
-  --base-1: #0c0d22; --base-2: #05060f;
-  --glow: #4b3fd6; --glow-a: 0.3;
-  --line: #a59cff; --line-a: 0.24; --index-a: 0.6; --index-glow-a: 0.45;
+.wp-noise {
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.wp-aurora {
-  --base-1: #e9eefc; --base-2: #fbeff6;
-  --c1: #5fd9c4; --c2: #a68bff; --c3: #ff9cc6;
-  --star: #6c6aa0; --star-a: 0;
-  --ray-a: 0.25; --blend: multiply;
+/* Flow: four big soft blobs, each drifting on its own slow loop. Only their
+ * transforms animate, so the browser just moves already-painted layers. */
+.wp-flow {
+  --base: #f5f3ff;
+  --b1: #a78bfa; --b2: #60a5fa; --b3: #f472b6; --b4: #22d3ee;
+  --blob-a: 0.55;
+  background: var(--base);
 }
-.dark .wp-aurora {
-  --base-1: #02030b; --base-2: #0a1030;
-  --c1: #2ee6c5; --c2: #8b5cf6; --c3: #f472b6;
-  --star: #ffffff; --star-a: 1;
-  --ray-a: 0.3; --blend: screen;
+.dark .wp-flow {
+  --base: #07071a;
+  --b1: #7c3aed; --b2: #2563eb; --b3: #db2777; --b4: #0891b2;
+  --blob-a: 0.6;
 }
-
-.wp-bokeh {
-  --base-1: #fbf9ff; --base-2: #ebe6f7;
-  --c1: #f5b450; --c2: #a78bfa; --c3: #f49ac6; --c4: #8fb6ff;
-  --disc-a: 0.32; --rim-a: 0.35; --blend: multiply;
+.wp-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: var(--blob-a);
+  will-change: transform;
 }
-.dark .wp-bokeh {
-  --base-1: #1c1342; --base-2: #06051a;
-  --c1: #f59e0b; --c2: #a78bfa; --c3: #f472b6; --c4: #60a5fa;
-  --disc-a: 0.26; --rim-a: 0.4; --blend: screen;
-}
-
-.wp-monogram {
-  --base-1: #f6f5fc; --base-2: #e8e5f4;
-  --glow: #d8ceff; --glow-a: 0.8;
-  --c1: #b8a6ff; --c2: #8f7bff; --c3: #ff9fcb;
-  --shade: #6a5fc0; --shadow-a: 0.35; --inner-a: 0.35;
-  --light: #ffffff; --light-a: 0.85; --spec-a: 0.95;
-}
-.dark .wp-monogram {
-  --base-1: #0d0b28; --base-2: #04040f;
-  --glow: #4a35d8; --glow-a: 0.35;
-  --c1: #7b5cff; --c2: #4a33d6; --c3: #d6448e;
-  --shade: #010108; --shadow-a: 0.8; --inner-a: 0.55;
-  --light: #c9bdff; --light-a: 0.55; --spec-a: 0.8;
+.wp-blob-1 { width: 46vmax; height: 46vmax; left: -8vmax; top: -10vmax; background: var(--b1); animation: wp-drift-1 26s ease-in-out infinite alternate; }
+.wp-blob-2 { width: 40vmax; height: 40vmax; right: -10vmax; top: 10vmax; background: var(--b2); animation: wp-drift-2 31s ease-in-out infinite alternate; }
+.wp-blob-3 { width: 36vmax; height: 36vmax; left: 20vmax; bottom: -14vmax; background: var(--b3); animation: wp-drift-3 29s ease-in-out infinite alternate; }
+.wp-blob-4 { width: 24vmax; height: 24vmax; left: 46vmax; top: 4vmax; background: var(--b4); animation: wp-drift-4 23s ease-in-out infinite alternate; }
+@keyframes wp-drift-1 { to { transform: translate(18vmax, 12vmax) scale(1.1); } }
+@keyframes wp-drift-2 { to { transform: translate(-16vmax, 14vmax) scale(0.9); } }
+@keyframes wp-drift-3 { to { transform: translate(14vmax, -16vmax) scale(1.15); } }
+@keyframes wp-drift-4 { to { transform: translate(-20vmax, 18vmax) scale(1.2); } }
+@media (prefers-reduced-motion: reduce) {
+  .wp-blob { animation: none; }
 }
 
-.wp-grid {
-  --base-1: #f7f7fb;
-  --c1: #b9a8ff; --c2: #9cc2ff; --bloom-a: 0.6;
-  --dot: #5a5e9a; --dot-a: 0.3;
-  --arc: #7c6cff; --arc-glow-a: 0.5;
+/* Spotlight: a soft cone of light from the top, over a grid that fades out. */
+.wp-spot {
+  --base: #fafafc;
+  --beam: rgb(124 92 255 / 0.22);
+  --glow: rgb(167 139 250 / 0.35);
+  --grid: rgb(20 20 50 / 0.07);
+  background: var(--base);
 }
-.dark .wp-grid {
-  --base-1: #05060f;
-  --c1: #6d4cff; --c2: #2563eb; --bloom-a: 0.42;
-  --dot: #c7c9ff; --dot-a: 0.32;
-  --arc: #b3a6ff; --arc-glow-a: 0.8;
+.dark .wp-spot {
+  --base: #050510;
+  --beam: rgb(180 160 255 / 0.2);
+  --glow: rgb(109 76 255 / 0.4);
+  --grid: rgb(255 255 255 / 0.06);
+}
+.wp-spot-grid {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+}
+.wp-spot-beam {
+  left: 50%;
+  top: -10%;
+  width: 70vw;
+  height: 90%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, var(--beam), transparent 85%);
+  clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+  filter: blur(28px);
+}
+.wp-spot-glow {
+  left: 50%;
+  top: -24vmax;
+  width: 60vmax;
+  height: 40vmax;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  background: var(--glow);
+  filter: blur(90px);
 }
