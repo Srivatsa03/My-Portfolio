@@ -229,7 +229,7 @@ export const Footer = () => {
                     <p className="text-xs text-muted-foreground leading-none">
                         &copy; {new Date().getFullYear()} Srivatsa Kamballa. All rights reserved.
                     </p>
-                    <p className="text-xs text-muted-foreground leading-none text-center">
+                    <p className="text-xs text-muted-foreground leading-relaxed text-center sm:text-right">
                         Built with ❤️ using React, Next.js and Tailwind ·{" "}
                         <a
                             href="https://googlefonts.github.io/noto-emoji-animation/"
@@ -240,6 +240,34 @@ export const Footer = () => {
                             Animated emoji by Google Noto
                         </a>{" "}
                         (CC BY 4.0)
+                        <br />
+                        Chicago photos by{" "}
+                        <a
+                            href="https://unsplash.com/@jbrown1276?utm_source=srivatsa_portfolio&utm_medium=referral"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline-offset-2 hover:text-foreground hover:underline"
+                        >
+                            Jeff Brown
+                        </a>{" "}
+                        and{" "}
+                        <a
+                            href="https://unsplash.com/@maxwbender?utm_source=srivatsa_portfolio&utm_medium=referral"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline-offset-2 hover:text-foreground hover:underline"
+                        >
+                            Max Bender
+                        </a>{" "}
+                        on{" "}
+                        <a
+                            href="https://unsplash.com/?utm_source=srivatsa_portfolio&utm_medium=referral"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline-offset-2 hover:text-foreground hover:underline"
+                        >
+                            Unsplash
+                        </a>
                     </p>
                 </div>
             </div>

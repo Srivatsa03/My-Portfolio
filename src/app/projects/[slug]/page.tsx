@@ -71,8 +71,8 @@ export default async function ProjectPage({ params }: Props) {
           </TransitionLink>
 
           <header className="max-w-3xl">
-            <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">{project.title}</h1>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{project.tagline}</p>
+            <h1 className="on-photo text-3xl font-bold tracking-tight sm:text-5xl">{project.title}</h1>
+            <p className="on-photo mt-4 text-lg leading-relaxed text-foreground/85">{project.tagline}</p>
             {project.links.length > 0 && (
               <div className="mt-6 flex flex-wrap gap-2">
                 {project.links.map((link, i) => {

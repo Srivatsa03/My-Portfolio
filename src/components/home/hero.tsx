@@ -87,13 +87,13 @@ export default function Hero() {
                         </div>
                         <div className="w-full space-y-6">
                             <BlurFade delay={0.005 * 1} inView>
-                                <p className="z-50 subpixel-antialiased leading-[1.8] text-5xl sm:text-7xl font-bold text-center whitespace-nowrap">
+                                <p className="on-photo z-50 subpixel-antialiased leading-[1.8] text-5xl sm:text-7xl font-bold text-center whitespace-nowrap">
                                     <span className="inline-block pb-2 bg-gradient-to-b from-zinc-700 to-zinc-950 dark:from-white dark:to-zinc-300 bg-clip-text text-transparent">
                                         Hi. I&#39;m{" "}
                                         <AnimatedName className="font-script font-normal text-[1.05em] leading-none align-baseline" />
                                     </span>
                                 </p>
-                                <p className="text-base subpixel-antialiased tracking-tight font-medium sm:text-2xl text-center text-foreground/85">
+                                <p className="on-photo text-base subpixel-antialiased tracking-tight font-medium sm:text-2xl text-center text-foreground/90">
                                     A Software Engineer who{" "}
                                     <span className="font-script font-normal text-[1.05em] leading-none align-baseline">
                                         breaks what he builds

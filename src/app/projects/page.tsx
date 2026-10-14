@@ -34,8 +34,8 @@ export default function ProjectsPage() {
             <IconArrowLeft className="h-4 w-4" />
             Back home
           </Link>
-          <h1 className="mb-3 text-4xl font-bold tracking-tight sm:text-5xl">Projects</h1>
-          <p className="mb-16 max-w-2xl text-lg text-muted-foreground">
+          <h1 className="on-photo mb-3 text-4xl font-bold tracking-tight sm:text-5xl">Projects</h1>
+          <p className="on-photo mb-16 max-w-2xl text-lg text-foreground/85">
             Each one is written up the way I&#39;d explain it in a design review: the problem, how it works, what
             I chose and why, what broke, and the numbers with their sources.
           </p>

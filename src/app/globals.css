@@ -510,76 +510,50 @@ html:not(.dark) {
   background: color-mix(in oklab, var(--foreground) 6%, transparent);
 }
 
-/* Wallpaper palette: satin in one color family per theme, after macOS.
- * Dark is midnight blue, light is pearl. Each sheet tone runs from its lit
- * corner (-1) to its shaded one (-2); shadows are a deep hue, never black. */
+/* Wallpaper: Chicago across the lake. Photos on Unsplash by Jeff Brown (day)
+ * and Max Bender (night), credited in the footer. The veil keeps text that
+ * sits straight on the photo readable. */
 :root {
-  --wp-base-1: #e9ecf5;
-  --wp-base-2: #dfe3ef;
-  --wp-glow: #b9c4ff;
-  --wp-glow-strength: 0.45;
-  --wp-a-1: #f7f8fd;
-  --wp-a-2: #d5dbec;
-  --wp-b-1: #fbfbff;
-  --wp-b-2: #d9dbef;
-  --wp-c-1: #ffffff;
-  --wp-c-2: #dde2f2;
-  --wp-d-1: #f4f2fc;
-  --wp-d-2: #d6d3ec;
-  --wp-shade: #6d74a8;
-  --wp-shadow-strength: 0.4;
-  --wp-trough-strength: 0.16;
-  --wp-sheen: #ffffff;
-  --wp-sheen-strength: 0.9;
-  --wp-rim: #ffffff;
-  --wp-rim-strength: 0.9;
-  --wp-grain: 0.04;
+  --wp-base-1: #7d93b3;
+  --wp-veil:
+    radial-gradient(65% 50% at 50% 40%, rgb(255 255 255 / 0.55), transparent 75%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.35), rgb(255 255 255 / 0.15));
+  --on-photo-halo: drop-shadow(0 1px 1px rgb(255 255 255 / 0.8)) drop-shadow(0 0 16px rgb(255 255 255 / 0.95));
 }
 
 .dark {
-  --wp-base-1: #04060f;
-  --wp-base-2: #080c1e;
-  --wp-glow: #3b4fd0;
-  --wp-glow-strength: 0.22;
-  --wp-a-1: #1a2a63;
-  --wp-a-2: #0a1131;
-  --wp-b-1: #26398a;
-  --wp-b-2: #0d1640;
-  --wp-c-1: #3049a8;
-  --wp-c-2: #111c52;
-  --wp-d-1: #2a2370;
-  --wp-d-2: #0e0b30;
-  --wp-shade: #010208;
-  --wp-shadow-strength: 0.85;
-  --wp-trough-strength: 0.45;
-  --wp-sheen: #7f9dff;
-  --wp-sheen-strength: 0.42;
-  --wp-rim: #c4d2ff;
-  --wp-rim-strength: 0.55;
-  --wp-grain: 0.06;
+  --wp-base-1: #0b1a24;
+  --wp-veil:
+    radial-gradient(65% 50% at 50% 40%, rgb(3 5 14 / 0.6), transparent 75%),
+    linear-gradient(180deg, rgb(4 6 16 / 0.38), rgb(4 6 16 / 0.55));
+  --on-photo-halo: drop-shadow(0 1px 2px rgb(0 0 0 / 0.7)) drop-shadow(0 0 18px rgb(2 4 12 / 0.9));
 }
 
 .liquid-wallpaper {
-  background-color: var(--wp-base-1);
+  background: var(--wp-base-1) url("/wallpaper/chicago-day-wide.webp") center 55% / cover no-repeat;
 }
-
-/* Landscape and portrait compositions, so phones still see the shapes. */
-.liquid-wallpaper-wide {
-  display: none;
+.dark .liquid-wallpaper {
+  background-image: url("/wallpaper/chicago-night-wide.webp");
 }
-@media (min-aspect-ratio: 1/1) {
-  .liquid-wallpaper-wide {
-    display: block;
+@media (max-aspect-ratio: 1/1) {
+  .liquid-wallpaper {
+    background-image: url("/wallpaper/chicago-day-tall.webp");
   }
-  .liquid-wallpaper-tall {
-    display: none;
+  .dark .liquid-wallpaper {
+    background-image: url("/wallpaper/chicago-night-tall.webp");
   }
 }
 
-/* Fine grain hides the banding that wide, dark gradients show on 8-bit panels. */
-.liquid-wallpaper-grain {
-  opacity: var(--wp-grain);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+.liquid-wallpaper-veil {
+  background: var(--wp-veil);
+}
+
+/* Text that sits straight on the photo gets a soft halo in the theme's base
+ * tone. A drop-shadow filter, since the hero name is gradient-clipped text
+ * that a text-shadow would paint over. Never put it on an element that holds
+ * glass: a filter cuts the glass off from the backdrop. */
+.on-photo {
+  filter: var(--on-photo-halo);
 }
 
 body {

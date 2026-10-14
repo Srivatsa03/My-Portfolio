@@ -32,14 +32,14 @@ export default async function BlogPage() {
             <IconArrowLeft className="h-4 w-4" />
             Back home
           </Link>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-3">
+          <h1 className="on-photo text-4xl sm:text-5xl font-bold tracking-tight mb-3">
             Recent{" "}
             <span className="font-script font-normal text-[1.05em] leading-none align-baseline">
               writing
             </span>
             .
           </h1>
-          <p className="text-muted-foreground text-lg mb-16">
+          <p className="on-photo text-foreground/85 text-lg mb-16">
             Everything I&#39;ve written, here and on Medium and Dev.to, each piece listed once.
           </p>
         </BlurFade>
