@@ -105,7 +105,7 @@ export const Navbar = ({
             className
           )}
         >
-          <nav className="glass glass-refract pointer-events-auto flex w-full max-w-3xl items-center justify-between gap-2 rounded-full py-2 pl-4 pr-2 sm:pl-5">
+          <nav className="glass pointer-events-auto flex w-full max-w-3xl items-center justify-between gap-2 rounded-full py-2 pl-4 pr-2 sm:pl-5">
             {/* Logo on the left */}
             <div className="flex items-center">
               {mounted && (

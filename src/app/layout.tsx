@@ -6,7 +6,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { data } from "@/data/data";
 import { LiquidWallpaper } from "@/components/layout/liquid-wallpaper";
-import { LiquidFilters } from "@/components/layout/liquid-filters";
+import { LiquidLens } from "@/components/layout/liquid-lens";
 import { Analytics } from "@vercel/analytics/next";
 import { CommandPalette } from "@/components/command-palette/command-palette";
 import { getAllPosts } from "@/lib/blog";
@@ -87,7 +87,7 @@ export default function RootLayout({
         >
           <ThemeProvider attribute="class" defaultTheme="dark">
             <LiquidWallpaper />
-            <LiquidFilters />
+            <LiquidLens />
             <Navbar navItems={data.nav} />
             <CommandPalette posts={palettePosts} projects={paletteProjects} />
             {children}

@@ -345,46 +345,52 @@ html.dark code[data-theme] span {
  * Liquid Glass
  *
  * Every surface is a sheet of glass over one fixed wallpaper
- * (components/layout/liquid-wallpaper.tsx). A sheet blurs and saturates what
- * is behind it, lights its top-left rim, and casts a soft shadow.
+ * (components/layout/liquid-wallpaper.tsx). The glass is mostly clear: its
+ * thick, curved edge bends the backdrop like a lens (components/layout/
+ * liquid-lens.tsx sizes one per surface), a light frost and a lift in
+ * saturation sit on top, the rim catches the light, and it casts a soft
+ * shadow. Capsules (rounded-full controls) are the clearest, like Apple's
+ * toolbars; cards keep a little more frost for the text on them.
  *
  *   .glass          the standard material: cards, panels, controls
  *   .glass-thick    a denser sheet behind long-form reading
  *   .glass-dark     smoked glass, for the terminal
  *   .glass-tint     the accent color poured into the glass, for primary actions
  *   .glass-hover    lifts on hover and presses in on click
- *   .glass-refract  bends the backdrop like a lens (Chromium only, see below)
  *
  * A backdrop-filter only sees up to the nearest ancestor with a filter,
  * opacity below 1 or a mask, so animated wrappers must clear their filter
  * when they finish (BlurFade does).
  * ---------------------------------------------------------------------- */
 :root {
-  --glass-tint-color: rgb(255 255 255 / 0.46);
-  --glass-tint-hover: rgb(255 255 255 / 0.6);
+  --glass-tint-color: rgb(255 255 255 / 0.3);
+  --glass-tint-hover: rgb(255 255 255 / 0.42);
   --glass-thick-color: rgb(255 255 255 / 0.72);
   --glass-rim: rgb(255 255 255 / 0.95);
   --glass-rim-soft: rgb(255 255 255 / 0.35);
   --glass-rim-far: rgb(255 255 255 / 0.7);
-  --glass-inner: inset 0 1px 1px 0 rgb(255 255 255 / 0.85), inset 0 -1px 1px 0 rgb(255 255 255 / 0.35),
-    inset 0 0 22px -6px rgb(255 255 255 / 0.65);
+  --glass-inner: inset 0 1px 1px 0 rgb(255 255 255 / 0.9), inset 0 -1px 1px 0 rgb(255 255 255 / 0.4),
+    inset 0 0 0 0.5px rgb(255 255 255 / 0.5), inset 0 0 18px -4px rgb(255 255 255 / 0.55);
   --glass-shadow: 0 18px 40px -18px rgb(40 50 120 / 0.35), 0 2px 8px -2px rgb(40 50 120 / 0.12);
   --glass-shadow-hover: 0 26px 50px -18px rgb(40 50 120 / 0.42), 0 4px 12px -2px rgb(40 50 120 / 0.16);
   --glass-accent: oklch(0.6 0.2 258);
-  --glass-blur: 22px;
-  --glass-saturate: 1.5;
+  --glass-blur: 12px;
+  --glass-blur-clear: 2px;
+  --glass-saturate: 1.7;
+  --glass-bright: 1.06;
 }
 
 .dark {
-  --glass-saturate: 1.3;
-  --glass-tint-color: rgb(255 255 255 / 0.08);
-  --glass-tint-hover: rgb(255 255 255 / 0.11);
+  --glass-saturate: 1.5;
+  --glass-bright: 0.94;
+  --glass-tint-color: rgb(255 255 255 / 0.05);
+  --glass-tint-hover: rgb(255 255 255 / 0.09);
   --glass-thick-color: rgb(14 17 32 / 0.66);
-  --glass-rim: rgb(255 255 255 / 0.42);
-  --glass-rim-soft: rgb(255 255 255 / 0.07);
-  --glass-rim-far: rgb(255 255 255 / 0.2);
-  --glass-inner: inset 0 1px 1px 0 rgb(255 255 255 / 0.16), inset 0 -1px 1px 0 rgb(255 255 255 / 0.05),
-    inset 0 0 22px -8px rgb(255 255 255 / 0.12);
+  --glass-rim: rgb(255 255 255 / 0.6);
+  --glass-rim-soft: rgb(255 255 255 / 0.08);
+  --glass-rim-far: rgb(255 255 255 / 0.3);
+  --glass-inner: inset 0 1px 1px 0 rgb(255 255 255 / 0.32), inset 0 -1px 1px 0 rgb(255 255 255 / 0.1),
+    inset 0 0 0 0.5px rgb(255 255 255 / 0.14), inset 0 0 18px -6px rgb(255 255 255 / 0.18);
   --glass-shadow: 0 20px 44px -18px rgb(0 0 0 / 0.7), 0 2px 10px -2px rgb(0 0 0 / 0.35);
   --glass-shadow-hover: 0 28px 56px -18px rgb(0 0 0 / 0.8), 0 4px 14px -2px rgb(0 0 0 / 0.4);
   --glass-accent: oklch(0.58 0.2 262);
@@ -402,9 +408,18 @@ html:not(.dark) {
   .glass-tint {
     position: relative;
     background-color: var(--glass-tint-color);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    /* --lens is the per-surface lens filter, set by LiquidLens on Chromium. */
+    -webkit-backdrop-filter: var(--lens,) blur(var(--glass-blur)) saturate(var(--glass-saturate))
+      brightness(var(--glass-bright));
+    backdrop-filter: var(--lens,) blur(var(--glass-blur)) saturate(var(--glass-saturate))
+      brightness(var(--glass-bright));
     box-shadow: var(--glass-inner), var(--glass-shadow);
+  }
+
+  /* Capsules are controls: the clearest glass, so the lens shows most. */
+  .glass.rounded-full,
+  .glass-tint.rounded-full {
+    --glass-blur: var(--glass-blur-clear);
   }
 
   /* The rim: bright where the light hits (top left), faint on the far edge. */
@@ -417,7 +432,7 @@ html:not(.dark) {
     inset: 0;
     z-index: 1;
     border-radius: inherit;
-    padding: 1px;
+    padding: 1.25px;
     background: linear-gradient(
       135deg,
       var(--glass-rim) 0%,
@@ -472,21 +487,27 @@ html:not(.dark) {
     transition-duration: 0.15s;
   }
 
+  /* A highlight that follows the pointer across the glass (set --mx/--my). */
+  .glass-shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(90px circle at var(--mx, 50%) var(--my, 0%), rgb(255 255 255 / 0.32), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .glass-shine:hover::after {
+    opacity: 1;
+  }
+
   /* Small controls that sit inside a glass sheet. */
   .glass-chip {
     background-color: color-mix(in oklab, var(--foreground) 7%, transparent);
     box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.12);
   }
-}
-
-/*
- * Chromium can run an SVG filter on the backdrop, which bends the light like a
- * lens. Safari and Firefox drop the whole declaration if it holds url(), so
- * this only applies once LiquidFilters marks <html> as able to render it.
- */
-.lg-refract .glass-refract {
-  -webkit-backdrop-filter: url(#lg-refract) blur(3px) saturate(2) brightness(1.04);
-  backdrop-filter: url(#lg-refract) blur(3px) saturate(2) brightness(1.04);
 }
 
 @media (prefers-reduced-transparency: reduce) {
