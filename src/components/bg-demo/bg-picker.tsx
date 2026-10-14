@@ -6,23 +6,17 @@ import { cn } from "@/lib/utils";
 // A local tool for picking the site's background. It sets html[data-bg];
 // globals.css draws each one. Remove it once one is picked.
 const OPTIONS = [
-  { id: "clean", name: "Clean", note: "Plain page, solid cards. Nothing pulls the eye from your name and your work." },
-  { id: "glow", name: "Glow", note: "The plain page, with one soft violet glow behind the hero." },
-  { id: "dots", name: "Dots", note: "A faint dot grid behind the cards. Quiet, and it looks like an engineer's notebook." },
-  { id: "grid", name: "Grid", note: "Faint graph-paper lines behind the hero only. Then a plain page." },
-  { id: "chicago", name: "Chicago", note: "Your Chicago photo behind the hero only. The rest of the page is plain." },
-  { id: "paper", name: "Paper", note: "A warm paper tone with a fine grain, like a printed resume." },
+  { id: "navy", name: "Navy", note: "Deep navy, and a soft light follows your mouse. The best-known dev portfolio look." },
+  { id: "gradient", name: "Gradient", note: "Big soft color blobs drift slowly behind the page, like the Stripe and Linear heroes." },
+  { id: "sky", name: "Night sky", note: "Faint stars twinkle and a meteor goes by now and then. Stars show in dark mode." },
+  { id: "chicago", name: "Chicago", note: "The full Chicago photo on every page. Cards are solid now, so text stays easy to read." },
 ] as const;
 
-const KEY = "bg-demo";
+const KEY = "bg-demo-2";
 
 export function BgPicker() {
-  const [bg, setBg] = useState<string>("clean");
+  const [bg, setBg] = useState<string>("navy");
   const [open, setOpen] = useState(true);
-
-  useEffect(() => {
-    setBg(document.documentElement.dataset.bg ?? "clean");
-  }, []);
 
   const pick = (id: string) => {
     setBg(id);
@@ -32,7 +26,13 @@ export function BgPicker() {
     } catch {}
   };
 
-  // 1 to 6 on the keyboard switch too.
+  useEffect(() => {
+    const saved = document.documentElement.dataset.bg;
+    if (OPTIONS.some((o) => o.id === saved)) setBg(saved!);
+    else pick(OPTIONS[0].id);
+  }, []);
+
+  // The number keys switch too.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -74,7 +74,7 @@ export function BgPicker() {
             Hide
           </button>
         </div>
-        <div className="grid grid-cols-6 gap-1">
+        <div className="grid grid-cols-4 gap-1">
           {OPTIONS.map((o, i) => (
             <button
               key={o.id}
@@ -82,7 +82,7 @@ export function BgPicker() {
               onClick={() => pick(o.id)}
               aria-pressed={bg === o.id}
               className={cn(
-                "rounded-xl px-0.5 py-2 text-[11px] font-semibold tracking-tight transition-colors sm:px-1 sm:text-xs sm:tracking-normal",
+                "rounded-xl px-1 py-2 text-xs font-semibold transition-colors",
                 bg === o.id ? "bg-background text-foreground" : "hover:bg-background/15",
               )}
             >

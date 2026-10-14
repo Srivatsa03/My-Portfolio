@@ -15,7 +15,7 @@ import { ViewTransitions } from "next-view-transitions";
 import { BgPicker } from "@/components/bg-demo/bg-picker";
 
 // Puts back the picked background before the first paint (picker only).
-const BG_INIT = `try{document.documentElement.dataset.bg=localStorage.getItem("bg-demo")||"clean"}catch(e){}`;
+const BG_INIT = `try{document.documentElement.dataset.bg=localStorage.getItem("bg-demo-2")||"navy"}catch(e){}`;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
