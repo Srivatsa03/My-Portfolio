@@ -93,7 +93,14 @@ export function LiquidLens() {
       const known = made.get(key);
       if (known) return known;
       const bezel = clamp(Math.min(w, h) * 0.3, 8, 26);
-      const scale = magnify ? clamp(Math.min(w, h) * 0.45, 24, 90) : clamp(bezel * 1.7, 12, 44);
+      // A short pill can't take a deep bend: its rim would pull the label in
+      // again as a sliver, so the navbar drop gets a shallow one.
+      const scale =
+        magnify >= 0.5
+          ? clamp(Math.min(w, h) * 0.45, 24, 90)
+          : magnify > 0
+            ? clamp(Math.min(w, h) * 0.3, 8, 14)
+            : clamp(bezel * 1.7, 12, 44);
       const id = `lg-lens-${made.size}`;
       const filter = document.createElementNS(NS, "filter");
       filter.setAttribute("id", id);
@@ -133,7 +140,8 @@ export function LiquidLens() {
       }
       const r = Math.round(Math.min(parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0, w / 2, h / 2));
       // data-lens="magnify" marks a drop that enlarges what's under it.
-      const magnify = el.dataset.lens === "magnify" ? 0.5 : 0;
+      // "drop" is a gentler one, for the selected tab in the navbar.
+      const magnify = el.dataset.lens === "magnify" ? 0.5 : el.dataset.lens === "drop" ? 0.18 : 0;
       el.style.setProperty("--lens", `url(#${filterFor(w, h, r, magnify)})`);
     };
 

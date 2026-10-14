@@ -1,11 +1,15 @@
 "use client";
-import React, { JSX, useState, useEffect } from "react";
+import React, { JSX, useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import {
   motion,
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
+  useSpring,
+  useTransform,
+  useVelocity,
 } from "motion/react";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "../theme-toggle";
 import { useTheme } from "next-themes";
@@ -16,8 +20,178 @@ import { IconBrandGithub, IconStar } from "@tabler/icons-react";
 import { useGitHubStars } from "@/hooks/useGitHubStars";
 
 const FALLBACK_REPO_URL = "https://github.com/Srivatsa03/My-Portfolio";
-// import Link from "next/link";
-// import Image from "next/image";
+
+type NavItem = { name: string; link: string; icon?: JSX.Element };
+
+const SPRING = { type: "spring", stiffness: 520, damping: 28, mass: 0.8 } as const;
+
+/**
+ * Which tab the glass drop sits on. On the home page it follows the section in
+ * view; elsewhere it follows the route; -1 means none.
+ */
+function useActiveTab(items: NavItem[], hold: React.RefObject<number>) {
+  const pathname = usePathname();
+  const [inView, setInView] = useState(0);
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+    const onScroll = () => {
+      // A click scrolls past other sections on the way; don't chase them.
+      if (performance.now() < hold.current) return;
+      const line = window.innerHeight * 0.35;
+      let at = 0;
+      items.forEach((item, i) => {
+        if (item.link.startsWith("/")) return;
+        const el = document.getElementById(item.link);
+        if (el && el.getBoundingClientRect().top <= line) at = i;
+      });
+      setInView(at);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [pathname, items, hold]);
+
+  if (pathname === "/") return inView;
+  const page = items.findIndex((item) => item.link.startsWith("/") && pathname.startsWith(item.link));
+  if (page >= 0) return page;
+  if (pathname.startsWith("/projects")) return items.findIndex((item) => item.link === "projects");
+  return -1;
+}
+
+/**
+ * The links as a Liquid Glass tab bar: the selected tab sits under a drop of
+ * clear glass that slides between tabs on a spring, stretches with its speed
+ * and magnifies the label under it. Press and drag along the bar to slide it
+ * yourself; letting go picks the nearest tab.
+ */
+function NavTabs({ items, active, onSelect }: { items: NavItem[]; active: number; onSelect: (i: number) => void }) {
+  const row = useRef<HTMLDivElement>(null);
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const spots = useRef<{ left: number; width: number }[]>([]);
+  const [box, setBox] = useState({ top: 0, height: 0, tick: 0 });
+  const x = useSpring(0, { stiffness: 420, damping: 32, mass: 0.9 });
+  const width = useSpring(0, { stiffness: 420, damping: 32 });
+  const speed = useVelocity(x);
+  const stretch = useTransform(speed, [-2400, 0, 2400], [1.3, 1, 1.3]);
+  const squash = useTransform(speed, [-2400, 0, 2400], [0.84, 1, 0.84]);
+  const [dragging, setDragging] = useState(false);
+  const press = useRef<{ x: number; moved: boolean } | null>(null);
+  const placed = useRef(false);
+
+  const measure = useCallback(() => {
+    spots.current = tabs.current.map((t) => ({ left: t?.offsetLeft ?? 0, width: t?.offsetWidth ?? 0 }));
+    const first = tabs.current[0];
+    setBox((b) => ({ top: first?.offsetTop ?? 0, height: first?.offsetHeight ?? 0, tick: b.tick + 1 }));
+  }, []);
+
+  useLayoutEffect(() => {
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (row.current) ro.observe(row.current);
+    return () => ro.disconnect();
+  }, [measure]);
+
+  const settle = useCallback(
+    (i: number) => {
+      const s = spots.current[i];
+      if (!s || !s.width) return;
+      // A jump the first time, so the drop doesn't fly in on page load.
+      if (!placed.current) {
+        x.jump(s.left);
+        width.jump(s.width);
+        placed.current = true;
+      } else {
+        x.set(s.left);
+        width.set(s.width);
+      }
+    },
+    [x, width],
+  );
+
+  useEffect(() => {
+    if (active >= 0 && !press.current) settle(active);
+  }, [active, box.tick, settle]);
+
+  const nearest = (px: number) => {
+    let best = 0;
+    spots.current.forEach((s, i) => {
+      const b = spots.current[best];
+      if (Math.abs(s.left + s.width / 2 - px) < Math.abs(b.left + b.width / 2 - px)) best = i;
+    });
+    return best;
+  };
+  const rowX = (clientX: number) => clientX - (row.current?.getBoundingClientRect().left ?? 0);
+
+  return (
+    <div
+      ref={row}
+      className="relative flex touch-none select-none items-center gap-0.5 sm:gap-1"
+      onPointerDown={(e) => {
+        if (e.button !== 0) return;
+        press.current = { x: e.clientX, moved: false };
+        e.currentTarget.setPointerCapture(e.pointerId);
+      }}
+      onPointerMove={(e) => {
+        const p = press.current;
+        if (!p) return;
+        if (!p.moved && Math.abs(e.clientX - p.x) < 6) return;
+        if (!p.moved) {
+          p.moved = true;
+          setDragging(true);
+        }
+        const w = width.get();
+        const max = (row.current?.offsetWidth ?? w) - w;
+        x.set(Math.min(max, Math.max(0, rowX(e.clientX) - w / 2)));
+      }}
+      onPointerUp={(e) => {
+        if (!press.current) return;
+        press.current = null;
+        setDragging(false);
+        const i = nearest(rowX(e.clientX));
+        settle(i);
+        onSelect(i);
+      }}
+      onPointerCancel={() => {
+        press.current = null;
+        setDragging(false);
+        if (active >= 0) settle(active);
+      }}
+    >
+      {items.map((item, i) => (
+        <button
+          key={item.link}
+          ref={(el) => {
+            tabs.current[i] = el;
+          }}
+          type="button"
+          aria-current={active === i ? "page" : undefined}
+          // Pointer presses are handled by the row; this is for the keyboard.
+          onClick={(e) => {
+            if (e.detail === 0) onSelect(i);
+          }}
+          className={cn(
+            "relative flex items-center rounded-full px-2.5 py-1.5 text-sm font-semibold transition-colors duration-300 sm:px-3.5",
+            active === i ? "text-violet-600 dark:text-violet-300" : "text-foreground/75 hover:text-foreground",
+          )}
+        >
+          <span className="block sm:hidden">{item.icon}</span>
+          <span className="hidden sm:block">{item.name}</span>
+        </button>
+      ))}
+      {/* Over the labels, so the one under it is seen through the glass. */}
+      <motion.span
+        aria-hidden
+        data-lens="drop"
+        className="glass glass-drop pointer-events-none absolute left-0 z-20 rounded-full"
+        style={{ x, width, top: box.top, height: box.height, scaleX: stretch, scaleY: squash }}
+        initial={false}
+        animate={{ opacity: active < 0 && !dragging ? 0 : 1, scale: dragging ? 1.16 : 1 }}
+        transition={SPRING}
+      />
+    </div>
+  );
+}
 
 
 export const Navbar = ({
@@ -40,6 +214,18 @@ export const Navbar = ({
   const { scrollY } = useScroll();
   const [visible, setVisible] = useState(true);
   const router = useTransitionRouter();
+  // Until when scrolling shouldn't move the drop (set by a click).
+  const hold = useRef(0);
+  const inPlace = useActiveTab(navItems, hold);
+  const [picked, setPicked] = useState<number | null>(null);
+  const active = picked ?? inPlace;
+
+  // A pick wins until the scroll it started is over, then the page leads again.
+  useEffect(() => {
+    if (picked === null) return;
+    const t = window.setTimeout(() => setPicked(null), 1100);
+    return () => window.clearTimeout(t);
+  }, [picked]);
 
 
   useEffect(() => {
@@ -119,16 +305,15 @@ export const Navbar = ({
 
             {/* Links, then the controls */}
             <div className="flex items-center gap-0.5 sm:gap-1">
-              {navItems.map((navItem, idx) => (
-                <button
-                  key={`link=${idx}`}
-                  onClick={() => handleNavClick(navItem.link)}
-                  className="relative flex items-center rounded-full px-2.5 py-1.5 text-sm font-semibold text-foreground/75 transition-colors duration-300 hover:bg-foreground/[0.08] hover:text-foreground sm:px-3.5"
-                >
-                  <span className="block sm:hidden">{navItem.icon}</span>
-                  <span className="hidden sm:block">{navItem.name}</span>
-                </button>
-              ))}
+              <NavTabs
+                items={navItems}
+                active={active}
+                onSelect={(i) => {
+                  hold.current = performance.now() + 1100;
+                  setPicked(i);
+                  handleNavClick(navItems[i].link);
+                }}
+              />
               <span aria-hidden className="mx-1 h-5 w-px self-center bg-foreground/15" />
               <a
                 href={repoUrl}

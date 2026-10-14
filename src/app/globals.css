@@ -487,6 +487,15 @@ html:not(.dark) {
     transition-duration: 0.15s;
   }
 
+  /* The drop over the selected tab: no frost, so the label under it stays sharp. */
+  .glass.glass-drop {
+    --glass-blur: 0px;
+    --glass-tint-color: rgb(255 255 255 / 0.16);
+  }
+  .dark .glass.glass-drop {
+    --glass-tint-color: rgb(255 255 255 / 0.07);
+  }
+
   /* A highlight that follows the pointer across the glass (set --mx/--my). */
   .glass-shine::after {
     content: "";
