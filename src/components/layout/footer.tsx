@@ -241,7 +241,7 @@ export const Footer = () => {
                         </a>{" "}
                         (CC BY 4.0)
                         <br />
-                        Chicago photos by{" "}
+                        Photos by{" "}
                         <a
                             href="https://unsplash.com/@jbrown1276?utm_source=srivatsa_portfolio&utm_medium=referral"
                             target="_blank"
@@ -249,8 +249,8 @@ export const Footer = () => {
                             className="underline-offset-2 hover:text-foreground hover:underline"
                         >
                             Jeff Brown
-                        </a>{" "}
-                        and{" "}
+                        </a>
+                        {", "}
                         <a
                             href="https://unsplash.com/@maxwbender?utm_source=srivatsa_portfolio&utm_medium=referral"
                             target="_blank"
@@ -258,6 +258,33 @@ export const Footer = () => {
                             className="underline-offset-2 hover:text-foreground hover:underline"
                         >
                             Max Bender
+                        </a>
+                        {", "}
+                        <a
+                            href="https://unsplash.com/@vorosbenisop?utm_source=srivatsa_portfolio&utm_medium=referral"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline-offset-2 hover:text-foreground hover:underline"
+                        >
+                            Benjamin Voros
+                        </a>
+                        {", "}
+                        <a
+                            href="https://unsplash.com/@r3dmax?utm_source=srivatsa_portfolio&utm_medium=referral"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline-offset-2 hover:text-foreground hover:underline"
+                        >
+                            Jonatan Pie
+                        </a>
+                        {" and "}
+                        <a
+                            href="https://unsplash.com/@peterlaster?utm_source=srivatsa_portfolio&utm_medium=referral"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline-offset-2 hover:text-foreground hover:underline"
+                        >
+                            Pedro Lastra
                         </a>{" "}
                         on{" "}
                         <a

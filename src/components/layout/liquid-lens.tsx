@@ -5,10 +5,11 @@ import { useEffect } from "react";
 type BrandedNavigator = Navigator & { userAgentData?: { brands?: { brand: string }[] } };
 
 const NS = "http://www.w3.org/2000/svg";
-// Glass that gets a lens: only real glass (the navbar, marked data-glass).
-// Each lens is a filter the browser reruns on every scroll frame, so the
-// solid cards on the page don't get one.
-const SELECTOR = "[data-glass]:is(.glass, .glass-tint), [data-glass] :is(.glass, .glass-tint)";
+// Glass that gets a lens: the controls (capsules), the navbar and anything
+// marked data-lens. Each lens is a filter the browser reruns as the page
+// scrolls, so the big frosted cards don't get one.
+const SELECTOR =
+  ":is(.glass, .glass-tint).rounded-full, [data-glass]:is(.glass, .glass-tint), [data-glass] :is(.glass, .glass-tint), [data-lens]";
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
