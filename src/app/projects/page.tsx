@@ -64,7 +64,7 @@ export default function ProjectsPage() {
                           </div>
                         )}
                         <div className="min-w-0 flex-1 sm:pt-1">
-                          <div className="flex items-baseline justify-between gap-4">
+                          <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                             <h3 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl">
                               {p.title}
                             </h3>

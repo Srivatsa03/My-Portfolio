@@ -12,10 +12,6 @@ import { CommandPalette } from "@/components/command-palette/command-palette";
 import { getAllPosts } from "@/lib/blog";
 import { getAllProjects } from "@/lib/projects";
 import { ViewTransitions } from "next-view-transitions";
-import { BgPicker } from "@/components/bg-demo/bg-picker";
-
-// Puts back the picked background before the first paint (picker only).
-const BG_INIT = `try{var d=document.documentElement.dataset;d.bg=localStorage.getItem("bg-demo-3")||"sky";if(localStorage.getItem("bg-demo-glass")==="off")d.solid=""}catch(e){}`;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -86,9 +82,6 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en" suppressHydrationWarning>
-        <head>
-          <script dangerouslySetInnerHTML={{ __html: BG_INIT }} />
-        </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${pacifico.variable} antialiased relative`}
         >
@@ -99,7 +92,6 @@ export default function RootLayout({
             <CommandPalette posts={palettePosts} projects={paletteProjects} />
             {children}
             <Footer />
-            <BgPicker />
           </ThemeProvider>
           <Analytics />
         </body>

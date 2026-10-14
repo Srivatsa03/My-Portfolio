@@ -547,34 +547,21 @@ html:not(.dark) {
  * (capsules: the navbar, buttons, pills) are the clear glass with a lens,
  * the way Apple uses Liquid Glass for the layer that floats over content.
  * Each lens and blur is work the browser redoes as the page scrolls, so the
- * lens stays on the small pieces. html[data-solid] swaps the page's
- * glass for solid sheets (the navbar stays glass), to compare.
+ * lens stays on the small pieces.
  * ---------------------------------------------------------------------- */
 :root {
-  --page: oklch(0.975 0.003 264);
+  --page: #8a90b8;
   --glass-card: rgb(255 255 255 / 0.5);
   --glass-card-hover: rgb(255 255 255 / 0.62);
   --glass-pill: rgb(255 255 255 / 0.36);
-  --surface: #ffffff;
-  --surface-hover: #ffffff;
-  --surface-line: rgb(15 23 42 / 0.09);
-  --surface-top: rgb(255 255 255 / 0.9);
-  --surface-shadow: 0 1px 2px rgb(15 23 42 / 0.05), 0 8px 24px -12px rgb(15 23 42 / 0.14);
-  --surface-shadow-hover: 0 2px 4px rgb(15 23 42 / 0.06), 0 18px 36px -16px rgb(15 23 42 / 0.22);
   --on-photo-halo: drop-shadow(0 1px 1px rgb(255 255 255 / 0.8)) drop-shadow(0 0 16px rgb(255 255 255 / 0.95));
 }
 
 .dark {
-  --page: oklch(0.14 0.018 262);
+  --page: #0c1022;
   --glass-card: rgb(10 14 30 / 0.42);
   --glass-card-hover: rgb(16 20 40 / 0.5);
   --glass-pill: rgb(10 14 30 / 0.24);
-  --surface: oklch(0.185 0.02 262);
-  --surface-hover: oklch(0.205 0.022 262);
-  --surface-line: rgb(255 255 255 / 0.08);
-  --surface-top: rgb(255 255 255 / 0.05);
-  --surface-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 30px -14px rgb(0 0 0 / 0.7);
-  --surface-shadow-hover: 0 2px 4px rgb(0 0 0 / 0.45), 0 20px 40px -16px rgb(0 0 0 / 0.8);
   --on-photo-halo: drop-shadow(0 1px 2px rgb(0 0 0 / 0.7)) drop-shadow(0 0 18px rgb(2 4 12 / 0.9));
 }
 
@@ -597,190 +584,39 @@ html:not(.dark) {
     --glass-blur: 6px;
     --glass-tint-color: color-mix(in oklab, var(--page) 40%, transparent);
   }
-
-  html[data-solid] :is(.glass, .glass-thick, .glass-dark, .glass-tint):not([data-glass], [data-glass] *) {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-  html[data-solid] :is(.glass, .glass-thick):not([data-glass], [data-glass] *) {
-    --glass-tint-color: var(--surface);
-    --glass-tint-hover: var(--surface-hover);
-    --glass-thick-color: var(--surface);
-    --glass-rim: var(--surface-line);
-    --glass-rim-soft: var(--surface-line);
-    --glass-rim-far: var(--surface-line);
-    --glass-inner: inset 0 1px 0 0 var(--surface-top);
-    --glass-shadow: var(--surface-shadow);
-    --glass-shadow-hover: var(--surface-shadow-hover);
-  }
-  html[data-solid] .glass-dark:not([data-glass], [data-glass] *) {
-    background-color: oklch(0.17 0.02 262);
-  }
-  html[data-solid] .glass-tint:not([data-glass], [data-glass] *) {
-    background-color: var(--glass-accent);
-  }
 }
 
 /* ------------------------------------------------------------------------
- * Backgrounds (for picking one: html[data-bg] is set by the picker in
- * components/bg-demo). Each one is a still picture, or moves only small
- * pieces (a few stars, a meteor), so the glass over it isn't redrawn on
- * every frame.
+ * Wallpaper: the Milky Way over snowy mountains. Photo on Unsplash by
+ * Benjamin Voros, credited in the footer. The veil keeps text that sits
+ * straight on the photo readable: a light mist by day, a dark one at night.
  * ---------------------------------------------------------------------- */
-body,
-.liquid-wallpaper {
+body {
   background-color: var(--page);
 }
-.sky,
-.peaks {
-  display: none;
+.liquid-wallpaper {
+  background: var(--page) url("/wallpaper/milkyway-wide.webp") center 55% / cover no-repeat;
 }
-
-/* Night sky: stars, a few that twinkle, and a meteor now and then. By day
- * it's a pale sky without stars. */
-html:is([data-bg="sky"], [data-bg="mountains"]) {
-  --page: #eef3fb;
-}
-html.dark:is([data-bg="sky"], [data-bg="mountains"]) {
-  --page: #04060f;
-}
-html[data-bg="sky"] .liquid-wallpaper {
-  background: linear-gradient(180deg, #dce7fa 0%, var(--page) 60%);
-}
-html.dark[data-bg="sky"] .liquid-wallpaper {
-  background:
-    radial-gradient(90% 50% at 50% 100%, rgb(76 54 160 / 0.22), transparent 70%),
-    linear-gradient(180deg, #02030a 0%, #060a1c 60%, #0b1030 100%);
-}
-html.dark:is([data-bg="sky"], [data-bg="mountains"]) .sky {
-  display: block;
-}
-.star {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 50%;
-}
-.star-1 { width: 1px; height: 1px; }
-.star-2 { width: 2px; height: 2px; }
-.star-3 { width: 2.5px; height: 2.5px; }
-.twinkle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 0 6px 1px rgb(200 215 255 / 0.8);
-  animation: twinkle 3s ease-in-out infinite alternate;
-}
-@keyframes twinkle {
-  from { opacity: 1; transform: scale(1); }
-  to { opacity: 0.2; transform: scale(0.6); }
-}
-.meteor {
-  position: absolute;
-  width: 110px;
-  height: 1px;
-  background: linear-gradient(90deg, rgb(255 255 255 / 0.9), transparent);
-  opacity: 0;
-  animation: meteor-fall 24s linear infinite;
-}
-@keyframes meteor-fall {
-  0% { opacity: 0; transform: rotate(-37deg) translateX(0); }
-  0.5% { opacity: 1; }
-  5% { opacity: 0; transform: rotate(-37deg) translateX(-900px); }
-  100% { opacity: 0; transform: rotate(-37deg) translateX(-900px); }
-}
-
-/* Mountains: the night sky over three ridges and a low moon. By day it's a
- * dawn sky over blue hills. */
-html[data-bg="mountains"] {
-  --peak-1: #b3bedb;
-  --peak-2: #94a1c6;
-  --peak-3: #7583ab;
-}
-html.dark[data-bg="mountains"] {
-  --peak-1: #222a52;
-  --peak-2: #151b3b;
-  --peak-3: #0a0f26;
-}
-html[data-bg="mountains"] .liquid-wallpaper {
-  background:
-    radial-gradient(45% 35% at 50% 88%, rgb(255 205 160 / 0.55), transparent 70%),
-    linear-gradient(180deg, #c3d3f2 0%, #e6e3f1 55%, #f9dccb 100%);
-}
-html.dark[data-bg="mountains"] .liquid-wallpaper {
-  background:
-    radial-gradient(circle 30px at 78% 22%, rgb(235 238 255 / 0.95) 88%, transparent 100%),
-    radial-gradient(circle 240px at 78% 22%, rgb(170 180 255 / 0.2), transparent 70%),
-    linear-gradient(180deg, #02030b 0%, #080d28 55%, #19163f 100%);
-}
-html[data-bg="mountains"] .peaks {
-  display: block;
-}
-.peaks path:nth-child(1) { fill: var(--peak-1); }
-.peaks path:nth-child(2) { fill: var(--peak-2); }
-.peaks path:nth-child(3) { fill: var(--peak-3); }
-
-/* Photos. On Unsplash: Chicago by Jeff Brown (day) and Max Bender (night),
- * the Milky Way by Benjamin Voros, the aurora by Jonatan Pie, the Chicago
- * river by Pedro Lastra. All credited in the footer. */
-html:is([data-bg="chicago"], [data-bg="milkyway"], [data-bg="aurora"], [data-bg="river"]) .liquid-wallpaper {
-  background-position: center 55%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-html[data-bg="chicago"] { --page: #7d93b3; }
-html.dark[data-bg="chicago"] { --page: #0b1a24; }
-html[data-bg="milkyway"] { --page: #8a90b8; }
-html.dark[data-bg="milkyway"] { --page: #0c1022; }
-html[data-bg="aurora"] { --page: #7fa3a8; }
-html.dark[data-bg="aurora"] { --page: #061416; }
-html[data-bg="river"] { --page: #8d86b0; }
-html.dark[data-bg="river"] { --page: #120f22; }
-
-html[data-bg="chicago"] .liquid-wallpaper { background-image: url("/wallpaper/chicago-day-wide.webp"); }
-html.dark[data-bg="chicago"] .liquid-wallpaper { background-image: url("/wallpaper/chicago-night-wide.webp"); }
-html[data-bg="milkyway"] .liquid-wallpaper { background-image: url("/wallpaper/milkyway-wide.webp"); }
-html[data-bg="aurora"] .liquid-wallpaper { background-image: url("/wallpaper/aurora-wide.webp"); }
-html[data-bg="river"] .liquid-wallpaper { background-image: url("/wallpaper/river-wide.webp"); }
 @media (max-aspect-ratio: 1/1) {
-  html[data-bg="chicago"] .liquid-wallpaper { background-image: url("/wallpaper/chicago-day-tall.webp"); }
-  html.dark[data-bg="chicago"] .liquid-wallpaper { background-image: url("/wallpaper/chicago-night-tall.webp"); }
-  html[data-bg="milkyway"] .liquid-wallpaper { background-image: url("/wallpaper/milkyway-tall.webp"); }
-  html[data-bg="aurora"] .liquid-wallpaper { background-image: url("/wallpaper/aurora-tall.webp"); }
-  html[data-bg="river"] .liquid-wallpaper { background-image: url("/wallpaper/river-tall.webp"); }
+  .liquid-wallpaper {
+    background-image: url("/wallpaper/milkyway-tall.webp");
+  }
 }
-
-/* A veil keeps text that sits straight on a photo readable. The night photos
- * get a stronger one by day, until each has a day version. */
-html[data-bg="chicago"] .liquid-wallpaper-veil {
-  background:
-    radial-gradient(65% 50% at 50% 40%, rgb(255 255 255 / 0.5), transparent 75%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.3), rgb(255 255 255 / 0.15));
-}
-html:is([data-bg="milkyway"], [data-bg="aurora"], [data-bg="river"]) .liquid-wallpaper-veil {
+.liquid-wallpaper-veil {
   background:
     radial-gradient(65% 50% at 50% 40%, rgb(255 255 255 / 0.55), transparent 75%),
     linear-gradient(180deg, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.4));
 }
-html.dark:is([data-bg="chicago"], [data-bg="milkyway"], [data-bg="aurora"], [data-bg="river"]) .liquid-wallpaper-veil {
+.dark .liquid-wallpaper-veil {
   background:
     radial-gradient(65% 50% at 50% 40%, rgb(3 5 14 / 0.55), transparent 75%),
     linear-gradient(180deg, rgb(4 6 16 / 0.3), rgb(4 6 16 / 0.5));
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .twinkle,
-  .meteor {
-    animation: none;
-  }
-}
-
-/* Text over a photo gets a soft halo in the theme's base tone. A drop-shadow
- * filter, since the hero name is gradient-clipped text that a text-shadow
- * would paint over. Never put it on an element that holds glass: a filter
- * cuts the glass off from the backdrop. */
-html:is([data-bg="chicago"], [data-bg="milkyway"], [data-bg="aurora"], [data-bg="river"]) .on-photo {
+/* Text that sits straight on the photo gets a soft halo in the theme's base
+ * tone. A drop-shadow filter, since the hero name is gradient-clipped text
+ * that a text-shadow would paint over. Never put it on an element that holds
+ * glass: a filter cuts the glass off from the backdrop. */
+.on-photo {
   filter: var(--on-photo-halo);
 }
