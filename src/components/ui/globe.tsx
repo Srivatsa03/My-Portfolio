@@ -240,12 +240,22 @@ export function Globe({
 
       for (const c of CITIES) if (c.dot) drawDot(c.lat, c.lng);
 
-      overlayAnimId = requestAnimationFrame(drawOverlay);
+      overlayAnimId = onScreen ? requestAnimationFrame(drawOverlay) : 0;
     };
+
+    // Both loops stop while the globe is scrolled out of view.
+    let onScreen = true;
+    const seen = new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      globe.toggle(onScreen);
+      if (onScreen && !overlayAnimId) overlayAnimId = requestAnimationFrame(drawOverlay);
+    });
+    seen.observe(canvasRef.current!);
 
     overlayAnimId = requestAnimationFrame(drawOverlay);
 
     return () => {
+      seen.disconnect();
       cancelAnimationFrame(overlayAnimId);
       globe.destroy();
       window.removeEventListener("resize", onResize);

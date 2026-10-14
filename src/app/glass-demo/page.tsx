@@ -16,7 +16,7 @@ const DEMOS = [
 // A local page for trying Liquid Glass motion before it goes on the site.
 export default function GlassDemos() {
   return (
-    <div className="relative z-10 px-3 pb-24 pt-32 sm:px-4 sm:pt-40">
+    <div data-glass className="relative z-10 px-3 pb-24 pt-32 sm:px-4 sm:pt-40">
       <div className="mx-auto max-w-4xl">
         <h1 className="on-photo text-4xl font-bold tracking-tight sm:text-5xl">Liquid Glass motion</h1>
         <p className="on-photo mt-3 max-w-2xl text-lg text-foreground/85">

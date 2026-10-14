@@ -5,9 +5,10 @@ import { useEffect } from "react";
 type BrandedNavigator = Navigator & { userAgentData?: { brands?: { brand: string }[] } };
 
 const NS = "http://www.w3.org/2000/svg";
-// Glass that gets a lens. The thick reading sheets and the terminal stay flat:
-// bending the text behind a paragraph only makes it harder to read.
-const SELECTOR = ".glass:not(.glass-thick):not(.glass-dark), .glass-tint";
+// Glass that gets a lens: only real glass (the navbar, marked data-glass).
+// Each lens is a filter the browser reruns on every scroll frame, so the
+// solid cards on the page don't get one.
+const SELECTOR = "[data-glass]:is(.glass, .glass-tint), [data-glass] :is(.glass, .glass-tint)";
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
