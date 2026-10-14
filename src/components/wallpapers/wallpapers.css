@@ -1,0 +1,79 @@
+/* Colors for the background demos. Light first, then the dark override. */
+
+.wp-ripple {
+  --base-1: #f5f4fc; --base-2: #e6e3f3;
+  --glow: #cbbfff; --glow-a: 0.75;
+  --crest: #ffffff; --crest-a: 0.95;
+  --shade: #7f74c4; --trough-a: 0.34;
+  --line: #ffffff; --line-a: 1;
+}
+.dark .wp-ripple {
+  --base-1: #110f33; --base-2: #050516;
+  --glow: #5b43ea; --glow-a: 0.42;
+  --crest: #a493ff; --crest-a: 0.5;
+  --shade: #010108; --trough-a: 0.7;
+  --line: #ddd5ff; --line-a: 0.5;
+}
+
+.wp-contour {
+  --base-1: #f6f5fb; --base-2: #eae8f4;
+  --glow: #d9d2ff; --glow-a: 0.8;
+  --line: #5f57b0; --line-a: 0.22; --index-a: 0.42; --index-glow-a: 0;
+}
+.dark .wp-contour {
+  --base-1: #0c0d22; --base-2: #05060f;
+  --glow: #4b3fd6; --glow-a: 0.3;
+  --line: #a59cff; --line-a: 0.24; --index-a: 0.6; --index-glow-a: 0.45;
+}
+
+.wp-aurora {
+  --base-1: #e9eefc; --base-2: #fbeff6;
+  --c1: #5fd9c4; --c2: #a68bff; --c3: #ff9cc6;
+  --star: #6c6aa0; --star-a: 0;
+  --ray-a: 0.25; --blend: multiply;
+}
+.dark .wp-aurora {
+  --base-1: #02030b; --base-2: #0a1030;
+  --c1: #2ee6c5; --c2: #8b5cf6; --c3: #f472b6;
+  --star: #ffffff; --star-a: 1;
+  --ray-a: 0.3; --blend: screen;
+}
+
+.wp-bokeh {
+  --base-1: #fbf9ff; --base-2: #ebe6f7;
+  --c1: #f5b450; --c2: #a78bfa; --c3: #f49ac6; --c4: #8fb6ff;
+  --disc-a: 0.32; --rim-a: 0.35; --blend: multiply;
+}
+.dark .wp-bokeh {
+  --base-1: #1c1342; --base-2: #06051a;
+  --c1: #f59e0b; --c2: #a78bfa; --c3: #f472b6; --c4: #60a5fa;
+  --disc-a: 0.26; --rim-a: 0.4; --blend: screen;
+}
+
+.wp-monogram {
+  --base-1: #f6f5fc; --base-2: #e8e5f4;
+  --glow: #d8ceff; --glow-a: 0.8;
+  --c1: #b8a6ff; --c2: #8f7bff; --c3: #ff9fcb;
+  --shade: #6a5fc0; --shadow-a: 0.35; --inner-a: 0.35;
+  --light: #ffffff; --light-a: 0.85; --spec-a: 0.95;
+}
+.dark .wp-monogram {
+  --base-1: #0d0b28; --base-2: #04040f;
+  --glow: #4a35d8; --glow-a: 0.35;
+  --c1: #7b5cff; --c2: #4a33d6; --c3: #d6448e;
+  --shade: #010108; --shadow-a: 0.8; --inner-a: 0.55;
+  --light: #c9bdff; --light-a: 0.55; --spec-a: 0.8;
+}
+
+.wp-grid {
+  --base-1: #f7f7fb;
+  --c1: #b9a8ff; --c2: #9cc2ff; --bloom-a: 0.6;
+  --dot: #5a5e9a; --dot-a: 0.3;
+  --arc: #7c6cff; --arc-glow-a: 0.5;
+}
+.dark .wp-grid {
+  --base-1: #05060f;
+  --c1: #6d4cff; --c2: #2563eb; --bloom-a: 0.42;
+  --dot: #c7c9ff; --dot-a: 0.32;
+  --arc: #b3a6ff; --arc-glow-a: 0.8;
+}
